@@ -32,7 +32,7 @@ def move_back(object,v):
 	sim.simxSetJointTargetVelocity(object.clientID,object.robotBackLeftMotor, v, sim.simx_opmode_oneshot)
 	sim.simxPauseCommunication(object.clientID, False)
 
-
+#Nas funções da garra, vamos ter que definir quando quisermos manipular uma das duas garras, pois como agora vamos ter duas, isso vai ter que ser especificado em cada função de mover a garra
 def close_arms(object, position):
     sim.simxPauseCommunication(object.clientID, True)
     sim.simxSetJointTargetPosition(object.clientID,object.leftArmFrente,position,sim.simx_opmode_oneshot)
@@ -46,7 +46,7 @@ def open_arms(object, position):
     sim.simxSetJointTargetPosition(object.clientID,object.rightArmFrente,position,sim.simx_opmode_oneshot)
     sim.simxPauseCommunication(object.clientID, False)
 
-def able_magic_cube(object, cubo):
+def enable_magic_cube(object, cubo):
 	sim.simxPauseCommunication(object.clientID, True)
 	sim.simxSetModelProperty(object.clientID, cubo, simConst.sim_modelproperty_not_dynamic, sim.simx_opmode_oneshot)
 	sim.simxSetObjectParent(object.clientID, cubo, object.robot, True, sim.simx_opmode_oneshot)
