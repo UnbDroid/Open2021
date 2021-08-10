@@ -2,6 +2,7 @@ import sim
 import numpy as np
 import time
 import simConst
+from motor import stop
 
 ## FUNÇÕES DE GIRAR ######################################
 
