@@ -55,3 +55,50 @@ def turn_around_angle(object, angle, sentido, velocidade):
 
 		current_angle = get_angle_that_makes_sense(object)
 	stop(object)
+
+
+def girar_90_graus(object, sentido):
+	# sentido = 1 , anti horario, esquerda
+	# sentido =-1 , horario, direita
+
+	velocidade = 2 #se velocidade = 5, passo = 3.4
+	passo = 1.5
+
+	angulo_inicial=get_angle_that_makes_sense(object)
+
+	# print(50*'#')
+	# print("angulo_inicial: ", angulo_inicial) #teste
+	# print(50*'#')
+
+	#Começa a girar, talvez de para trocar essas linhas por: giro_livre(object, sentido, velocidade)
+	sim.simxPauseCommunication(object.clientID, True)
+	sim.simxSetJointTargetVelocity(object.clientID, object.robotFrontRightMotor, (-1)*sentido*velocidade, sim.simx_opmode_oneshot)
+	sim.simxSetJointTargetVelocity(object.clientID, object.robotFrontLeftMotor, sentido*velocidade, sim.simx_opmode_oneshot)
+	sim.simxSetJointTargetVelocity(object.clientID, object.robotBackRightMotor, (-1)*sentido*velocidade, sim.simx_opmode_oneshot)
+	sim.simxSetJointTargetVelocity(object.clientID, object.robotBackLeftMotor, sentido*velocidade, sim.simx_opmode_oneshot)
+	sim.simxPauseCommunication(object.clientID, False)
+	
+
+	while True:
+		angulo_final=get_angle_that_makes_sense(object)
+		# print("While angulo_final: ", angulo_final) #teste
+		angulo_percorrido = angulo_final - angulo_inicial
+
+		if sentido == 1: #anti horário
+			if angulo_percorrido < 0: #estava no 4º quadrante e foi para o 1º
+				angulo_percorrido += 360 #transforma para um ângulo positivo na primeira volta
+
+		else: #horário
+			angulo_percorrido *= -1 #como está no sentido horário os valores vão vir negativos, ai multiplica por -1 pra arrumar
+			if angulo_percorrido < 0: #estava no 1º quadrante e foi para o 4º
+				angulo_percorrido += 360 #transforma para um ângulo positivo na primeira volta
+
+		#implementar aquilo que a gente falou do controle de velocidade baseado no quão próximo o robô está do ângulo final
+
+		if (90 - (passo/2)) < angulo_percorrido < (90 + (passo/2)):
+			# print(50*'#')
+			# print("Final angulo_percorrido: ", angulo_percorrido) #teste
+			# print(50*'#')
+			break
+
+	stop(object)
