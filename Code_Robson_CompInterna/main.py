@@ -8,11 +8,7 @@ import simConst
 def init_objects():
     # Instancia objeto
 	objects = ObjectHandle(clientID, robotname)
-	objects.handle_Robot()
-	objects.handle_OmniWheels()
-	objects.handle_Garras()
-	objects.handle_Sensores()
-
+	
 	return objects
 
 
@@ -31,7 +27,7 @@ except:
 
 sim.simxFinish(-1) # just in case, close all opened connections
 global clientID
-clientID = sim.simxStart('127.0.0.1',20001,True,True,5000,5)
+clientID = sim.simxStart('127.0.0.1',19999,True,True,5000,5)
 robotname = 'S_Base'
 
 if clientID != -1:
