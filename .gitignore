@@ -1,1 +1,11 @@
 *.pyc
+# Default ignored files
+/shelf/
+/Code_Robson_CompInterna/__pycache__
+/Code_Robson_CompInterna/.idea
+/workspace.xml
+# Datasource local storage ignored files
+/dataSources/
+/dataSources.local.xml
+# Editor-based HTTP Client requests
+/httpRequests/

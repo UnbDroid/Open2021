@@ -1,7 +1,7 @@
 import sim
 
 class ObjectHandle:
-   def __init__(self, clientID,robotname):
+   def __init__(self, clientID, robotname):
       self.clientID = clientID
       self.robotname = robotname
       #Robô
