@@ -6,17 +6,47 @@ import simConst
 ## FUNÇÕES DA GARRA ######################################
 
 #Nas funções da garra, vamos ter que definir quando quisermos manipular uma das duas garras, pois como agora vamos ter duas, isso vai ter que ser especificado em cada função de mover a garra
-def close_arms(object, position):
+
+#essas funções de subir e descer a garra estavam sem a parte de pauseCommunication, não sei se tem problema
+def subir_garra_frente(object, altura):
+    sim.simxSetJointTargetPosition(object.clientID,object.acoplador_garra1,altura,sim.simx_opmode_oneshot) 
+    time.sleep(1)
+
+def subir_garra_costas(object, altura):
+    sim.simxSetJointTargetPosition(object.clientID,object.acoplador_garra2,altura,sim.simx_opmode_oneshot) 
+    time.sleep(1)
+
+def descer_garra_frente(object):
+    sim.simxSetJointTargetPosition(object.clientID,object.acoplador_garra1,-0.15,sim.simx_opmode_oneshot)
+    time.sleep(1)
+
+def descer_garra_costas(object):
+    sim.simxSetJointTargetPosition(object.clientID,object.acoplador_garra2,-0.15,sim.simx_opmode_oneshot)
+    time.sleep(1)
+
+def fechar_garra_frente(object, position):
     sim.simxPauseCommunication(object.clientID, True)
-    sim.simxSetJointTargetPosition(object.clientID,object.leftArmFrente,position,sim.simx_opmode_oneshot)
-    sim.simxSetJointTargetPosition(object.clientID,object.rightArmFrente,-1*position,sim.simx_opmode_oneshot)
+    sim.simxSetJointTargetPosition(object.clientID,object.pa_esquerda1,position,sim.simx_opmode_oneshot)
+    sim.simxSetJointTargetPosition(object.clientID,object.pa_direita1,-1*position,sim.simx_opmode_oneshot)
+    sim.simxPauseCommunication(object.clientID, False)
+
+def fechar_garra_costas(object, position):
+    sim.simxPauseCommunication(object.clientID, True)
+    sim.simxSetJointTargetPosition(object.clientID,object.pa_esquerda2,position,sim.simx_opmode_oneshot)
+    sim.simxSetJointTargetPosition(object.clientID,object.pa_direita2,-1*position,sim.simx_opmode_oneshot)
     sim.simxPauseCommunication(object.clientID, False)
 
 
-def open_arms(object, position):
+def abrir_garra_frente(object, position):
     sim.simxPauseCommunication(object.clientID, True)
-    sim.simxSetJointTargetPosition(object.clientID,object.leftArmFrente,-1*position,sim.simx_opmode_oneshot)
-    sim.simxSetJointTargetPosition(object.clientID,object.rightArmFrente,position,sim.simx_opmode_oneshot)
+    sim.simxSetJointTargetPosition(object.clientID,object.pa_esquerda1,-1*position,sim.simx_opmode_oneshot)
+    sim.simxSetJointTargetPosition(object.clientID,object.pa_direita1,position,sim.simx_opmode_oneshot)
+    sim.simxPauseCommunication(object.clientID, False)
+
+def abrir_garra_costas(object, position):
+    sim.simxPauseCommunication(object.clientID, True)
+    sim.simxSetJointTargetPosition(object.clientID,object.pa_esquerda2,-1*position,sim.simx_opmode_oneshot)
+    sim.simxSetJointTargetPosition(object.clientID,object.pa_direita2,position,sim.simx_opmode_oneshot)
     sim.simxPauseCommunication(object.clientID, False)
 
 def enable_magic_cube(object, cubo):
