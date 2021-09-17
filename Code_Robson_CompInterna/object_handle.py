@@ -17,12 +17,12 @@ class ObjectHandle:
       erro, self.junta_deslizadora_ef = sim.simxGetObjectHandle(self.clientID, 'slippingJoint_Esquerda_Frente', sim.simx_opmode_blocking)
       erro, self.junta_deslizadora_ea = sim.simxGetObjectHandle(self.clientID, 'slippingJoint_Esquerda_Atras', sim.simx_opmode_blocking)
       #Garras:
-      erro, self.acoplador_garra1 = sim.simxGetObjectHandle(self.clientID,'joint_acoplador_garra1',sim.simx_opmode_blocking)
-      erro, self.acoplador_garra2 = sim.simxGetObjectHandle(self.clientID,'joint_acoplador_garra2',sim.simx_opmode_blocking)
+      erro, self.acoplador_garra1 = sim.simxGetObjectHandle(self.clientID,'joint_acoplador_garra1',sim.simx_opmode_blocking) #garra 1 => frente
+      erro, self.acoplador_garra2 = sim.simxGetObjectHandle(self.clientID,'joint_acoplador_garra2',sim.simx_opmode_blocking) #garra 2 => costas
       erro, self.pa_direita1 = sim.simxGetObjectHandle(self.clientID,'joint_pa_direita_garra1',sim.simx_opmode_blocking)
-      erro, self.pa_esquerda1 = sim.simxGetObjectHandle(self.clientID,'joint_pa_direita_garra1',sim.simx_opmode_blocking)
+      erro, self.pa_esquerda1 = sim.simxGetObjectHandle(self.clientID,'joint_pa_esquerda_garra1',sim.simx_opmode_blocking)
       erro, self.pa_direita2 = sim.simxGetObjectHandle(self.clientID,'joint_pa_direita_garra2',sim.simx_opmode_blocking)
-      erro, self.pa_esquerda2 = sim.simxGetObjectHandle(self.clientID,'joint_pa_direita_garra2',sim.simx_opmode_blocking)
+      erro, self.pa_esquerda2 = sim.simxGetObjectHandle(self.clientID,'joint_pa_esquerda_garra2',sim.simx_opmode_blocking)
       #Sensores:
       erro, self.us_frente = sim.simxGetObjectHandle(self.clientID, 'Sensor_US_Frente', sim.simx_opmode_blocking)
       erro, self.us_lateral = sim.simxGetObjectHandle(self.clientID, 'Sensor_US_Lateral', sim.simx_opmode_blocking)
