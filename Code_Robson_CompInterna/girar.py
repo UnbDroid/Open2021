@@ -20,11 +20,9 @@ def giro_livre(object,d, v):
 
 
 def get_angle_that_makes_sense(object):
-    erro, euler_angles = sim.simxGetObjectOrientation(object.clientID, object.robot, -1,
-                                                      sim.simx_opmode_streaming)
+    erro, euler_angles = sim.simxGetObjectOrientation(object.clientID, object.robot, -1, sim.simx_opmode_streaming)
     while (erro != 0):
-        erro, euler_angles = sim.simxGetObjectOrientation(object.clientID, object.robot, -1,
-                                                          sim.simx_opmode_streaming)
+        erro, euler_angles = sim.simxGetObjectOrientation(object.clientID, object.robot, -1, sim.simx_opmode_streaming)
 
     # print(erro, euler_angles)
     factor = 90
@@ -73,14 +71,10 @@ def girar_90_graus(object, sentido):
 
     # Começa a girar, talvez de para trocar essas linhas por: giro_livre(object, sentido, velocidade)
     sim.simxPauseCommunication(object.clientID, True)
-    sim.simxSetJointTargetVelocity(object.clientID, object.omniWheel_direita_frente, (-1) * sentido * velocidade,
-                                   sim.simx_opmode_oneshot)
-    sim.simxSetJointTargetVelocity(object.clientID, object.omniWheel_esquerda_frente, (-1) * sentido * velocidade,
-                                   sim.simx_opmode_oneshot)
-    sim.simxSetJointTargetVelocity(object.clientID, object.omniWheel_direita_atras, (-1) * sentido * velocidade,
-                                   sim.simx_opmode_oneshot)
-    sim.simxSetJointTargetVelocity(object.clientID, object.omniWheel_esquerda_atras, (-1) * sentido * velocidade,
-                                   sim.simx_opmode_oneshot)
+    sim.simxSetJointTargetVelocity(object.clientID, object.omniWheel_direita_frente, (-1) * sentido * velocidade, sim.simx_opmode_oneshot)
+    sim.simxSetJointTargetVelocity(object.clientID, object.omniWheel_esquerda_frente, (-1) * sentido * velocidade, sim.simx_opmode_oneshot)
+    sim.simxSetJointTargetVelocity(object.clientID, object.omniWheel_direita_atras, (-1) * sentido * velocidade, sim.simx_opmode_oneshot)
+    sim.simxSetJointTargetVelocity(object.clientID, object.omniWheel_esquerda_atras, (-1) * sentido * velocidade, sim.simx_opmode_oneshot)
     sim.simxPauseCommunication(object.clientID, False)
 
     while True:
