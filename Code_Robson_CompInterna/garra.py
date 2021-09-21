@@ -27,27 +27,31 @@ def descer_garra_costas(object):
 def fechar_garra_frente(object, position):
     sim.simxPauseCommunication(object.clientID, True)
     sim.simxSetJointTargetPosition(object.clientID,object.pa_esquerda1,position,sim.simx_opmode_oneshot)
-    sim.simxSetJointTargetPosition(object.clientID,object.pa_direita1,-1*position,sim.simx_opmode_oneshot)
+    sim.simxSetJointTargetPosition(object.clientID,object.pa_direita1,position,sim.simx_opmode_oneshot)
     sim.simxPauseCommunication(object.clientID, False)
+    time.sleep(1)
 
 def fechar_garra_costas(object, position):
     sim.simxPauseCommunication(object.clientID, True)
     sim.simxSetJointTargetPosition(object.clientID,object.pa_esquerda2,position,sim.simx_opmode_oneshot)
-    sim.simxSetJointTargetPosition(object.clientID,object.pa_direita2,-1*position,sim.simx_opmode_oneshot)
+    sim.simxSetJointTargetPosition(object.clientID,object.pa_direita2,position,sim.simx_opmode_oneshot)
     sim.simxPauseCommunication(object.clientID, False)
+    time.sleep(1)
 
 
 def abrir_garra_frente(object, position):
     sim.simxPauseCommunication(object.clientID, True)
-    sim.simxSetJointTargetPosition(object.clientID,object.pa_esquerda1,-1*position,sim.simx_opmode_oneshot)
+    sim.simxSetJointTargetPosition(object.clientID,object.pa_esquerda1,position,sim.simx_opmode_oneshot)
     sim.simxSetJointTargetPosition(object.clientID,object.pa_direita1,position,sim.simx_opmode_oneshot)
     sim.simxPauseCommunication(object.clientID, False)
+    time.sleep(1)
 
 def abrir_garra_costas(object, position):
     sim.simxPauseCommunication(object.clientID, True)
-    sim.simxSetJointTargetPosition(object.clientID,object.pa_esquerda2,-1*position,sim.simx_opmode_oneshot)
+    sim.simxSetJointTargetPosition(object.clientID,object.pa_esquerda2,position,sim.simx_opmode_oneshot)
     sim.simxSetJointTargetPosition(object.clientID,object.pa_direita2,position,sim.simx_opmode_oneshot)
     sim.simxPauseCommunication(object.clientID, False)
+    time.sleep(1)
 
 def enable_magic_cube(object, cubo):
 	sim.simxPauseCommunication(object.clientID, True)
