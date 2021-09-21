@@ -4,6 +4,7 @@ from girar import *
 from motor import *
 from object_handle import ObjectHandle
 from sensor import *
+from garra import *
 
 
 def init_objects():
@@ -37,11 +38,13 @@ if clientID != -1:
 
     components = init_objects()
     # while True:
-    print(Ler_Cor(components, 'esquerda'))
-    print(Ler_Cor(components, 'direita') , 'cuzin')
-    print(Ler_Distancia(components, 'costas'))
-    print(Ler_Distancia(components, 'direita'))
-    # andar_em_metros(components, 2, 2, 0.2)
+    andar_em_metros(components, 2, 2, 0.2)
+    # descer_garra_costas(components)
+    # subir_garra_costas(components, 0)
+
+    # while True:
+    # abrir_garra_costas(components, 0.02)
+    # abrir_garra_frente(components, 0.01)
     
 else:
     print('Failed connecting to remote API server')
