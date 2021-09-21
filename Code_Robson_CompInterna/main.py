@@ -3,6 +3,7 @@ import sys
 from girar import *
 from motor import *
 from object_handle import ObjectHandle
+from sensor import *
 
 
 def init_objects():
@@ -10,7 +11,6 @@ def init_objects():
     objects = ObjectHandle(clientID, robotname)
 
     return objects
-
 
 try:
     import sim
@@ -37,9 +37,12 @@ if clientID != -1:
 
     components = init_objects()
     # while True:
-    girar_90_graus(components,1)
+    print(Ler_Cor(components, 'esquerda'))
+    print(Ler_Cor(components, 'direita') , 'cuzin')
+    print(Ler_Distancia(components, 'costas'))
+    print(Ler_Distancia(components, 'direita'))
     # andar_em_metros(components, 2, 2, 0.2)
-
+    
 else:
     print('Failed connecting to remote API server')
     sys.exit()

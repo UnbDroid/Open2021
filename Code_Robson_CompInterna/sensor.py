@@ -1,11 +1,12 @@
 import sim
 import numpy as np
+from object_handle import ObjectHandle
 
-def read_color(object, direction):
-    if direction.lower() == "left":
-        sensor_cor = object.color_sensor_left
-    elif direction.lower() == "right":
-        sensor_cor = object.color_sensor_right
+def Ler_Cor(object, direction):
+    if direction.lower() == "esquerda":
+        sensor_cor = object.cor_esquerda
+    elif direction.lower() == "direita":
+        sensor_cor = object.cor_direita
     elif direction.lower() == "aux":
         sensor_cor = object.color_sensor_aux
     else:
@@ -36,14 +37,11 @@ def read_color(object, direction):
     return 'PRETO'
 
 
-def read_distance(object, direction):
-    if direction.lower() == "left":
-        sensor_us = object.us_left
-    elif direction.lower() == "right":
-        sensor_us = object.us_right
-    else:
-        sensor_us= object.us_front
-
+def Ler_Distancia(object, direction):
+    if direction.lower() == "costas":
+        sensor_us = object.us_costas
+    elif direction.lower() == "direita":
+        sensor_us = object.us_direita
     max_distance = 1
 
     erro, detectionState, distancePoint, detectedObjectHandle, detectedSurface = sim.simxReadProximitySensor(object.clientID, sensor_us, sim.simx_opmode_streaming)
