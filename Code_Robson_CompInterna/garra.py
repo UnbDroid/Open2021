@@ -16,11 +16,11 @@ def subir_garra_costas(object, altura):
     time.sleep(1)
 
 def descer_garra_frente(object):
-    sim.simxSetJointTargetPosition(object.clientID,object.acoplador_garra1,-0.15,sim.simx_opmode_oneshot)
+    sim.simxSetJointTargetPosition(object.clientID,object.acoplador_garra1,-0.1,sim.simx_opmode_oneshot)
     time.sleep(1)
 
 def descer_garra_costas(object):
-    sim.simxSetJointTargetPosition(object.clientID,object.acoplador_garra2,-0.15,sim.simx_opmode_oneshot)
+    sim.simxSetJointTargetPosition(object.clientID,object.acoplador_garra2,-0.1,sim.simx_opmode_oneshot)
     time.sleep(1)
 
 def fechar_garra_frente(object, position):
