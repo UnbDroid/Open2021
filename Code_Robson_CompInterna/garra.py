@@ -81,7 +81,7 @@ def fechar_garra_frente_cubo(object, cube):
         # sim.simxSetJointTargetPosition(object.clientID,object.pa_direita1,0.2,sim.simx_opmode_oneshot) #se pa não precisa fechar a garra
         # sim.simxSetJointTargetPosition(object.clientID,object.pa_esquerda1,0.2,sim.simx_opmode_oneshot)
         erro = sim.simxSetObjectPosition(object.clientID, cube, object.pa_esquerda1, cubePosition, sim.simx_opmode_oneshot)
-        sim.simxSetObjectParent(object.clientID, cube, object.cubo_acoplador2, True, sim.simx_opmode_oneshot)
+        sim.simxSetObjectParent(object.clientID, cube, object.cubo_acoplador1, True, sim.simx_opmode_oneshot)
         sim.simxPauseCommunication(object.clientID, False)
     time.sleep(1)
 
