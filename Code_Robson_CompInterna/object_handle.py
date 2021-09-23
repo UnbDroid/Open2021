@@ -19,6 +19,8 @@ class ObjectHandle:
       #Garras:
       erro, self.acoplador_garra1 = sim.simxGetObjectHandle(self.clientID,'joint_acoplador_garra1',sim.simx_opmode_blocking) #garra 1 => frente
       erro, self.acoplador_garra2 = sim.simxGetObjectHandle(self.clientID,'joint_acoplador_garra2',sim.simx_opmode_blocking) #garra 2 => costas
+      erro, self.cubo_acoplador1 = sim.simxGetObjectHandle(self.clientID,'Cuboid_acoplador',sim.simx_opmode_blocking)
+      erro, self.cubo_acoplador2 = sim.simxGetObjectHandle(self.clientID,'Cuboid_acoplador#0',sim.simx_opmode_blocking)
       erro, self.pa_direita1 = sim.simxGetObjectHandle(self.clientID,'joint_pa_direita_garra1',sim.simx_opmode_blocking)
       erro, self.pa_esquerda1 = sim.simxGetObjectHandle(self.clientID,'joint_pa_esquerda_garra1',sim.simx_opmode_blocking)
       erro, self.pa_direita2 = sim.simxGetObjectHandle(self.clientID,'joint_pa_direita_garra2',sim.simx_opmode_blocking)
