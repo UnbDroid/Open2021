@@ -8,10 +8,20 @@ import simConst
 
 #essas funções de subir e descer a garra estavam sem a parte de pauseCommunication, não sei se tem problema
 def subir_garra_frente(object, altura):
+    """Alturas das estantes
+    1º andar => altura = -0.06
+    2º andar => altura = 0.055
+    3º andar => altura = 0.165"""
+    
     sim.simxSetJointTargetPosition(object.clientID,object.acoplador_garra1,altura,sim.simx_opmode_oneshot) 
     time.sleep(1)
 
 def subir_garra_costas(object, altura):
+    """Alturas das estantes
+    1º andar => altura = -0.06
+    2º andar => altura = 0.055
+    3º andar => altura = 0.165"""
+
     sim.simxSetJointTargetPosition(object.clientID,object.acoplador_garra2,altura,sim.simx_opmode_oneshot) 
     time.sleep(1)
 
