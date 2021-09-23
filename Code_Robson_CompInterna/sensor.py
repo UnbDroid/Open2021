@@ -62,9 +62,9 @@ def read_force(object):
         erro, state, forceVector, torqueVector = sim.simxReadForceSensor(object.clientID, object.force_sensor, sim.simx_opmode_buffer)
     print("erro:",erro, "state", state, "forceVector", forceVector, "torqueVector", torqueVector)
     return forceVector[2]
-#
-# def getCubeHandle(sensor):
-#     erro = 1
-#     while (erro != 0):
-#         erro, detectionState, distancePoint, detectedObjectHandle, detectedSurface = sim.simxReadProximitySensor(gd.clientID, sensor, sim.simx_opmode_streaming)
-#     return detectedObjectHandle
+
+def getCubeHandle(object, sensor):
+    erro = 1
+    while (erro != 0):
+        erro, detectionState, distancePoint, detectedObjectHandle, detectedSurface = sim.simxReadProximitySensor(object.clientID, sensor, sim.simx_opmode_streaming)
+    return detectedObjectHandle
