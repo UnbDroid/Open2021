@@ -36,15 +36,10 @@ if clientID != -1:
     sim.simxAddStatusbarMessage(clientID, 'Funcionando...', sim.simx_opmode_oneshot_wait)
     time.sleep(0.02)
 
-    components = init_objects()
+    adeni = init_objects()
     # while True:
-    andar_em_metros(components, 2, 2, 0.2)
-    # descer_garra_costas(components)
-    # subir_garra_costas(components, 0)
+    andar_em_metros(adeni, 2, 2, 0.2)
 
-    # while True:
-    # abrir_garra_costas(components, 0.02)
-    # abrir_garra_frente(components, 0.01)
     
 else:
     print('Failed connecting to remote API server')
