@@ -5,8 +5,7 @@ from garra import *
 from girar import *
 from motor import *
 from sensor import *
-from garra import *
-
+from object_handle import ObjectHandle
 
 try:
     import sim
