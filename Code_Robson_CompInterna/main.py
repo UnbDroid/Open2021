@@ -1,8 +1,9 @@
 import time
 import sys
+
+from garra import *
 from girar import *
 from motor import *
-from object_handle import ObjectHandle
 from sensor import *
 from garra import *
 
@@ -12,6 +13,7 @@ def init_objects():
     objects = ObjectHandle(clientID, robotname)
 
     return objects
+
 
 try:
     import sim
@@ -38,9 +40,16 @@ if clientID != -1:
 
     adeni = init_objects()
     # while True:
-    andar_em_metros(adeni, 2, 2, 0.2)
+    # turn_around_angle(adeni, 100, 1, 2)
+    # girar_90_graus(adeni, 1)
 
-    
+    # girar_90_graus(adeni, 1)
+
+    # giro_livre(adeni,1,2)
+    # andar_em_metros(adeni, 'tras', 2, 1)
+
+
+
 else:
     print('Failed connecting to remote API server')
     sys.exit()

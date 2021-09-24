@@ -4,18 +4,23 @@ import numpy as np
 import sim
 from motor import stop
 
+
 ## FUNÇÕES DE GIRAR ######################################
 
 
-def giro_livre(object,d, v):
+def giro_livre(object, d, v):
     # d = 1 , horario
     # d =-1 , anti
     # v = velocidade
     sim.simxPauseCommunication(object.clientID, True)
-    sim.simxSetJointTargetVelocity(object.clientID, object.omniWheel_direita_frente, d * v * (-1), sim.simx_opmode_oneshot)
-    sim.simxSetJointTargetVelocity(object.clientID, object.omniWheel_esquerda_frente, d * v * (-1), sim.simx_opmode_oneshot)
-    sim.simxSetJointTargetVelocity(object.clientID, object.omniWheel_direita_atras, d * v * (-1), sim.simx_opmode_oneshot)
-    sim.simxSetJointTargetVelocity(object.clientID, object.omniWheel_esquerda_atras, d * v * (-1), sim.simx_opmode_oneshot)
+    sim.simxSetJointTargetVelocity(object.clientID, object.omniWheel_direita_frente, d * v * (-1),
+                                   sim.simx_opmode_oneshot)
+    sim.simxSetJointTargetVelocity(object.clientID, object.omniWheel_esquerda_frente, d * v * (-1),
+                                   sim.simx_opmode_oneshot)
+    sim.simxSetJointTargetVelocity(object.clientID, object.omniWheel_direita_atras, d * v * (-1),
+                                   sim.simx_opmode_oneshot)
+    sim.simxSetJointTargetVelocity(object.clientID, object.omniWheel_esquerda_atras, d * v * (-1),
+                                   sim.simx_opmode_oneshot)
     sim.simxPauseCommunication(object.clientID, False)
 
 
@@ -27,10 +32,10 @@ def get_angle_that_makes_sense(object):
     # print(erro, euler_angles)
     factor = 90
     # print(factor)
-    if (euler_angles[0] <= 0): factor = 270
+    if (euler_angles[1] <= 0): factor = 270
     # print(factor)
     # print((np.sign(euler_angles[0]) * 60*euler_angles[1]))
-    finalAngle = (np.sign(euler_angles[0]) * 60 * euler_angles[1]) + factor
+    finalAngle = (np.sign(euler_angles[1]) * 60 * euler_angles[2]) + factor
     return finalAngle
 
 
@@ -65,24 +70,29 @@ def girar_90_graus(object, sentido):
 
     angulo_inicial = get_angle_that_makes_sense(object)
 
-    # print(50*'#')
-    # print("angulo_inicial: ", angulo_inicial) #teste
-    # print(50*'#')
+    # print(50 * '#')
+    # print("angulo_inicial: ", angulo_inicial)  # teste
+    # print(50 * '#')
 
     # Começa a girar, talvez de para trocar essas linhas por: giro_livre(object, sentido, velocidade)
-    sim.simxPauseCommunication(object.clientID, True)
-    sim.simxSetJointTargetVelocity(object.clientID, object.omniWheel_direita_frente, (-1) * sentido * velocidade, sim.simx_opmode_oneshot)
-    sim.simxSetJointTargetVelocity(object.clientID, object.omniWheel_esquerda_frente, (-1) * sentido * velocidade, sim.simx_opmode_oneshot)
-    sim.simxSetJointTargetVelocity(object.clientID, object.omniWheel_direita_atras, (-1) * sentido * velocidade, sim.simx_opmode_oneshot)
-    sim.simxSetJointTargetVelocity(object.clientID, object.omniWheel_esquerda_atras, (-1) * sentido * velocidade, sim.simx_opmode_oneshot)
-    sim.simxPauseCommunication(object.clientID, False)
+    giro_livre(object, sentido, velocidade)
+
+    # sim.simxPauseCommunication(object.clientID, True)
+    # sim.simxSetJointTargetVelocity(object.clientID, object.omniWheel_direita_frente, (-1) * sentido * velocidade, sim.simx_opmode_oneshot)
+    # sim.simxSetJointTargetVelocity(object.clientID, object.omniWheel_esquerda_frente, (-1) * sentido * velocidade, sim.simx_opmode_oneshot)
+    # sim.simxSetJointTargetVelocity(object.clientID, object.omniWheel_direita_atras, (-1) * sentido * velocidade, sim.simx_opmode_oneshot)
+    # sim.simxSetJointTargetVelocity(object.clientID, object.omniWheel_esquerda_atras, (-1) * sentido * velocidade, sim.simx_opmode_oneshot)
+    # sim.simxPauseCommunication(object.clientID, False)
 
     while True:
         angulo_final = get_angle_that_makes_sense(object)
-        # print("While angulo_final: ", angulo_final) #teste
+        # print("While angulo_final: ", angulo_final)  # teste
+        # print("While angulo_inicial###: ", angulo_inicial)  # teste
         angulo_percorrido = angulo_final - angulo_inicial
+        # print("While angulo_Percorrido: ", angulo_percorrido)  # teste
 
         if sentido == 1:  # anti horário
+            # print("To aqui -> ", angulo_percorrido)
             if angulo_percorrido < 0:  # estava no 4º quadrante e foi para o 1º
                 angulo_percorrido += 360  # transforma para um ângulo positivo na primeira volta
 
@@ -98,5 +108,4 @@ def girar_90_graus(object, sentido):
             # print("Final angulo_percorrido: ", angulo_percorrido) #teste
             # print(50*'#')
             break
-
     stop(object)
