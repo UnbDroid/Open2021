@@ -60,8 +60,8 @@ if clientID != -1:
                 flag = 1
             else:
                 move_frente(adeni, 3)
-    while True:
-        alinhar()
+    #while True:
+     #   alinhar()
         
     # while True:
     # turn_around_angle(adeni, 100, 1, 2)
