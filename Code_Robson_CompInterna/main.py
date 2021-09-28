@@ -5,15 +5,7 @@ from garra import *
 from girar import *
 from motor import *
 from sensor import *
-from garra import *
-
-
-def init_objects():
-    # Instancia objeto
-    objects = ObjectHandle(clientID, robotname)
-
-    return objects
-
+from object_handle import ObjectHandle
 
 try:
     import sim
@@ -38,7 +30,7 @@ if clientID != -1:
     sim.simxAddStatusbarMessage(clientID, 'Funcionando...', sim.simx_opmode_oneshot_wait)
     time.sleep(0.02)
 
-    adeni = init_objects()
+    adeni = ObjectHandle(clientID, robotname) #instancia objeto
     # while True:
     # turn_around_angle(adeni, 100, 1, 2)
     # girar_90_graus(adeni, 1)
