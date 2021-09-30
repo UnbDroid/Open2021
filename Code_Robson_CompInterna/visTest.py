@@ -32,6 +32,7 @@ if clientID!=-1:
 	# result = vis.getImage(adeni, adeni.camera_chao) # ok
 	# result = vis.test(adeni, adeni.camera_chao) #ok mas nao entendi pra q
 	result = vis.getNumber(adeni)
+	# result = vis.getCode(adeni)
 	#print(one.identifyFirstPos(adeni))
 	print(result)
 

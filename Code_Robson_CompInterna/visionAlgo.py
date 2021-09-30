@@ -16,7 +16,7 @@ except:
 import time
 import numpy as np
 import cv2
-# import compareFaces
+import compareFaces
 import pytesseract as pytes
 HSV_OP2 = [[43,50],[32,34],[25,30],[25,30]]
 
@@ -475,7 +475,7 @@ def getNumber(object):
 
 
 
-	text = pytes.image_to_string(isolImg, config='--oem 2 --psm 7 -c tessedit_char_whitelist=0123456789')
+	text = pytes.image_to_string(isolImg, config='--oem 3 --psm 6 -c tessedit_char_whitelist=0123456789')
 
 	if not(int(text) in range(0,16)):
     	# Não está no intervalo permitido de números [0, 15]
@@ -491,11 +491,12 @@ def getCode(object):
 	camera = object.camera_chao
 	# Start the Stream
 	erro, res, image = sim.simxGetVisionSensorImage(object.clientID, camera, 0, sim.simx_opmode_streaming)
-	frame, resol = getImage(camera)
+	frame, resol = getImage(object, camera)
 	src = frame.copy()
 	#test(camera)
 
 	img = basicFilter(src, 2, correction)
+
 	isolImg, nres = isolateFace(frame.copy(), img, resol, 1)
 	print(isolImg)
 	if(isolImg.size == 0):
@@ -507,6 +508,8 @@ def getCode(object):
 		print(nres)
 
 	cv2.imwrite('./imgs/7new.png', isolImg)
+	cv2.imshow('getCode', isolImg)
+	cv2.waitKey(0)
 
 	op2 = compareFaces.compareBar(isolImg, nres)
 
