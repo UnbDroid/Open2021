@@ -16,18 +16,22 @@ except:
 import time
 import numpy as np
 import cv2
-import compareFaces
+# import compareFaces
 import pytesseract as pytes
 HSV_OP2 = [[43,50],[32,34],[25,30],[25,30]]
 
+
+# LEMBRAR DE APAGAR OS CV2.SHOW
 
 def getImage(object, camera):
 	errol = 1
 
 	while(errol != sim.simx_return_ok):
-		errol, res, image = sim.simxGetVisionSensorImage(object.clientID, camera, 0, sim.simx_opmode_buffer)
+		errol, res, image = sim.simxGetVisionSensorImage(object.clientID, camera, 0, sim.simx_opmode_streaming)
 		print(image)
-		time.sleep(50) #pq??
+		# time.sleep(50) #pq??
+		print(errol)
+	print("sai")
 	nres = [res[0]-4*int(res[0]/30),res[1]] #pq??
 	img = np.array(image, dtype=np.uint8)		# Como é recebido uma string, precisa reformatar
 	img = np.reshape(img, (res[0], res[1], 3))	# Pro CV2, (y, x, [B,R,G])
@@ -36,7 +40,12 @@ def getImage(object, camera):
 	img = img[(int(res[0]/5)):res[0]-(int(res[0]/10)), 0:res[1]]
 	img = cv2.copyMakeBorder(img, int(res[0]*5/30), 0, 0, 0, cv2.BORDER_CONSTANT)
 
+	print(image)
 	cv2.imwrite('./imgs/0src.png', img)
+	cv2.imshow('image', img)
+	cv2.waitKey(0)
+
+
 	return img, nres
 
 
@@ -44,9 +53,9 @@ def getImage(object, camera):
 def nothing(x):
 	pass
 
-def test(object, camera):
+def test(object, camera): #pra que isso??
 
-	image, resol = getImage(camera)
+	image, resol = getImage(object, camera)
 
 	# Create a window
 	cv2.namedWindow('image')
@@ -92,7 +101,7 @@ def test(object, camera):
 	#	cv2.waitKey(0)
 
 	while(1):
-		frame, resol = getImage(camera)
+		frame, resol = getImage(object,camera)
 		# get current positions of all trackbars
 		hMin = cv2.getTrackbarPos('HMin','track')
 		sMin = cv2.getTrackbarPos('SMin','track')
@@ -159,13 +168,23 @@ def basicFilter(_src, _op, _correction=0):
 	#Copiar a mascara para a imagem inicial:
 	_src2 = _src.copy()
 	img = cv2.bitwise_and(_src, _src, mask=mask)
+	cv2.imshow('image b1', img)
+	cv2.waitKey(0)
+
 
 	#Transformar para cinza:
 	img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 	cv2.imwrite('./imgs/1gray.png', img)
 
+	cv2.imshow('image b2', img)
+	cv2.waitKey(0)
+
 	# Media:
 	img = cv2.medianBlur(img, 3)
+
+	cv2.imshow('image b3', img)
+	cv2.waitKey(0)
+
 	cv2.imwrite('./imgs/4median.png', img)
 
 
@@ -174,13 +193,21 @@ def basicFilter(_src, _op, _correction=0):
 		img2 = cv2.bitwise_and(_src2, _src2, mask=mask2)
 		img2 = cv2.cvtColor(img2, cv2.COLOR_BGR2GRAY)
 		cv2.imwrite('./imgs/1gray2.png', img2)
+
+		cv2.imshow('image b4', img2)
+		cv2.waitKey(0)
+
 		img2 = cv2.medianBlur(img2, 3)
 		kernel = np.ones((5,5),dtype=np.uint8)
 		img2 = cv2.erode(img2,kernel,iterations = 2)
 		img2 = cv2.dilate(img2,kernel,iterations = 2)
 		cv2.imwrite('./imgs/4median2.png', img2)
+		cv2.imshow('image b5', img2)
+		cv2.waitKey(0)
 		nimg = cv2.bitwise_or(img, img2)
 		cv2.imwrite('./imgs/4median3.png', nimg)
+		cv2.imshow('image b6', img2)
+		cv2.waitKey(0)
 	else:
 		nimg = img.copy()
 
@@ -188,6 +215,7 @@ def basicFilter(_src, _op, _correction=0):
 
 def compareCenters(_cx, _cy, _centers):
 	"Compara os valores [cy,cx] com o vetor 2d conhecido"
+	print("Entrei compare Centers")
 	if(len(_centers) == 0):
 		return 1
 	for coord in _centers:
@@ -203,6 +231,8 @@ def findUseful(_src, _img, _factor):
 	thres, _img = cv2.threshold(_img, 10, 255, cv2.THRESH_BINARY)
 	edges = cv2.Canny(_img, 100, 200)
 	cv2.imwrite('./imgs/5edges.png', edges)
+	cv2.imshow('find useful edges 1', edges)
+	cv2.waitKey(0)
 	foundCenters = np.empty(shape=[0,2])
 	foundShapes = np.empty(shape=[0,5,2])
 	foundColors = np.empty(shape=[0,3])
@@ -224,6 +254,7 @@ def findUseful(_src, _img, _factor):
 		cy = int(m['m01']/m['m00'])
 
 		if(compareCenters(cx, cy, foundCenters) == 1):
+			print("Compare centers = 1")
 			if(len(approx) == 4 and (cv2.contourArea(cnt) > 200) and (cv2.contourArea(cnt) < 2900)):
 				k = np.array([[[cx,cy]]])
 				for padd in range(5-(len(approx))):
@@ -239,10 +270,15 @@ def findUseful(_src, _img, _factor):
 			else:
 				cv2.drawContours(errorim, cnt, -1, (255,255,0), 3)
 		else:
+			print("Compare centers = 0")
 			cv2.drawContours(errorim, cnt, -1, (255,0,255), 3)
 
 	cv2.imwrite('./imgs/8centers.png', _src)
 	cv2.imwrite('./imgs/0errors.png', errorim)
+	cv2.imshow('find useful src', _src)
+	cv2.waitKey(0)
+	cv2.imshow('find useful errorim', errorim)
+	cv2.waitKey(0)
 	print(foundCenters)
 	print(foundColors)
 	return foundShapes, foundColors, foundCenters
@@ -315,30 +351,24 @@ def createArray(_foundCenters, _foundColors, _rangeY, _rangeX):
 	return squares
 
 def isolateFace(_src, _img, _res, _op):
-	print("entrei no isolateFace")
 
 	img = _img.copy()
-	print("print 1 img: ",img)
 	nres = [_res[0]-int(_res[0]/2),int(_res[1]*0.6)]
 	img = img[int(_res[0]/2):_res[0], 0:int(_res[1]*0.6)]
-	print("print 2 img: ",img)
 	minV = 127
 	factor = 0.13
 	if(_op == 1):
-		print("Primeiro if")
 		minV = 5
 		src = img.copy()
 
 	thres, img = cv2.threshold(img, minV, 255, cv2.THRESH_BINARY)
 
 	if(_op == 1):
-		print("Segundo if")
 		kernel = np.ones((5,5),np.uint8)
 		img = cv2.dilate(img,kernel,iterations = 1)
 		img = cv2.erode(img,kernel,iterations = 3)
 		img = cv2.dilate(img,kernel,iterations = 2)
 	else:
-		print("Primeiro else")
 		kernel = np.ones((7,7),dtype=np.uint8)
 		img = cv2.dilate(img,kernel,iterations = 1)
 		img = cv2.erode(img,kernel,iterations = 1)
@@ -347,18 +377,17 @@ def isolateFace(_src, _img, _res, _op):
 		img = cv2.dilate(img,kernel,iterations = 2)
 
 	if(_op == 2):
-		print("terceiro if")
 		img = img[int(nres[0]/4):nres[0], int(nres[1]/6):nres[1]-int(nres[1]/6)]
 
 	edges = cv2.Canny(img, 100, 200)
 	cnts, hier = cv2.findContours(edges, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
 
-
 	cv2.imwrite('./imgs/5face.png', img)
+	cv2.imshow('isolateFace', img)
+	cv2.waitKey(0)
 
 	approx = [0]
 	while(len(approx) < 2 and factor < 5):
-		print("while")
 		for cnt in cnts:
 			perimeter = cv2.arcLength(cnt, True)
 			if(perimeter > 350 and perimeter < 1300):
@@ -366,7 +395,6 @@ def isolateFace(_src, _img, _res, _op):
 		factor = factor + 0.2
 
 	if(factor > 5):
-		print("quarto if")
 		return 0, [0,0]
 
 
@@ -388,21 +416,23 @@ def isolateFace(_src, _img, _res, _op):
 		thres, img = cv2.threshold(img, 127, 255, cv2.THRESH_BINARY)
 
 	#print([maxHei-height,maxWid-width])
-	print("cheguei aqui")
 	return img, [maxHei-height,maxWid-width]
 
-def resolveVision(object, sigValue):
+def resolveVision(object, _sigValue):
 
+	global sigValue
+	sigValue = _sigValue
 	# Get the camera handle:
 	camera = object.camera_superior #função de 2020 colocava essa camera -> ver possibilidade de colocar as 2
 	# Start the Stream
 	erro, res, image = sim.simxGetVisionSensorImage(object.clientID, camera, 0, sim.simx_opmode_streaming)
-	frame, resol = getImage(camera)
+	frame, resol = getImage(object, camera)
 
 	src = frame.copy()
 	img = basicFilter(src, 0)
 	foundShape, foundColors, foundCenters = findUseful(src, img, 0.09)
 	foundColors = rgbToLetter(foundColors)
+	print(foundColors)
 	foundCubes = createArray(foundCenters, foundColors, resol[0], resol[1])
 
 	j=0
@@ -412,6 +442,9 @@ def resolveVision(object, sigValue):
 		j+=1
 
 	cv2.imwrite('./imgs/7Final.png', frame)
+	cv2.imshow('image2', frame)
+	cv2.waitKey(0)
+
 	return foundCubes
 
 def getNumber(object):
@@ -419,17 +452,23 @@ def getNumber(object):
 	camera = object.camera_chao
 	# Start the Stream
 	erro, res, image = sim.simxGetVisionSensorImage(object.clientID, camera, 0, sim.simx_opmode_streaming)
-	frame, resol = getImage(camera)
+	frame, resol = getImage(object, camera)
 	#test(camera)
 
 	src = frame.copy()
 	img = basicFilter(src, 1)
 	isolImg, nres = isolateFace(frame.copy(), img, resol, 0)
+	print("nres", nres)
 	cv2.imwrite('./imgs/7new.png', isolImg)
+	cv2.imshow('isolImg number', isolImg)
+	cv2.waitKey(0)
 
 	if(nres[0] < 100 or nres[1] < 100):
 		isolImg, nres = isolateFace(frame.copy(), img, resol, 2)
+		print("nres2", nres)
 		cv2.imwrite('./imgs/7new.png', isolImg)
+		cv2.imshow('isolImg number2', isolImg)
+		cv2.waitKey(0)
 
 	if(nres[0] < 100 or nres[1] < 100):
 		return ("empty", [-1, -1])

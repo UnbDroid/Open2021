@@ -14,7 +14,7 @@ except:
 
 import time
 import visionAlgo as vis
-import firstSq as one
+# import firstSq as one
 from object_handle import ObjectHandle
 
 # START
@@ -22,19 +22,21 @@ from object_handle import ObjectHandle
 print ('Program started')
 sim.simxFinish(-1) # just in case, close all opened connections
 clientID=sim.simxStart('127.0.0.1',19998,True,True,5000,5) # Connect to CoppeliaSim
+robotname = 'S_Base'
 if clientID!=-1:
 	print ('Connected to remote API server')
 	time.sleep(2)
 
 	adeni = ObjectHandle(clientID, robotname) #instancia objeto
-	#result = vis.resolveVision(adeni,0)
-	#result = vis.getNumber(adeni)
-	result = vis.getImage(adeni)
+	# result = vis.resolveVision(adeni,0) # ok + ok funcoes dependentes
+	# result = vis.getImage(adeni, adeni.camera_chao) # ok
+	# result = vis.test(adeni, adeni.camera_chao) #ok mas nao entendi pra q
+	result = vis.getNumber(adeni)
 	#print(one.identifyFirstPos(adeni))
-	#print(result)
+	print(result)
 
 	# Before closing the connection to CoppeliaSim, make sure that the last command sent out had time to arrive. You can guarantee this with (for example):
-	sim.simxGetPingTime(adeni)
+	sim.simxGetPingTime(clientID)
 
 	# Now close the connection to CoppeliaSim:
 	sim.simxFinish(clientID)
