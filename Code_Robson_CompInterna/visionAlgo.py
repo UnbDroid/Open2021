@@ -28,10 +28,8 @@ def getImage(object, camera):
 
 	while(errol != sim.simx_return_ok):
 		errol, res, image = sim.simxGetVisionSensorImage(object.clientID, camera, 0, sim.simx_opmode_streaming)
-		print(image)
+		# print(image)
 		# time.sleep(50) #pq??
-		print(errol)
-	print("sai")
 	nres = [res[0]-4*int(res[0]/30),res[1]] #pq??
 	img = np.array(image, dtype=np.uint8)		# Como é recebido uma string, precisa reformatar
 	img = np.reshape(img, (res[0], res[1], 3))	# Pro CV2, (y, x, [B,R,G])
@@ -40,10 +38,10 @@ def getImage(object, camera):
 	img = img[(int(res[0]/5)):res[0]-(int(res[0]/10)), 0:res[1]]
 	img = cv2.copyMakeBorder(img, int(res[0]*5/30), 0, 0, 0, cv2.BORDER_CONSTANT)
 
-	print(image)
+	# print(image)
 	cv2.imwrite('./imgs/0src.png', img)
-	cv2.imshow('image', img)
-	cv2.waitKey(0)
+	# cv2.imshow('image', img)
+	# cv2.waitKey(0)
 
 
 	return img, nres
@@ -168,22 +166,22 @@ def basicFilter(_src, _op, _correction=0):
 	#Copiar a mascara para a imagem inicial:
 	_src2 = _src.copy()
 	img = cv2.bitwise_and(_src, _src, mask=mask)
-	cv2.imshow('image b1', img)
-	cv2.waitKey(0)
+	# cv2.imshow('image b1', img)
+	# cv2.waitKey(0)
 
 
 	#Transformar para cinza:
 	img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 	cv2.imwrite('./imgs/1gray.png', img)
 
-	cv2.imshow('image b2', img)
-	cv2.waitKey(0)
+	# cv2.imshow('image b2', img)
+	# cv2.waitKey(0)
 
 	# Media:
 	img = cv2.medianBlur(img, 3)
 
-	cv2.imshow('image b3', img)
-	cv2.waitKey(0)
+	# cv2.imshow('image b3', img)
+	# cv2.waitKey(0)
 
 	cv2.imwrite('./imgs/4median.png', img)
 
@@ -194,20 +192,20 @@ def basicFilter(_src, _op, _correction=0):
 		img2 = cv2.cvtColor(img2, cv2.COLOR_BGR2GRAY)
 		cv2.imwrite('./imgs/1gray2.png', img2)
 
-		cv2.imshow('image b4', img2)
-		cv2.waitKey(0)
+		# cv2.imshow('image b4', img2)
+		# cv2.waitKey(0)
 
 		img2 = cv2.medianBlur(img2, 3)
 		kernel = np.ones((5,5),dtype=np.uint8)
 		img2 = cv2.erode(img2,kernel,iterations = 2)
 		img2 = cv2.dilate(img2,kernel,iterations = 2)
 		cv2.imwrite('./imgs/4median2.png', img2)
-		cv2.imshow('image b5', img2)
-		cv2.waitKey(0)
+		# cv2.imshow('image b5', img2)
+		# cv2.waitKey(0)
 		nimg = cv2.bitwise_or(img, img2)
 		cv2.imwrite('./imgs/4median3.png', nimg)
-		cv2.imshow('image b6', img2)
-		cv2.waitKey(0)
+		# cv2.imshow('image b6', img2)
+		# cv2.waitKey(0)
 	else:
 		nimg = img.copy()
 
@@ -231,8 +229,8 @@ def findUseful(_src, _img, _factor):
 	thres, _img = cv2.threshold(_img, 10, 255, cv2.THRESH_BINARY)
 	edges = cv2.Canny(_img, 100, 200)
 	cv2.imwrite('./imgs/5edges.png', edges)
-	cv2.imshow('find useful edges 1', edges)
-	cv2.waitKey(0)
+	# cv2.imshow('find useful edges 1', edges)
+	# cv2.waitKey(0)
 	foundCenters = np.empty(shape=[0,2])
 	foundShapes = np.empty(shape=[0,5,2])
 	foundColors = np.empty(shape=[0,3])
@@ -275,10 +273,10 @@ def findUseful(_src, _img, _factor):
 
 	cv2.imwrite('./imgs/8centers.png', _src)
 	cv2.imwrite('./imgs/0errors.png', errorim)
-	cv2.imshow('find useful src', _src)
-	cv2.waitKey(0)
-	cv2.imshow('find useful errorim', errorim)
-	cv2.waitKey(0)
+	# cv2.imshow('find useful src', _src)
+	# cv2.waitKey(0)
+	# cv2.imshow('find useful errorim', errorim)
+	# cv2.waitKey(0)
 	print(foundCenters)
 	print(foundColors)
 	return foundShapes, foundColors, foundCenters
@@ -383,8 +381,8 @@ def isolateFace(_src, _img, _res, _op):
 	cnts, hier = cv2.findContours(edges, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
 
 	cv2.imwrite('./imgs/5face.png', img)
-	cv2.imshow('isolateFace', img)
-	cv2.waitKey(0)
+	# cv2.imshow('isolateFace', img)
+	# cv2.waitKey(0)
 
 	approx = [0]
 	while(len(approx) < 2 and factor < 5):
@@ -395,7 +393,7 @@ def isolateFace(_src, _img, _res, _op):
 		factor = factor + 0.2
 
 	if(factor > 5):
-		return 0, [0,0]
+		return np.array([]), [0,0]
 
 
 	height = 3000
@@ -415,7 +413,7 @@ def isolateFace(_src, _img, _res, _op):
 		img = src[height:maxHei, width:maxWid]
 		thres, img = cv2.threshold(img, 127, 255, cv2.THRESH_BINARY)
 
-	#print([maxHei-height,maxWid-width])
+	# print("isolate",[maxHei-height,maxWid-width])
 	return img, [maxHei-height,maxWid-width]
 
 def resolveVision(object, _sigValue):
@@ -442,8 +440,8 @@ def resolveVision(object, _sigValue):
 		j+=1
 
 	cv2.imwrite('./imgs/7Final.png', frame)
-	cv2.imshow('image2', frame)
-	cv2.waitKey(0)
+	# cv2.imshow('image2', frame)
+	# cv2.waitKey(0)
 
 	return foundCubes
 
@@ -458,17 +456,17 @@ def getNumber(object):
 	src = frame.copy()
 	img = basicFilter(src, 1)
 	isolImg, nres = isolateFace(frame.copy(), img, resol, 0)
-	print("nres", nres)
+	# print("nres", nres)
 	cv2.imwrite('./imgs/7new.png', isolImg)
-	cv2.imshow('isolImg number', isolImg)
-	cv2.waitKey(0)
+	# cv2.imshow('isolImg number', isolImg)
+	# cv2.waitKey(0)
 
 	if(nres[0] < 100 or nres[1] < 100):
 		isolImg, nres = isolateFace(frame.copy(), img, resol, 2)
-		print("nres2", nres)
+		# print("nres2", nres)
 		cv2.imwrite('./imgs/7new.png', isolImg)
-		cv2.imshow('isolImg number2', isolImg)
-		cv2.waitKey(0)
+		# cv2.imshow('isolImg number2', isolImg)
+		# cv2.waitKey(0)
 
 	if(nres[0] < 100 or nres[1] < 100):
 		return ("empty", [-1, -1])
@@ -496,20 +494,23 @@ def getCode(object):
 	#test(camera)
 
 	img = basicFilter(src, 2, correction)
-
+	cv2.imwrite('./imgs/imagemtesteeee.png', img)
+	# cv2.imshow('teste',img)
+	# cv2.waitKey(0)
 	isolImg, nres = isolateFace(frame.copy(), img, resol, 1)
-	print(isolImg)
+	# print(isolImg)
+	# print(isolImg.size)
 	if(isolImg.size == 0):
 		return -1
 	while((nres[0] > 240 or nres[0] < 80 or nres[1] > 240 or nres[1] < 80 or (abs(nres[0]-nres[1]) > 70)) and correction != 3):
 		correction = correction+1
 		img = basicFilter(src, 2, correction)
 		isolImg, nres = isolateFace(frame.copy(), img, resol, 1)
-		print(nres)
+		# print(nres)
 
 	cv2.imwrite('./imgs/7new.png', isolImg)
-	cv2.imshow('getCode', isolImg)
-	cv2.waitKey(0)
+	# cv2.imshow('getCode', isolImg)
+	# cv2.waitKey(0)
 
 	op2 = compareFaces.compareBar(isolImg, nres)
 

@@ -31,10 +31,10 @@ if clientID!=-1:
 	# result = vis.resolveVision(adeni,0) # ok + ok funcoes dependentes
 	# result = vis.getImage(adeni, adeni.camera_chao) # ok
 	# result = vis.test(adeni, adeni.camera_chao) #ok mas nao entendi pra q
-	result = vis.getNumber(adeni)
-	# result = vis.getCode(adeni)
+	# result = vis.getNumber(adeni)
+	result = vis.getCode(adeni)
 	#print(one.identifyFirstPos(adeni))
-	print(result)
+	print("Resultado\n", result)
 
 	# Before closing the connection to CoppeliaSim, make sure that the last command sent out had time to arrive. You can guarantee this with (for example):
 	sim.simxGetPingTime(clientID)
