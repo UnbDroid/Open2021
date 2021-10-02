@@ -6,6 +6,7 @@ from girar import *
 from motor import *
 from sensor import *
 from object_handle import ObjectHandle
+import visionAlgo
 
 try:
     import sim
