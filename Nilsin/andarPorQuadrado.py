@@ -91,7 +91,8 @@ def chegadaNolocal(posicaoAtual, posicaoFinal):  # Define se chegou ao local
     return False
 
 
-def IndoDeA_para_B(object, posicaoAtual,  posicaoFinal, minhaDirecao):
+def IndoDeA_para_B(object, posicaoAtual,  posicaoFinal, minhaDirecao, direcaoFinal):
+    
     while(not chegadaNolocal(posicaoAtual, posicaoFinal)):
         moverY = (int(posicaoFinal/10)) - (int(posicaoAtual/10))
         moverX = (posicaoFinal % 10) - (posicaoAtual % 10)
@@ -102,10 +103,10 @@ def IndoDeA_para_B(object, posicaoAtual,  posicaoFinal, minhaDirecao):
 
             # O eixo x é a linha horizontal e verifica se ele vai para esquerda ou para direita.
             if(moverX > 0):
-                andarParaOLadoPorQuadrado(object, 6)  # anda para a direita
+                andarParaOLadoPorQuadrado(object, 4)  # anda para a direita
                 posicaoAtual += 1
             else:
-                andarParaOLadoPorQuadrado(object, 4)  # anda para a esquerda
+                andarParaOLadoPorQuadrado(object, 6)  # anda para a esquerda
                 posicaoAtual -= 1
         elif(moverY != 0):  # and notStockLocal(object, posicaoAtual, moverX, axisX)
             print('Entrei 1 Elif')
@@ -119,5 +120,7 @@ def IndoDeA_para_B(object, posicaoAtual,  posicaoFinal, minhaDirecao):
             else:
                 moverParaFrentePorQuadrado(object, 8)
                 posicaoAtual += 10
+
         print(posicaoAtual, moverX, moverY)
-    return posicaoAtual, minhaDirecao
+        # posicaoAtual, minhaDirecao
+    return corrigindoADirecao(object,minhaDirecao,direcaoFinal)

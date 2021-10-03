@@ -45,13 +45,13 @@ def get_angle_that_makes_sense(object):
         erro, euler_angles = sim.simxGetObjectOrientation(
             object.clientID, object.robot, -1, sim.simx_opmode_streaming)
 
-    print(erro, euler_angles)
+    # print(erro, euler_angles)
     factor = 90
     # print(factor)
     if (euler_angles[0] <= 0):
         factor = 270
     # print(factor)
-    print((np.sign(euler_angles[1]) * 60*euler_angles[2]))
+    # print((np.sign(euler_angles[1]) * 60*euler_angles[2]))
     finalAngle = (np.sign(euler_angles[1]) * 60 * euler_angles[2]) + factor
     return finalAngle
 
@@ -116,7 +116,7 @@ def girar_90_graus(object, sentido):
 
         if (86) < angulo_percorrido < (96):
             # print(50*'#')
-            print("Final angulo_percorrido: ", angulo_percorrido)  # teste
+            # print("Final angulo_percorrido: ", angulo_percorrido)  # teste
             # print(50*'#')
             break
     stop(object)
