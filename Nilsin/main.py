@@ -1,12 +1,13 @@
 import time
 import sys
 
-from garra import *
+# from garra import *
 from girar import *
 from motor import *
-from sensor import *
+# from sensor import *
 from object_handle import ObjectHandle
-from logLocomAlgo import *
+#from logLocomAlgo import *
+from andarPorQuadrado import *
 
 try:
     import sim
@@ -32,10 +33,12 @@ if clientID != -1:
     time.sleep(0.02)
     adeni = ObjectHandle(clientID, robotname) #instancia objeto
     girando = 0
-    cor_esquerda = Ler_Cor(adeni ,'esquerda')
-    cor_direita = Ler_Cor(adeni, 'direita')
+    # cor_esquerda = Ler_Cor(adeni ,'esquerda')
+    # cor_direita = Ler_Cor(adeni, 'direita')
+    ###############################################################
+    #girar_90_graus(adeni,1)
+    IndoDeA_para_B(adeni, 51,71,NORTE)
 
-    deA_para_B(22,25,NORTE)
 
 
 else:

@@ -1,36 +1,58 @@
 import sim
 import numpy as np
+import time
 
 import sim
-from motor import stop
+#from motor import stop
 
 ## FUNÇÕES DE GIRAR ######################################
 
 
-def giro_livre(object,d, v):
+def stop(object):
+    sim.simxPauseCommunication(object.clientID, True)
+    print(sim.simxSetJointTargetVelocity(
+        object.clientID, object.omniWheel_direita_frente, 0, sim.simx_opmode_oneshot))
+    sim.simxSetJointTargetVelocity(
+        object.clientID, object.omniWheel_direita_atras, 0, sim.simx_opmode_oneshot)
+    sim.simxSetJointTargetVelocity(
+        object.clientID, object.omniWheel_esquerda_frente, 0, sim.simx_opmode_oneshot)
+    sim.simxSetJointTargetVelocity(
+        object.clientID, object.omniWheel_esquerda_atras, 0, sim.simx_opmode_oneshot)
+    sim.simxPauseCommunication(object.clientID, False)
+    time.sleep(0.5)
+
+
+def giro_livre(object, d, v):
     # d = 1 , horario
     # d =-1 , anti
     # v = velocidade
     sim.simxPauseCommunication(object.clientID, True)
-    sim.simxSetJointTargetVelocity(object.clientID, object.omniWheel_direita_frente, d * v * (-1), sim.simx_opmode_oneshot)
-    sim.simxSetJointTargetVelocity(object.clientID, object.omniWheel_esquerda_frente, d * v * (-1), sim.simx_opmode_oneshot)
-    sim.simxSetJointTargetVelocity(object.clientID, object.omniWheel_direita_atras, d * v * (-1), sim.simx_opmode_oneshot)
-    sim.simxSetJointTargetVelocity(object.clientID, object.omniWheel_esquerda_atras, d * v * (-1), sim.simx_opmode_oneshot)
+    sim.simxSetJointTargetVelocity(
+        object.clientID, object.omniWheel_direita_frente, d * v * (-1), sim.simx_opmode_oneshot)
+    sim.simxSetJointTargetVelocity(
+        object.clientID, object.omniWheel_esquerda_frente, d * v * (-1), sim.simx_opmode_oneshot)
+    sim.simxSetJointTargetVelocity(
+        object.clientID, object.omniWheel_direita_atras, d * v * (-1), sim.simx_opmode_oneshot)
+    sim.simxSetJointTargetVelocity(
+        object.clientID, object.omniWheel_esquerda_atras, d * v * (-1), sim.simx_opmode_oneshot)
     sim.simxPauseCommunication(object.clientID, False)
 
 
 def get_angle_that_makes_sense(object):
-    erro, euler_angles = sim.simxGetObjectOrientation(object.clientID, object.robot, -1, sim.simx_opmode_streaming)
+    erro, euler_angles = sim.simxGetObjectOrientation(
+        object.clientID, object.robot, -1, sim.simx_opmode_streaming)
     while (erro != 0):
-        erro, euler_angles = sim.simxGetObjectOrientation(object.clientID, object.robot, -1, sim.simx_opmode_streaming)
+        erro, euler_angles = sim.simxGetObjectOrientation(
+            object.clientID, object.robot, -1, sim.simx_opmode_streaming)
 
-    # print(erro, euler_angles)
+    print(erro, euler_angles)
     factor = 90
     # print(factor)
-    if (euler_angles[0] <= 0): factor = 270
+    if (euler_angles[0] <= 0):
+        factor = 270
     # print(factor)
-    # print((np.sign(euler_angles[0]) * 60*euler_angles[1]))
-    finalAngle = (np.sign(euler_angles[0]) * 60 * euler_angles[1]) + factor
+    print((np.sign(euler_angles[1]) * 60*euler_angles[2]))
+    finalAngle = (np.sign(euler_angles[1]) * 60 * euler_angles[2]) + factor
     return finalAngle
 
 
@@ -56,6 +78,7 @@ def turn_around_angle(object, angle, sentido, velocidade):
     stop(object)
 
 
+# gira no sentido horário sem nenhum problema, porém no anti horario apresenta problemas.
 def girar_90_graus(object, sentido):
     # sentido = 1 , anti horario, esquerda
     # sentido =-1 , horario, direita
@@ -65,38 +88,30 @@ def girar_90_graus(object, sentido):
 
     angulo_inicial = get_angle_that_makes_sense(object)
 
-    # print(50*'#')
-    # print("angulo_inicial: ", angulo_inicial) #teste
-    # print(50*'#')
-
     # Começa a girar, talvez de para trocar essas linhas por: giro_livre(object, sentido, velocidade)
-    sim.simxPauseCommunication(object.clientID, True)
-    sim.simxSetJointTargetVelocity(object.clientID, object.omniWheel_direita_frente, (-1) * sentido * velocidade, sim.simx_opmode_oneshot)
-    sim.simxSetJointTargetVelocity(object.clientID, object.omniWheel_esquerda_frente, (-1) * sentido * velocidade, sim.simx_opmode_oneshot)
-    sim.simxSetJointTargetVelocity(object.clientID, object.omniWheel_direita_atras, (-1) * sentido * velocidade, sim.simx_opmode_oneshot)
-    sim.simxSetJointTargetVelocity(object.clientID, object.omniWheel_esquerda_atras, (-1) * sentido * velocidade, sim.simx_opmode_oneshot)
-    sim.simxPauseCommunication(object.clientID, False)
-
+    giro_livre(object, sentido, velocidade)
+    # print("ANTES DO WHILE", sentido)
     while True:
         angulo_final = get_angle_that_makes_sense(object)
-        # print("While angulo_final: ", angulo_final) #teste
+
         angulo_percorrido = angulo_final - angulo_inicial
 
         if sentido == 1:  # anti horário
+            print("To aqui -> ", angulo_percorrido, " - ",angulo_final," - ", angulo_inicial)
             if angulo_percorrido < 0:  # estava no 4º quadrante e foi para o 1º
                 angulo_percorrido += 360  # transforma para um ângulo positivo na primeira volta
-
-        else:  # horário
-            angulo_percorrido *= -1  # como está no sentido horário os valores vão vir negativos, ai multiplica por -1 pra arrumar
+        elif sentido != 1:  # horário
+            # como está no sentido horário os valores vão vir negativos, ai multiplica por -1 pra arrumar
+            angulo_percorrido *= -1
             if angulo_percorrido < 0:  # estava no 1º quadrante e foi para o 4º
                 angulo_percorrido += 360  # transforma para um ângulo positivo na primeira volta
+        # print("dps DO WHILE", type(sentido))
 
         # implementar aquilo que a gente falou do controle de velocidade baseado no quão próximo o robô está do ângulo final
 
-        if (90 - (passo / 2)) < angulo_percorrido < (90 + (passo / 2)):
+        if (86) < angulo_percorrido < (96):
             # print(50*'#')
-            # print("Final angulo_percorrido: ", angulo_percorrido) #teste
+            print("Final angulo_percorrido: ", angulo_percorrido) #teste
             # print(50*'#')
             break
-
     stop(object)

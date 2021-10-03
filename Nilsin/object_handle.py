@@ -47,3 +47,6 @@ class ObjectHandle:
       erro, self.cor_direita = sim.simxGetObjectHandle(self.clientID, 'Sensor_cor_direita', sim.simx_opmode_blocking)
       erro, self.camera_chao = sim.simxGetObjectHandle(self.clientID, 'Camera_Inferior_Chao', sim.simx_opmode_blocking)
       erro, self.camera_superior = sim.simxGetObjectHandle(self.clientID, 'Camera_Superior_Vision', sim.simx_opmode_blocking)
+      erro, self.cor_esquerda_lateral  = sim.simxGetObjectHandle(self.clientID, 'Sensor_cor_lateral_esquerda', sim.simx_opmode_blocking)
+      erro, self.cor_direita_lateral = sim.simxGetObjectHandle(self.clientID, 'Sensor_cor_lateral_direita', sim.simx_opmode_blocking)
+      
