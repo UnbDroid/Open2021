@@ -78,6 +78,10 @@ def turn_around_angle(object, angle, sentido, velocidade):
     stop(object)
 
 
+def girar_180_graus(object):
+    girar_90_graus(object, 1)
+    girar_90_graus(object, 1)
+
 # gira no sentido horário sem nenhum problema, porém no anti horario apresenta problemas.
 def girar_90_graus(object, sentido):
     # sentido = 1 , anti horario, esquerda
@@ -97,7 +101,8 @@ def girar_90_graus(object, sentido):
         angulo_percorrido = angulo_final - angulo_inicial
 
         if sentido == 1:  # anti horário
-            print("To aqui -> ", angulo_percorrido, " - ",angulo_final," - ", angulo_inicial)
+            print("To aqui -> ", angulo_percorrido, " - ",
+                  angulo_final, " - ", angulo_inicial)
             if angulo_percorrido < 0:  # estava no 4º quadrante e foi para o 1º
                 angulo_percorrido += 360  # transforma para um ângulo positivo na primeira volta
         elif sentido != 1:  # horário
@@ -111,7 +116,7 @@ def girar_90_graus(object, sentido):
 
         if (86) < angulo_percorrido < (96):
             # print(50*'#')
-            print("Final angulo_percorrido: ", angulo_percorrido) #teste
+            print("Final angulo_percorrido: ", angulo_percorrido)  # teste
             # print(50*'#')
             break
     stop(object)

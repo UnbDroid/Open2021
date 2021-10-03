@@ -123,31 +123,36 @@ def alinhar(object):
     while True:
         esquerda = Ler_Cor(object, 'esquerda')
         direita = Ler_Cor(object, 'direita')
-        if esquerda == 'PRETO' or direita == 'preto':
+        if esquerda == 'PRETO' or direita == 'PRETO':
             print('quebrei')
             stop(object)
             break
 
         else:
-            print('to andando')
+            # print('to andando')
             move_frente(object, 3)
     flag = 0
     while True:
         
         corE = Ler_Cor(object, 'esquerda')
+        print("COR ESQUERDA == ", corE)
         corD = Ler_Cor(object, 'direita')
+        print("COR DIREITA == ", corD)
+
         if flag:
             break
+        if corE == 'PRETO' and corD == 'PRETO':
+            break
         while Ler_Cor(object, 'esquerda') == 'PRETO' and Ler_Cor(object, 'direita') == 'BRANCO':
-            print('cor esquerda PRETO')
+            # print('cor esquerda PRETO')
             giro_livre(object, -1, 1)
             flag = 1
         while Ler_Cor(object, 'esquerda') == 'BRANCO' and Ler_Cor(object, 'direita') == 'PRETO':
             print('cor direita PRETA')
             giro_livre(object, 1, 1)
             flag = 1
-        else:
-            move_frente(object, 3)
+        # else:
+        move_frente(object, 3)
     stop(object)        
 
 # Girar para a direita ou para a esquerda pelo angulo que você escolher
@@ -172,7 +177,7 @@ def MoveForwardPosition(object, dist):
 
 def moverParaFrentePorQuadrado(object, d):
     andar_em_metros(object, d, 6, 0.20)
-    #alinhar(object)
+    alinhar(object)
 
 def andarParaOLadoPorQuadrado(object, d):
     andar_em_metros(object, d, 5, 0.20)
