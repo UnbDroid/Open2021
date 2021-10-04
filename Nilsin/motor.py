@@ -9,10 +9,6 @@ from sensor import *
 ## FUNÇÕES DE LOCOMOÇAO ######################################
 
 
-def teste(object):
-    girar_90_graus(object, 1)
-
-
 def stop(object):
     sim.simxPauseCommunication(object.clientID, True)
     sim.simxSetJointTargetVelocity(
@@ -68,7 +64,7 @@ def move_frente(object, v):
 
 def andar_livre(object, d, v):
 
-    # d = 1 , esquerda
+    d = 1
     # d =-1 , direita
     # v = velocidade
 
@@ -97,13 +93,13 @@ def andar_em_metros(object, d, v, m):
     x_inicial = a_inicial[0]
     y_inicial = a_inicial[1]
 
-    if d == 8:
+    if d == 'frente':
         move_frente(object, v)
-    if d == 2:
+    if d == 'tras':
         move_tras(object, v)
-    if d == 4:
+    if d == 'esquerda':
         andar_livre(object, -1, v)
-    if d == 6:
+    if d == 'direita':
         andar_livre(object, 1, v)
 
     while True:
@@ -119,7 +115,46 @@ def andar_em_metros(object, d, v, m):
     stop(object)
 
 
-def alinhar(object):
+def alinharLateral(object, d):
+    while True:
+        esquerda = Ler_Cor(object, 'esquerdaLateral')
+        direita = Ler_Cor(object, 'direitaLateral')
+        if esquerda == 'PRETO' or direita == 'PRETO':
+            print('quebrei')
+            stop(object)
+            break
+
+        else:
+            # print('to andando')
+            andar_livre(object, d, 2)
+    flag = 0
+    while True:
+
+        corE = Ler_Cor(object, 'esquerdaLateral')
+        print("COR ESQUERDA LATERAL == ", corE)
+        corD = Ler_Cor(object, 'direitaLateral')
+        print("COR DIREITA LATERAL == ", corD)
+
+        # if flag:
+        #     break
+        if corE == 'PRETO' and corD == 'PRETO':
+            break
+        if corE == 'BRANCO' and corD == 'BRANCO':
+            andar_livre(object,d,1)
+        while Ler_Cor(object, 'esquerdaLateral') == 'PRETO' and Ler_Cor(object, 'direitaLateral') == 'BRANCO':
+            # print('cor esquerda PRETO')
+            giro_livre(object, 1, 1)
+            flag = 1
+        while Ler_Cor(object, 'esquerdaLateral') == 'BRANCO' and Ler_Cor(object, 'direitaLateral') == 'PRETO':
+            # print('cor direitaLateral PRETA')
+            giro_livre(object, -1, 1)
+            flag = 1
+        # else:
+            # andar_livre(object, d, 2)
+    stop(object)
+
+
+def alinhar(object,d):
     while True:
         esquerda = Ler_Cor(object, 'esquerda')
         direita = Ler_Cor(object, 'direita')
@@ -130,10 +165,13 @@ def alinhar(object):
 
         else:
             # print('to andando')
-            move_frente(object, 3)
+            if d == 'tras':
+                move_tras(object,2)
+            else:
+                move_frente(object, 2)
     flag = 0
     while True:
-        
+
         corE = Ler_Cor(object, 'esquerda')
         print("COR ESQUERDA == ", corE)
         corD = Ler_Cor(object, 'direita')
@@ -152,8 +190,8 @@ def alinhar(object):
             giro_livre(object, 1, 1)
             flag = 1
         # else:
-        move_frente(object, 3)
-    stop(object)        
+        # move_frente(object, 3)
+    stop(object)
 
 # Girar para a direita ou para a esquerda pelo angulo que você escolher
 
@@ -172,16 +210,24 @@ def direcaoEGiro(object, ang):
         # pass
         girar_90_graus(object, 1)
 
+
 def MoveForwardPosition(object, dist):
     MoveDirectionPosition(object, 8, dist)
 
+
 def moverParaFrentePorQuadrado(object, d):
     andar_em_metros(object, d, 6, 0.20)
-    alinhar(object)
+    alinhar(object,d)
+
 
 def andarParaOLadoPorQuadrado(object, d):
-    andar_em_metros(object, d, 5, 0.20)
-    
+    print('VOU ANDAR EM METROS')
+    andar_em_metros(object, d, 3, 0.20)
+    print('VOU ALINHAR')
+    alinharLateral(object, d)
+    print('BYE')
+
+
 def TurnInSquare(object, angle):  # gira no centro do quadrado e vai para ponta
     print(angle)
 
@@ -193,7 +239,8 @@ def TurnInSquare(object, angle):  # gira no centro do quadrado e vai para ponta
         direcaoEGiro(object, abs(angle))
     MoveDirectionPosition(object, 8, 0.025)
     alinhar(object)
-        
+
+
 def MoveDirectionPosition(direcao, dist):  # Andar reto para frente ou para trás
     andar_em_metros(direcao, 5, dist)
 
@@ -253,6 +300,3 @@ def MoveDirectionPosition(direcao, dist):  # Andar reto para frente ou para trá
 
 #     align.Align()
 #     return
-
-
-

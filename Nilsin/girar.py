@@ -101,8 +101,8 @@ def girar_90_graus(object, sentido):
         angulo_percorrido = angulo_final - angulo_inicial
 
         if sentido == 1:  # anti horário
-            print("To aqui -> ", angulo_percorrido, " - ",
-                  angulo_final, " - ", angulo_inicial)
+            # print("To aqui -> ", angulo_percorrido, " - ",
+            #       angulo_final, " - ", angulo_inicial)
             if angulo_percorrido < 0:  # estava no 4º quadrante e foi para o 1º
                 angulo_percorrido += 360  # transforma para um ângulo positivo na primeira volta
         elif sentido != 1:  # horário

@@ -103,10 +103,12 @@ def IndoDeA_para_B(object, posicaoAtual,  posicaoFinal, minhaDirecao, direcaoFin
 
             # O eixo x é a linha horizontal e verifica se ele vai para esquerda ou para direita.
             if(moverX > 0):
-                andarParaOLadoPorQuadrado(object, 4)  # anda para a direita
+                # print('VOU ANDAR PARA O LADO')
+                andarParaOLadoPorQuadrado(object, 'esquerda')  # anda para a direita
+                # print('ANDEI PARA O LADO')
                 posicaoAtual += 1
             else:
-                andarParaOLadoPorQuadrado(object, 6)  # anda para a esquerda
+                andarParaOLadoPorQuadrado(object, 'direita')  # anda para a esquerda
                 posicaoAtual -= 1
         elif(moverY != 0):  # and notStockLocal(object, posicaoAtual, moverX, axisX)
             print('Entrei 1 Elif')
@@ -114,11 +116,12 @@ def IndoDeA_para_B(object, posicaoAtual,  posicaoFinal, minhaDirecao, direcaoFin
             #     object, minhaDirecao, moverX, axisX, True)
             # moverParaFrentePorQuadrado(object)
             if(moverY < 0):  # robô anda para cima
-                moverParaFrentePorQuadrado(object, 8)
+
+                moverParaFrentePorQuadrado(object, 'tras')
                 posicaoAtual -= 10
             # robô anda para baixo (necessário que ele gire 180 para não ter erro no alinhamento)
             else:
-                moverParaFrentePorQuadrado(object, 8)
+                moverParaFrentePorQuadrado(object, 'frente')
                 posicaoAtual += 10
 
         print(posicaoAtual, moverX, moverY)

@@ -39,7 +39,10 @@ if clientID != -1:
     #girar_90_graus(adeni,1)
     IndoDeA_para_B(adeni,24,64,NORTE,NORTE)
     IndoDeA_para_B(adeni,64,61,NORTE,NORTE)
-    
+    IndoDeA_para_B(adeni,61,31,NORTE,LESTE)
+
+    # while True:
+    # alinharLateral(adeni,1)
 
 
 
