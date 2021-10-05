@@ -6,6 +6,7 @@ from girar import *
 from motor import *
 from sensor import *
 from object_handle import ObjectHandle
+from andarPorQuadrado import *
 import visionAlgo
 
 try:
@@ -31,49 +32,11 @@ if clientID != -1:
     sim.simxAddStatusbarMessage(clientID, 'Funcionando...', sim.simx_opmode_oneshot_wait)
     time.sleep(0.02)
     adeni = ObjectHandle(clientID, robotname) #instancia objeto
-    girando = 0
-    cor_esquerda = Ler_Cor(adeni ,'esquerda')
-    cor_direita = Ler_Cor(adeni, 'direita')
-
-    def alinhar():
-        while True:
-            esquerda = Ler_Cor(adeni, 'esquerda')
-            direita = Ler_Cor(adeni, 'direita')
-            if esquerda =='PRETO' or direita =='preto':
-                print('quebrei')
-                break
-            else:
-                print('to andando')
-                move_frente(adeni,3)
-        while True:
-            flag = 0
-            corE =Ler_Cor(adeni, 'esquerda')
-            corD = Ler_Cor(adeni, 'direita')
-            if flag:
-                break
-            while Ler_Cor(adeni, 'esquerda')== 'PRETO' and Ler_Cor(adeni, 'direita') == 'BRANCO':
-                print('cor esquerda PRETO')
-                giro_livre(adeni, 1,1)
-                flag =1
-            while Ler_Cor(adeni, 'esquerda') == 'BRANCO' and Ler_Cor(adeni, 'direita') == 'PRETO':
-                print('cor direita PRETA')
-                giro_livre(adeni, -1,1)
-                flag = 1
-            else:
-                move_frente(adeni, 3)
-    #while True:
-     #   alinhar()
-        
-    # while True:
-    # turn_around_angle(adeni, 100, 1, 2)
-    # girar_90_graus(adeni, 1)
-
-    # girar_90_graus(adeni, 1)
-
-    # giro_livre(adeni,1,2)
-    # andar_em_metros(adeni, 'tras', 2, 1)
-    #while girando<1:
-     #   alinhar
+    IndoDeA_para_B(adeni,24,64,NORTE,NORTE)
+    IndoDeA_para_B(adeni,64,61,NORTE,NORTE)
+    IndoDeA_para_B(adeni,61,21,NORTE,NORTE)
+    IndoDeA_para_B(adeni,21,27,NORTE,LESTE)
+    
     
 
 

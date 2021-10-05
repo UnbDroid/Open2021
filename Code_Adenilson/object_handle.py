@@ -1,9 +1,24 @@
 import sim
+import time
+
+NORTE = 1
+SUL = -1
+LESTE = 2
+OESTE = -2
+axisX = 0
+axisY = 1
+frente = 8
+tras = 2
+direita = 1
+esquerda = -1
+
 
 class ObjectHandle:
    def __init__(self, clientID, robotname):
       self.clientID = clientID
       self.robotname = robotname
+
+
       #Robô
       erro, self.robot = sim.simxGetObjectHandle(self.clientID, self.robotname, sim.simx_opmode_blocking)
       erro, self.s_base = sim.simxGetObjectHandle(self.clientID, 'S_Base', sim.simx_opmode_blocking)
@@ -32,7 +47,10 @@ class ObjectHandle:
       erro, self.cor_direita = sim.simxGetObjectHandle(self.clientID, 'Sensor_cor_direita', sim.simx_opmode_blocking)
       erro, self.camera_chao = sim.simxGetObjectHandle(self.clientID, 'Camera_Inferior_Chao', sim.simx_opmode_blocking)
       erro, self.camera_superior = sim.simxGetObjectHandle(self.clientID, 'Camera_Superior_Vision', sim.simx_opmode_blocking)
-      erro, self.ir_frente_direita = sim.simxGetObjectHandle(self.clientID, 'Sensor_IR_frente_direita', sim.simx_opmode_blocking)
-      erro, self.ir_frente_esquerda = sim.simxGetObjectHandle(self.clientID, 'Sensor_IR_frente_esquerda', sim.simx_opmode_blocking)
-      erro, self.ir_costas_direita = sim.simxGetObjectHandle(self.clientID, 'Sensor_IR_costas__direita', sim.simx_opmode_blocking)
-      erro, self.ir_costas_esquerda = sim.simxGetObjectHandle(self.clientID, 'Sensor_IR_costas__esquerda', sim.simx_opmode_blocking)
+      erro, self.cor_esquerda_lateral1  = sim.simxGetObjectHandle(self.clientID, 'Sensor_cor_lateral_direita1', sim.simx_opmode_blocking)
+      erro, self.cor_direita_lateral1 = sim.simxGetObjectHandle(self.clientID, 'Sensor_cor_lateral_direita', sim.simx_opmode_blocking)
+      erro, self.cor_esquerda_lateral2  = sim.simxGetObjectHandle(self.clientID, 'Sensor_cor_lateral_esquerda1', sim.simx_opmode_blocking)
+      erro, self.cor_direita_lateral2 = sim.simxGetObjectHandle(self.clientID, 'Sensor_cor_lateral_esquerda', sim.simx_opmode_blocking)
+      erro, self.cor_esquerda_costas  = sim.simxGetObjectHandle(self.clientID, 'Sensor_cor_costas_esquerda', sim.simx_opmode_blocking)
+      erro, self.cor_direita_costas = sim.simxGetObjectHandle(self.clientID, 'Sensor_cor_costas_direita', sim.simx_opmode_blocking)
+     
