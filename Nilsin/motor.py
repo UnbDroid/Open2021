@@ -64,7 +64,7 @@ def move_frente(object, v):
 
 def andar_livre(object, d, v):
 
-    d = 1
+    # d = 1
     # d =-1 , direita
     # v = velocidade
 
@@ -115,10 +115,17 @@ def andar_em_metros(object, d, v, m):
     stop(object)
 
 
-def alinharLateral(object, d):
+def alinharLateral2(object, d):
+    # if d == 'esquerda':
+    #     valSensorEsquerdo = 'esquerdaLateral1'
+    #     valSensorDireito = 'direitaLateral1'
+    # elif d == 'direita':
+    #     valSensorEsquerdo = 'esquerdaLateral2'
+    #     valSensorDireito = 'direitaLateral2'
+
     while True:
-        esquerda = Ler_Cor(object, 'esquerdaLateral')
-        direita = Ler_Cor(object, 'direitaLateral')
+        esquerda = Ler_Cor(object, 'esquerdaLateral2')
+        direita = Ler_Cor(object, 'direitaLateral2')
         if esquerda == 'PRETO' or direita == 'PRETO':
             print('quebrei')
             stop(object)
@@ -126,13 +133,13 @@ def alinharLateral(object, d):
 
         else:
             # print('to andando')
-            andar_livre(object, d, 2)
+            andar_livre(object, -1, 2)
     flag = 0
     while True:
 
-        corE = Ler_Cor(object, 'esquerdaLateral')
+        corE = Ler_Cor(object, 'esquerdaLateral2')
         print("COR ESQUERDA LATERAL == ", corE)
-        corD = Ler_Cor(object, 'direitaLateral')
+        corD = Ler_Cor(object, 'direitaLateral2')
         print("COR DIREITA LATERAL == ", corD)
 
         # if flag:
@@ -140,12 +147,57 @@ def alinharLateral(object, d):
         if corE == 'PRETO' and corD == 'PRETO':
             break
         if corE == 'BRANCO' and corD == 'BRANCO':
-            andar_livre(object,d,1)
-        while Ler_Cor(object, 'esquerdaLateral') == 'PRETO' and Ler_Cor(object, 'direitaLateral') == 'BRANCO':
+            andar_livre(object,-1,2)
+        while Ler_Cor(object, 'esquerdaLateral2') == 'PRETO' and Ler_Cor(object, 'direitaLateral2') == 'BRANCO':
+            # print('cor esquerda PRETO')
+            giro_livre(object, -1, 1)
+            flag = 1
+        while Ler_Cor(object, 'esquerdaLateral2') == 'BRANCO' and Ler_Cor(object, 'direitaLateral2') == 'PRETO':
+            # print('cor direitaLateral PRETA')
+            giro_livre(object, 1, 1)
+            flag = 1
+        # else:
+            # andar_livre(object, d, 2)
+    stop(object)
+
+def alinharLateral(object, d):
+    # if d == 'esquerda':
+    #     valSensorEsquerdo = 'esquerdaLateral1'
+    #     valSensorDireito = 'direitaLateral1'
+    # elif d == 'direita':
+    #     valSensorEsquerdo = 'esquerdaLateral2'
+    #     valSensorDireito = 'direitaLateral2'
+
+    while True:
+        esquerda = Ler_Cor(object, 'esquerdaLateral1')
+        direita = Ler_Cor(object, 'direitaLateral1')
+        if esquerda == 'PRETO' or direita == 'PRETO':
+            print('quebrei')
+            stop(object)
+            break
+
+        else:
+            # print('to andando')
+            andar_livre(object, 1, 2)
+    flag = 0
+    while True:
+
+        corE = Ler_Cor(object, 'esquerdaLateral1')
+        print("COR ESQUERDA LATERAL == ", corE)
+        corD = Ler_Cor(object, 'direitaLateral1')
+        print("COR DIREITA LATERAL == ", corD)
+
+        # if flag:
+        #     break
+        if corE == 'PRETO' and corD == 'PRETO':
+            break
+        if corE == 'BRANCO' and corD == 'BRANCO':
+            andar_livre(object,1,2)
+        while Ler_Cor(object, 'esquerdaLateral1') == 'PRETO' and Ler_Cor(object, 'direitaLateral1') == 'BRANCO':
             # print('cor esquerda PRETO')
             giro_livre(object, 1, 1)
             flag = 1
-        while Ler_Cor(object, 'esquerdaLateral') == 'BRANCO' and Ler_Cor(object, 'direitaLateral') == 'PRETO':
+        while Ler_Cor(object, 'esquerdaLateral1') == 'BRANCO' and Ler_Cor(object, 'direitaLateral1') == 'PRETO':
             # print('cor direitaLateral PRETA')
             giro_livre(object, -1, 1)
             flag = 1
@@ -155,6 +207,13 @@ def alinharLateral(object, d):
 
 
 def alinhar(object,d):
+    if d == 'frente':
+        valSensorEsquerdo = 'esquerda'
+        valSensorDireito = 'direita'
+    elif d == 'tras':
+        valSensorEsquerdo = 'esquerdacosta'
+        valSensorDireito = 'direitacosta'
+
     while True:
         esquerda = Ler_Cor(object, 'esquerda')
         direita = Ler_Cor(object, 'direita')
@@ -186,7 +245,53 @@ def alinhar(object,d):
             giro_livre(object, -1, 1)
             flag = 1
         while Ler_Cor(object, 'esquerda') == 'BRANCO' and Ler_Cor(object, 'direita') == 'PRETO':
-            print('cor direita PRETA')
+            # print('cor direita PRETA')
+            giro_livre(object, 1, 1)
+            flag = 1
+        # else:
+        # move_frente(object, 3)
+    stop(object)
+
+def alinhar2(object,d):
+    # if d == 'frente':
+    #     valSensorEsquerdo = 'esquerda'
+    #     valSensorDireito = 'direita'
+    # elif d == 'tras':
+    #     valSensorEsquerdo = 'esquerdacosta'
+    #     valSensorDireito = 'direitacosta'
+
+    while True:
+        esquerda = Ler_Cor(object, 'esquerdacosta')
+        direita = Ler_Cor(object, 'direitacosta')
+        if esquerda == 'PRETO' or direita == 'PRETO':
+            print('quebrei')
+            stop(object)
+            break
+
+        else:
+            # print('to andando')
+            if d == 'tras':
+                move_tras(object,2)
+            else:
+                move_frente(object, 2)
+    flag = 0
+    while True:
+
+        corE = Ler_Cor(object, 'esquerdacosta')
+        print("COR ESQUERDA == ", corE)
+        corD = Ler_Cor(object, 'direitacosta')
+        print("COR DIREITA == ", corD)
+
+        if flag:
+            break
+        if corE == 'PRETO' and corD == 'PRETO':
+            break
+        while Ler_Cor(object, 'esquerdacosta') == 'PRETO' and Ler_Cor(object, 'direitacosta') == 'BRANCO':
+            # print('cor esquerda PRETO')
+            giro_livre(object, -1, 1)
+            flag = 1
+        while Ler_Cor(object, 'esquerdacosta') == 'BRANCO' and Ler_Cor(object, 'direitacosta') == 'PRETO':
+            # print('cor direita PRETA')
             giro_livre(object, 1, 1)
             flag = 1
         # else:
@@ -219,13 +324,17 @@ def moverParaFrentePorQuadrado(object, d):
     andar_em_metros(object, d, 6, 0.20)
     alinhar(object,d)
 
+def moverParaTrasPorQuadrado(object, d):
+    andar_em_metros(object, d, 6, 0.20)
+    alinhar2(object,d)
 
-def andarParaOLadoPorQuadrado(object, d):
-    print('VOU ANDAR EM METROS')
+def andarDireitaPorQuadrado(object, d):
     andar_em_metros(object, d, 3, 0.20)
-    print('VOU ALINHAR')
     alinharLateral(object, d)
-    print('BYE')
+
+def andarEsquerdaPorQuadrado(object, d):
+    andar_em_metros(object, d, 3, 0.20)
+    alinharLateral2(object, d)
 
 
 def TurnInSquare(object, angle):  # gira no centro do quadrado e vai para ponta

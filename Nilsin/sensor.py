@@ -8,10 +8,18 @@ def Ler_Cor(object, direction):
         sensor_cor = object.cor_esquerda
     elif direction.lower() == "direita":
         sensor_cor = object.cor_direita
-    elif direction.lower() == "direitalateral":
-        sensor_cor = object.cor_direita_lateral
-    elif direction.lower() == "esquerdalateral":
-        sensor_cor = object.cor_esquerda_lateral
+    elif direction.lower() == "esquerdacosta":
+        sensor_cor = object.cor_esquerda_costas
+    elif direction.lower() == "direitacosta":
+        sensor_cor = object.cor_direita_costas
+    elif direction.lower() == "direitalateral1":
+        sensor_cor = object.cor_direita_lateral1
+    elif direction.lower() == "esquerdalateral1":
+        sensor_cor = object.cor_esquerda_lateral1
+    elif direction.lower() == "direitalateral2":
+        sensor_cor = object.cor_direita_lateral2
+    elif direction.lower() == "esquerdalateral2":
+        sensor_cor = object.cor_esquerda_lateral2
     elif direction.lower() == "aux":
         sensor_cor = object.color_sensor_aux
     else:
