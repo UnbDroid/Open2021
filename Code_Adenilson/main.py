@@ -1,13 +1,13 @@
 import time
 import sys
 
-# from garra import *
+from garra import *
 from girar import *
 from motor import *
-# from sensor import *
+from sensor import *
 from object_handle import ObjectHandle
-#from logLocomAlgo import *
 from andarPorQuadrado import *
+import visionAlgo
 
 try:
     import sim
@@ -32,19 +32,12 @@ if clientID != -1:
     sim.simxAddStatusbarMessage(clientID, 'Funcionando...', sim.simx_opmode_oneshot_wait)
     time.sleep(0.02)
     adeni = ObjectHandle(clientID, robotname) #instancia objeto
-    girando = 0
-    # cor_esquerda = Ler_Cor(adeni ,'esquerda')
-    # cor_direita = Ler_Cor(adeni, 'direita')
-    ###############################################################
-    #girar_90_graus(adeni,1)
     IndoDeA_para_B(adeni,24,64,NORTE,NORTE)
     IndoDeA_para_B(adeni,64,61,NORTE,NORTE)
     IndoDeA_para_B(adeni,61,21,NORTE,NORTE)
     IndoDeA_para_B(adeni,21,27,NORTE,LESTE)
-
-    # while True:
-    # alinharLateral(adeni,1)
-
+    
+    
 
 
 else:

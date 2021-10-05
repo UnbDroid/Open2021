@@ -103,11 +103,11 @@ def IndoDeA_para_B(object, posicaoAtual,  posicaoFinal, minhaDirecao, direcaoFin
 
             # O eixo x é a linha horizontal e verifica se ele vai para esquerda ou para direita.
             if(moverX > 0):
-                print("ESSSSSSSSSSQUERDAAAAAAAAA")
+                # print("ESSSSSSSSSSQUERDAAAAAAAAA")
                 andarEsquerdaPorQuadrado(object, 'esquerda')  # anda para a esquerda
                 posicaoAtual += 1
             else:
-                print("DIIIIIIIIIIREIIIIIIIIIITAAAAAAA")
+                # print("DIIIIIIIIIIREIIIIIIIIIITAAAAAAA")
                 andarDireitaPorQuadrado(object, 'direita')  # anda para a direita
                 posicaoAtual -= 1
         elif(moverY != 0):  # and notStockLocal(object, posicaoAtual, moverX, axisX)
@@ -127,3 +127,74 @@ def IndoDeA_para_B(object, posicaoAtual,  posicaoFinal, minhaDirecao, direcaoFin
         print(posicaoAtual, moverX, moverY)
         # posicaoAtual, minhaDirecao
     return corrigindoADirecao(object,minhaDirecao,direcaoFinal)
+
+
+# def desvioAreaDeCarga(object, posicaoAtual, minhaDirecao):
+    # Parte de cima
+    if(posicaoAtual == 22):
+        minhaDirecao = direcaoCorreta(object, minhaDirecao, -1, axisY, True)
+        moverParaFrentePorQuadrado(object)
+        minhaDirecao = direcaoCorreta(object, minhaDirecao, +1, axisX, True)
+        moverParaFrentePorQuadrado(object)
+        posicaoAtual = 31
+    if(posicaoAtual == 23):
+        minhaDirecao = direcaoCorreta(object, minhaDirecao, +1, axisY, True)
+        moverParaFrentePorQuadrado(object)
+        minhaDirecao = direcaoCorreta(object, minhaDirecao, +1, axisX, True)
+        moverParaFrentePorQuadrado(object)
+        posicaoAtual = 34
+    if(posicaoAtual == 25):
+        minhaDirecao = direcaoCorreta(object, minhaDirecao, -1, axisY, True)
+        moverParaFrentePorQuadrado(object)
+        minhaDirecao = direcaoCorreta(object, minhaDirecao, +1, axisX, True)
+        moverParaFrentePorQuadrado(object)
+        posicaoAtual = 34
+    if(posicaoAtual == 26):
+        minhaDirecao = direcaoCorreta(object, minhaDirecao, +1, axisY, True)
+        moverParaFrentePorQuadrado(object)
+        minhaDirecao = direcaoCorreta(object, minhaDirecao, +1, axisX, True)
+        moverParaFrentePorQuadrado(object)
+        posicaoAtual = 37
+    # Parte de baixo
+    if(posicaoAtual == 52):
+        minhaDirecao = turnTo(object, minhaDirecao, OESTE, True)
+        moverParaFrentePorQuadrado(object)
+        minhaDirecao = turnTo(object, minhaDirecao, NORTE, True)
+        moverParaFrentePorQuadrado(object)
+        posicaoAtual = 41
+    if(posicaoAtual == 53):
+        minhaDirecao = turnTo(object, minhaDirecao, LESTE, True)
+        moverParaFrentePorQuadrado(object)
+        minhaDirecao = turnTo(object, minhaDirecao, NORTE, True)
+        moverParaFrentePorQuadrado(object)
+        posicaoAtual = 44
+    if(posicaoAtual == 55):
+        minhaDirecao = turnTo(object, minhaDirecao, OESTE, True)
+        moverParaFrentePorQuadrado(object)
+        minhaDirecao = turnTo(object, minhaDirecao, NORTE, True)
+        moverParaFrentePorQuadrado(object)
+        posicaoAtual = 44
+    if(posicaoAtual == 56):
+        minhaDirecao = turnTo(object, minhaDirecao, LESTE, True)
+        moverParaFrentePorQuadrado(object)
+        minhaDirecao = turnTo(minhaDirecao, NORTE, True)
+        moverParaFrentePorQuadrado(object)
+        posicaoAtual = 47
+    print(posicaoAtual, minhaDirecao)
+    return posicaoAtual, minhaDirecao
+
+# def notStockLocal(object, posicaoAtual, movement, axis):
+    if(axis == axisX):
+        if(movement > 0):  # Quer ir pra baixo (SUL)
+            # Lista de lugares que não podem ir pra baixo por conta do local de carga
+            locaisDeCarga = [22, 23, 25, 26]
+        if(movement < 0):  # Quer ir pra cima (NORTE)
+            locaisDeCarga = [52, 53, 55, 56]
+    if(axis == axisY):
+        if(movement > 0):  # Quer ir pra esquerda (LESTE)
+            locaisDeCarga = [31, 41, 34, 44]
+        if(movement < 0):  # Quer ir pra direita (OESTE)
+            locaisDeCarga = [34, 44, 37, 47]
+    if(posicaoAtual in locaisDeCarga):
+        return False
+    return True

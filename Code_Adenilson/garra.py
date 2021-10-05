@@ -8,10 +8,20 @@ import simConst
 
 #essas funções de subir e descer a garra estavam sem a parte de pauseCommunication, não sei se tem problema
 def subir_garra_frente(object, altura):
+    """Alturas das estantes
+    1º andar => altura = -0.06
+    2º andar => altura = 0.055
+    3º andar => altura = 0.165"""
+
     sim.simxSetJointTargetPosition(object.clientID,object.acoplador_garra1,altura,sim.simx_opmode_oneshot) 
     time.sleep(1)
 
 def subir_garra_costas(object, altura):
+    """Alturas das estantes
+    1º andar => altura = -0.06
+    2º andar => altura = 0.055
+    3º andar => altura = 0.165"""
+
     sim.simxSetJointTargetPosition(object.clientID,object.acoplador_garra2,altura,sim.simx_opmode_oneshot) 
     time.sleep(1)
 
@@ -37,7 +47,6 @@ def fechar_garra_costas(object, position):
     sim.simxPauseCommunication(object.clientID, False)
     time.sleep(1)
 
-
 def abrir_garra_frente(object, position):
     sim.simxPauseCommunication(object.clientID, True)
     sim.simxSetJointTargetPosition(object.clientID,object.pa_esquerda1,position,sim.simx_opmode_oneshot)
@@ -57,7 +66,6 @@ def enable_magic_cube(object, cubo):
 	sim.simxSetModelProperty(object.clientID, cubo, simConst.sim_modelproperty_not_dynamic, sim.simx_opmode_oneshot)
 	sim.simxSetObjectParent(object.clientID, cubo, object.robot, True, sim.simx_opmode_oneshot)
 	sim.simxPauseCommunication(object.clientID, False)
-
 
 def disable_magic_cube(object, cubo):
 	sim.simxPauseCommunication(object.clientID, True)
