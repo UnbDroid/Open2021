@@ -11,4 +11,6 @@
 /httpRequests/
 .vscode
 .vscode/
+.idea
+.idea/
 
