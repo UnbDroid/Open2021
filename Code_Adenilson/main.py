@@ -5,9 +5,10 @@ from garra import *
 from girar import *
 from motor import *
 from sensor import *
+from logLocomAlgo import *
 from object_handle import ObjectHandle
 from andarPorQuadrado import *
-import visionAlgo
+from visionAlgo import *
 
 try:
     import sim
@@ -19,6 +20,31 @@ except:
     print('or appropriately adjust the file "sim.py"')
     print('--------------------------------------------------------------')
     print('')
+
+
+def firstAreaCubes(currentPosition, myDirection, order):
+    if(order == 1):
+        destine = 22
+        direction = LESTE
+        lastTurn = direita
+    if(order == 2):
+        destine = 23
+        direction = OESTE
+        lastTurn = esquerda
+    #Vai para a primeira área
+    currentPosition, myDirection = deA_para_B(adeni, currentPosition, destine, myDirection)
+    #Se posiciona da melhor forma para enxergar os blocos
+    myDirection = turnTo(adeni, myDirection ,direction, True)
+    #Align() #TurnTo ja alinha
+    andar_em_metros(adeni,frente, 2, 0.04)
+    girar_90_graus(adeni,lastTurn)
+    myDirection = SUL
+    #align.Align()
+    andar_em_metros(adeni, tras, 5, 0.065)
+    matrix0 = vis.resolveVision(adeni, 0)
+    #time.sleep(3)
+    return matrix0, currentPosition, myDirection
+
 
 sim.simxFinish(-1)  # just in case, close all opened connections
 global clientID
@@ -32,12 +58,15 @@ if clientID != -1:
     sim.simxAddStatusbarMessage(clientID, 'Funcionando...', sim.simx_opmode_oneshot_wait)
     time.sleep(0.02)
     adeni = ObjectHandle(clientID, robotname) #instancia objeto
-    IndoDeA_para_B(adeni,31,34,SUL,SUL)
+    initialDirection = SUL
+    initialPosition = identifyFirstPos(adeni)
+    firstAreaCubes(initialPosition, initialDirection, 1)
+    # IndoDeA_para_B(adeni,31,34,SUL,SUL)
     # IndoDeA_para_B(adeni,64,61,SUL,SUL)
     # IndoDeA_para_B(adeni,61,21,SUL,SUL)
     # IndoDeA_para_B(adeni,21,27,SUL,LESTE)
-    
-    
+
+
 
 
 else:
