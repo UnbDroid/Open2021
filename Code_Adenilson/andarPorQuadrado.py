@@ -7,19 +7,22 @@ from sensor import *
 from motor import *
 from object_handle import *
 
+axisX = 0
+axisY = 1
 
-#Lógica e funções de andar por quadrado #######
+############### LÓGICA E FUNÇÕES PARA QUE O ROBÔ ANDE POR QUADRADO ############################
 
-def corrigindoADirecao(object, minhaDirecao, direcaoFinal):
+
+def corrigindoADirecao(object, minhaDirecao, direcaoFinal): #corrige a direção do robô baseado na direção final.
     if(direcaoFinal == NORTE):
         if(minhaDirecao == NORTE):
             return NORTE
         else:
             if(minhaDirecao == LESTE):
-                girar_90_graus(object, 1)
+                girar_90_graus(object, -1)  # sentido anti horário
 
             if(minhaDirecao == OESTE):
-                girar_90_graus(object, -1)
+                girar_90_graus(object, 1)  # sentido horário
 
             if(minhaDirecao == SUL):
                 girar_180_graus(object)
@@ -30,10 +33,10 @@ def corrigindoADirecao(object, minhaDirecao, direcaoFinal):
             return SUL
         else:
             if(minhaDirecao == LESTE):
-                girar_90_graus(object, -1)
+                girar_90_graus(object, 1)  # sentido horário
 
             if(minhaDirecao == OESTE):
-                girar_90_graus(object, 1)
+                girar_90_graus(object, -1)  # anti horário
 
             if(minhaDirecao == NORTE):
                 girar_180_graus(object)
@@ -46,9 +49,9 @@ def corrigindoADirecao(object, minhaDirecao, direcaoFinal):
             if(minhaDirecao == OESTE):
                 girar_180_graus(object)
             if(minhaDirecao == NORTE):
-                girar_90_graus(object, 1)
+                girar_90_graus(object, 1)  # sentido horário
             if(minhaDirecao == SUL):
-                girar_90_graus(object, -1)
+                girar_90_graus(object, -1)  # anti horário
         return direcaoFinal
 
     if(direcaoFinal == OESTE):
@@ -58,13 +61,12 @@ def corrigindoADirecao(object, minhaDirecao, direcaoFinal):
             if(minhaDirecao == LESTE):
                 girar_180_graus(object)
             if(minhaDirecao == NORTE):
-                girar_90_graus(object, 1)
+                girar_90_graus(object, -1)  # anti horário
             if(minhaDirecao == SUL):
-                girar_90_graus(object, -1)
+                girar_90_graus(object, 1)  # horário
         return direcaoFinal
 
-
-def chegadaNolocal(posicaoAtual, posicaoFinal):  # Define se chegou ao local
+def chegadaNolocal(posicaoAtual, posicaoFinal):  #define se chegou ao local
     locaisDeEstoque = [32, 33, 35, 36, 42, 43, 45, 46]
     locaisDeEntrega = [71, 72, 73, 74, 75, 76, 77]
     prateleira = [14]  # média entre as pratileiras
@@ -90,107 +92,72 @@ def chegadaNolocal(posicaoAtual, posicaoFinal):  # Define se chegou ao local
 
     return False
 
+def IndoDeA_para_B(object, posicaoAtual,  posicaoFinal, minhaDirecao, direcaoFinal): #faz com que o robô ande de A para B, sendo baseado nas posições da arena.
 
-def IndoDeA_para_B(object, posicaoAtual,  posicaoFinal, minhaDirecao, direcaoFinal):
-    
     while(not chegadaNolocal(posicaoAtual, posicaoFinal)):
         moverY = (int(posicaoFinal/10)) - (int(posicaoAtual/10))
         moverX = (posicaoFinal % 10) - (posicaoAtual % 10)
 
-        if(moverX != 0):  # and notStockLocal(object, posicaoAtual, moverX, axisX)
+        if(moverX != 0 and naoLocalDeCarga(object, posicaoAtual, moverX, axisX)):
             print('entrei no if')
             #minhaDirecao = direcaoCorreta(object, minhaDirecao, moverX, axisX, True)
 
             # O eixo x é a linha horizontal e verifica se ele vai para esquerda ou para direita.
             if(moverX > 0):
                 # print("ESSSSSSSSSSQUERDAAAAAAAAA")
-                andarEsquerdaPorQuadrado(object, 'esquerda')  # anda para a esquerda
+                # anda para a esquerda
+                moverLadoPorQuadrado(object, 'esquerda')
                 posicaoAtual += 1
             else:
                 # print("DIIIIIIIIIIREIIIIIIIIIITAAAAAAA")
-                andarDireitaPorQuadrado(object, 'direita')  # anda para a direita
+                moverLadoPorQuadrado(object, 'direita')  # anda para a direita
                 posicaoAtual -= 1
-        elif(moverY != 0):  # and notStockLocal(object, posicaoAtual, moverX, axisX)
+        elif(moverY != 0 and naoLocalDeCarga(object, posicaoAtual, moverY, axisY)):
             print('Entrei 1 Elif')
             # minhaDirecao = direcaoCorreta(
             #     object, minhaDirecao, moverX, axisX, True)
             # moverParaFrentePorQuadrado(object)
             if(moverY < 0):  # robô anda para cima
-
-                moverParaTrasPorQuadrado(object, 'tras')
+                moverPorQuadrado(object, 'tras')
                 posicaoAtual -= 10
             # robô anda para baixo (necessário que ele gire 180 para não ter erro no alinhamento)
             else:
-                moverParaFrentePorQuadrado(object, 'frente')
+                moverPorQuadrado(object, 'frente')
                 posicaoAtual += 10
+        else:
+            posicaoAtual, minhaDirecao = desvioAreaDeCarga(object,posicaoAtual, posicaoFinal,minhaDirecao,direcaoFinal)
 
         print(posicaoAtual, moverX, moverY)
         # posicaoAtual, minhaDirecao
-    return corrigindoADirecao(object,minhaDirecao,direcaoFinal)
-
-
-# def desvioAreaDeCarga(object, posicaoAtual, minhaDirecao):
-    # Parte de cima
-    if(posicaoAtual == 22):
-        minhaDirecao = direcaoCorreta(object, minhaDirecao, -1, axisY, True)
-        moverParaFrentePorQuadrado(object)
-        minhaDirecao = direcaoCorreta(object, minhaDirecao, +1, axisX, True)
-        moverParaFrentePorQuadrado(object)
-        posicaoAtual = 31
-    if(posicaoAtual == 23):
-        minhaDirecao = direcaoCorreta(object, minhaDirecao, +1, axisY, True)
-        moverParaFrentePorQuadrado(object)
-        minhaDirecao = direcaoCorreta(object, minhaDirecao, +1, axisX, True)
-        moverParaFrentePorQuadrado(object)
-        posicaoAtual = 34
-    if(posicaoAtual == 25):
-        minhaDirecao = direcaoCorreta(object, minhaDirecao, -1, axisY, True)
-        moverParaFrentePorQuadrado(object)
-        minhaDirecao = direcaoCorreta(object, minhaDirecao, +1, axisX, True)
-        moverParaFrentePorQuadrado(object)
-        posicaoAtual = 34
-    if(posicaoAtual == 26):
-        minhaDirecao = direcaoCorreta(object, minhaDirecao, +1, axisY, True)
-        moverParaFrentePorQuadrado(object)
-        minhaDirecao = direcaoCorreta(object, minhaDirecao, +1, axisX, True)
-        moverParaFrentePorQuadrado(object)
-        posicaoAtual = 37
-    # Parte de baixo
-    if(posicaoAtual == 52):
-        minhaDirecao = turnTo(object, minhaDirecao, OESTE, True)
-        moverParaFrentePorQuadrado(object)
-        minhaDirecao = turnTo(object, minhaDirecao, NORTE, True)
-        moverParaFrentePorQuadrado(object)
-        posicaoAtual = 41
-    if(posicaoAtual == 53):
-        minhaDirecao = turnTo(object, minhaDirecao, LESTE, True)
-        moverParaFrentePorQuadrado(object)
-        minhaDirecao = turnTo(object, minhaDirecao, NORTE, True)
-        moverParaFrentePorQuadrado(object)
-        posicaoAtual = 44
-    if(posicaoAtual == 55):
-        minhaDirecao = turnTo(object, minhaDirecao, OESTE, True)
-        moverParaFrentePorQuadrado(object)
-        minhaDirecao = turnTo(object, minhaDirecao, NORTE, True)
-        moverParaFrentePorQuadrado(object)
-        posicaoAtual = 44
-    if(posicaoAtual == 56):
-        minhaDirecao = turnTo(object, minhaDirecao, LESTE, True)
-        moverParaFrentePorQuadrado(object)
-        minhaDirecao = turnTo(minhaDirecao, NORTE, True)
-        moverParaFrentePorQuadrado(object)
-        posicaoAtual = 47
-    print(posicaoAtual, minhaDirecao)
     return posicaoAtual, minhaDirecao
 
-# def notStockLocal(object, posicaoAtual, movement, axis):
-    if(axis == axisX):
+def desvioAreaDeCarga(object, posicaoAtual, posicaoFinal, minhaDirecao, direcaoFinal):
+    # Parte de cima
+    if(int(posicaoAtual/10) == 2):
+        destino = posicaoAtual+10
+    elif(int(posicaoAtual/10) == 5):
+        destino = posicaoAtual-10
+
+    if(posicaoAtual in [22, 25, 52, 55]):
+        destino -= 1
+    elif(posicaoAtual in [23, 26, 53, 56]):
+        destino += 1
+    elif(posicaoAtual in [41, 44, 47]):
+        destino = posicaoAtual+10
+    elif(posicaoAtual in [31, 34, 37]):
+        destino = posicaoAtual-10
+
+    posicaoAtual, minhaDirecao = IndoDeA_para_B(object,posicaoAtual, destino,minhaDirecao,direcaoFinal)
+    return  posicaoAtual, minhaDirecao
+
+def naoLocalDeCarga(object, posicaoAtual, movement, axis):
+    if(axis == axisY):
         if(movement > 0):  # Quer ir pra baixo (SUL)
             # Lista de lugares que não podem ir pra baixo por conta do local de carga
             locaisDeCarga = [22, 23, 25, 26]
         if(movement < 0):  # Quer ir pra cima (NORTE)
             locaisDeCarga = [52, 53, 55, 56]
-    if(axis == axisY):
+    if(axis == axisX):
         if(movement > 0):  # Quer ir pra esquerda (LESTE)
             locaisDeCarga = [31, 41, 34, 44]
         if(movement < 0):  # Quer ir pra direita (OESTE)
@@ -198,3 +165,11 @@ def IndoDeA_para_B(object, posicaoAtual,  posicaoFinal, minhaDirecao, direcaoFin
     if(posicaoAtual in locaisDeCarga):
         return False
     return True
+   
+    
+
+# 31, 34, 37, 41, 44 e 47 --> o robô deverá fazer a subtração da sua posição atual pela sua posição final. 
+#Caso essa subtração seja < que 10, ele irá subir um quadrado e retomar para a função principal. Atualiza a posição inicial com a final após andar 1 quadrado para cima.
+#Caso essa subtração seja > que 10, o robô irá duas casas para baixo e retomará para o código principal. Atualiza a posição inicial com a final após andar 2 quadrado para baixo.
+
+# 22, 23, 25, 26, 52, 53, 55, e 56 --> o robô irá dar a volta pela diagonal
