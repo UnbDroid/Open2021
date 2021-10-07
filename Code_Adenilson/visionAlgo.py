@@ -166,8 +166,8 @@ def basicFilter(_src, _op, _correction=0):
 	#Copiar a mascara para a imagem inicial:
 	_src2 = _src.copy()
 	img = cv2.bitwise_and(_src, _src, mask=mask)
-	# cv2.imshow('image b1', img)
-	# cv2.waitKey(0)
+	cv2.imshow('image b1', img)
+	cv2.waitKey(0)
 
 
 	#Transformar para cinza:
