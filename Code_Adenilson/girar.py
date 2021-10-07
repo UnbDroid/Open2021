@@ -91,21 +91,27 @@ def girar_90_graus(object, sentido):
     passo = 1.5
 
     angulo_inicial = get_angle_that_makes_sense(object)
+    """if angulo_inicial >0:
+        angulo_inicial-=4
+    else:
+        angulo_inicial+=4"""
 
     # Começa a girar, talvez de para trocar essas linhas por: giro_livre(object, sentido, velocidade)
     giro_livre(object, sentido, velocidade)
     # print("ANTES DO WHILE", sentido)
     while True:
+        
         angulo_final = get_angle_that_makes_sense(object)
 
         angulo_percorrido = angulo_final - angulo_inicial
-
-        if sentido == 1:  # anti horário
+        print('angulo final', angulo_final)
+        print('angulo percorrido', angulo_percorrido)
+        if sentido != 1:  # anti horário
             # print("To aqui -> ", angulo_percorrido, " - ",
             #       angulo_final, " - ", angulo_inicial)
             if angulo_percorrido < 0:  # estava no 4º quadrante e foi para o 1º
                 angulo_percorrido += 360  # transforma para um ângulo positivo na primeira volta
-        elif sentido != 1:  # horário
+        elif sentido == 1:  # horário
             # como está no sentido horário os valores vão vir negativos, ai multiplica por -1 pra arrumar
             angulo_percorrido *= -1
             if angulo_percorrido < 0:  # estava no 1º quadrante e foi para o 4º
@@ -114,7 +120,7 @@ def girar_90_graus(object, sentido):
 
         # implementar aquilo que a gente falou do controle de velocidade baseado no quão próximo o robô está do ângulo final
 
-        if (86) < angulo_percorrido < (96):
+        if (88) < angulo_percorrido < (98):
             # print(50*'#')
             # print("Final angulo_percorrido: ", angulo_percorrido)  # teste
             # print(50*'#')
