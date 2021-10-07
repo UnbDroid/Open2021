@@ -166,8 +166,8 @@ def basicFilter(_src, _op, _correction=0):
 	#Copiar a mascara para a imagem inicial:
 	_src2 = _src.copy()
 	img = cv2.bitwise_and(_src, _src, mask=mask)
-	# cv2.imshow('image b1', img)
-	# cv2.waitKey(0)
+	cv2.imshow('image b1', img)
+	cv2.waitKey(0)
 
 
 	#Transformar para cinza:
@@ -515,31 +515,3 @@ def getCode(object):
 	op2 = compareFaces.compareBar(isolImg, nres)
 
 	return op2
-
-def identifyFirstPos(object):
-	global sigValue
-
-	# Get the camera handle:
-	erro, camera = sim.simxGetObjectHandle(object.clientID, object.camera_superior, sim.simx_opmode_oneshot_wait)
-	# Start the Stream
-	erro, res, image = sim.simxGetVisionSensorImage(object.clientID, camera, 0, sim.simx_opmode_streaming)
-	frame, resol = getImage(camera)
-	#test(camera)
-
-	filtered = basicFilter(frame)
-	foundColors, foundCenters = findUseful(frame.copy(), filtered)
-
-	if(foundCenters.size == 0):
-		return 0, -1
-
-	center, right = getMostCentered(resol, foundCenters)
-	#print(center, right)
-	colors = [rgbToLetter(foundColors[center]), rgbToLetter(foundColors[right])]
-	while(colors[0] != 'G' and right == -1):
-		frame, resol = getImage(camera)
-		filtered = basicFilter(frame)
-		foundColors, foundCenters = findUseful(frame.copy(), filtered)
-		center, right = getMostCentered(resol, foundCenters)
-		colors = [rgbToLetter(foundColors[center]), rgbToLetter(foundColors[right])]
-
-	return getY(foundCenters[center], resol), getX(colors, right)

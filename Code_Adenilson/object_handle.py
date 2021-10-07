@@ -53,4 +53,3 @@ class ObjectHandle:
       erro, self.cor_direita_lateral2 = sim.simxGetObjectHandle(self.clientID, 'Sensor_cor_lateral_esquerda', sim.simx_opmode_blocking)
       erro, self.cor_esquerda_costas  = sim.simxGetObjectHandle(self.clientID, 'Sensor_cor_costas_esquerda', sim.simx_opmode_blocking)
       erro, self.cor_direita_costas = sim.simxGetObjectHandle(self.clientID, 'Sensor_cor_costas_direita', sim.simx_opmode_blocking)
-     

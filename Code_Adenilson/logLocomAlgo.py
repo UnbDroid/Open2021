@@ -6,6 +6,7 @@ from girar import *
 from motor import *
 from sensor import *
 from object_handle import *
+from andarPorQuadrado import *
 #import alignAlgo as align
 #import cuboAlgo as cubo
 
@@ -236,9 +237,11 @@ def irMetadeDoQuadrado(object, moverX, moverY, posicaoAtual, minhaDirecao):
 
 
 # Permite que o robô vá de um canto para o outro.
-def deA_para_B(object,posicaoAtual,  posicaoFinal, minhaDirecao):
+def deA_para_B(object, posicaoAtual, posicaoFinal, minhaDirecao):
     posicaoFinal = posicaoRealFinal(object, posicaoFinal)
     i = 0
+    print("pos final",posicaoAtual)
+    print("pos inicial",posicaoFinal)
     while(not chegadaNolocal(object, posicaoAtual, posicaoFinal)):
         moverX = (int(posicaoFinal/10)) - (int(posicaoAtual/10))
         moverY = (posicaoFinal % 10) - (posicaoAtual % 10)

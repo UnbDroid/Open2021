@@ -218,7 +218,7 @@ def direcaoEGiro(object, ang): #girar para a direita ou para a esquerda pelo ang
         # pass
         girar_90_graus(object, 1)
 
-def MoveForwardPosition(object, dist): 
+def MoveForwardPosition(object, dist):
     MoveDirectionPosition(object, 8, dist)
 
 def moverPorQuadrado(object, d): #move frente ou trás dependendo da direção

@@ -9,6 +9,7 @@ from logLocomAlgo import *
 from object_handle import ObjectHandle
 from andarPorQuadrado import *
 from visionAlgo import *
+import firstSq
 
 try:
     import sim
@@ -59,8 +60,15 @@ if clientID != -1:
     time.sleep(0.02)
     adeni = ObjectHandle(clientID, robotname) #instancia objeto
     initialDirection = SUL
-    initialPosition = identifyFirstPos(adeni)
-    firstAreaCubes(initialPosition, initialDirection, 1)
+    print(sim.simxGetObjectHandle(clientID, 'Camera_Superior_Vision', sim.simx_opmode_blocking))
+    initialPosition = firstSq.identifyFirstPos(adeni)
+    if(initialPosition[1] == -1):
+        andar_em_metros(frente, 6, 0.20)
+        # align.Align()
+        move.andar_em_metros(tras, 5, 0.065)
+    iniY, iniX = firstSq.identifyFirstPos(adeni)
+    initialPosition = (iniY+1)*10+(iniX+1)
+    firstAreaCubes(initialPosition, initialDirection, 1) #vai quebrar não está pronto
     # IndoDeA_para_B(adeni,31,34,SUL,SUL)
     # IndoDeA_para_B(adeni,64,61,SUL,SUL)
     # IndoDeA_para_B(adeni,61,21,SUL,SUL)
