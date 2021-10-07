@@ -92,3 +92,14 @@ def getCubeHandle(object, sensor):
         erro, detectionState, distancePoint, detectedObjectHandle, detectedSurface = sim.simxReadProximitySensor(
             object.clientID, sensor, sim.simx_opmode_streaming)
     return detectedObjectHandle
+
+
+def le_distancia_ir(object, sensor):
+    max_distance_IR = 1
+    erro = 1
+    while (erro != 0): 
+        erro, detectable, distancePoint, detectedObjectHandle, detectedSurface = sim.simxReadProximitySensor(object.clientID, sensor, sim.simx_opmode_streaming)
+    distance = distancePoint[2]
+    if(detectable == False):
+        distance = max_distance_IR
+    return distance

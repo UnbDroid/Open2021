@@ -75,10 +75,10 @@ def andar_livre(object, d, v):
     sim.simxPauseCommunication(object.clientID, False)
 
 def andar_em_metros(object, d, v, m): #anda em todos os sentidos dependendo da direção
-    # d = 8 , andar para frente
-    # d = 2 , andar para trás
-    # d = 4 , andar para esquerda
-    # d = 6 , andar para direita
+    # d = frente, andar para frente
+    # d = tras, andar para trás
+    # d = esquerda, andar para esquerda
+    # d = direita, andar para direita
     # v = velocidade
     # m = valor em metros
 
