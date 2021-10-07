@@ -32,8 +32,9 @@ if clientID != -1:
     sim.simxAddStatusbarMessage(clientID, 'Funcionando...', sim.simx_opmode_oneshot_wait)
     time.sleep(0.02)
     adeni = ObjectHandle(clientID, robotname) #instancia objeto
-    IndoDeA_para_B(adeni,31,34,SUL,SUL)
-    # IndoDeA_para_B(adeni,64,61,SUL,SUL)
+    IndoDeA_para_B(adeni,27,21,SUL,SUL)
+    # entregandoCubos(adeni,22,23,SUL,NORTE)
+    # IndoDeA_para_B(adeni,47,22,OESTE,NORTE)
     # IndoDeA_para_B(adeni,61,21,SUL,SUL)
     # IndoDeA_para_B(adeni,21,27,SUL,LESTE)
     

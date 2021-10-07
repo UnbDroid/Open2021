@@ -94,6 +94,9 @@ def chegadaNolocal(posicaoAtual, posicaoFinal):  #define se chegou ao local
 
 def IndoDeA_para_B(object, posicaoAtual,  posicaoFinal, minhaDirecao, direcaoFinal): #faz com que o robô ande de A para B, sendo baseado nas posições da arena.
 
+    if minhaDirecao != SUL:
+        minhaDirecao = corrigindoADirecao(object,minhaDirecao,SUL)
+
     while(not chegadaNolocal(posicaoAtual, posicaoFinal)):
         moverY = (int(posicaoFinal/10)) - (int(posicaoAtual/10))
         moverX = (posicaoFinal % 10) - (posicaoAtual % 10)
@@ -166,7 +169,62 @@ def naoLocalDeCarga(object, posicaoAtual, movement, axis):
         return False
     return True
    
-    
+def entregandoCubos(object, posicaoAtual, posicaoFinal, minhaDirecao, direcaoFinal): 
+
+    Prateleira1 = [11, 6, 1]
+    Prateleira2 = [12, 7, 2]
+    Prateleira3 = [13, 8, 3]
+    Prateleira4 = [14, 9, 4]
+    Prateleira5 = [15, 10, 5]
+    locaisDeEntrega = [71, 72, 73, 74, 75, 76, 77]
+    valGarraFrente = object.cubo_garra_frente
+    valGarraCostas = object.cubo_garra_costas
+
+    if valGarraFrente and valGarraCostas != 0:
+        if (valGarraFrente in Prateleira1):
+            posicaoFinal = 22
+            direcaoFinal = NORTE
+            IndoDeA_para_B(object,posicaoAtual,posicaoFinal,minhaDirecao,direcaoFinal)
+            object.cubo_garra_frente = 0
+        elif (valGarraFrente in Prateleira2):
+            posicaoFinal = 23
+            IndoDeA_para_B(object,posicaoAtual,posicaoFinal)
+            object.cubo_garra_frente = 0
+        elif (valGarraFrente in Prateleira3):
+            posicaoFinal = 24
+            IndoDeA_para_B(object,posicaoAtual,posicaoFinal)
+            object.cubo_garra_frente = 0
+        elif (valGarraFrente in Prateleira4):
+            posicaoFinal = 25
+            IndoDeA_para_B(object,posicaoAtual,posicaoFinal)
+            object.cubo_garra_frente = 0
+        elif (valGarraFrente in Prateleira5):
+            posicaoFinal = 26
+            IndoDeA_para_B(object,posicaoAtual,posicaoFinal)
+            object.cubo_garra_frente = 0
+
+        if (valGarraCostas in Prateleira1):
+            posicaoFinal = 22
+            IndoDeA_para_B(object,posicaoAtual,posicaoFinal)
+            object.cubo_garra_costas = 0
+        elif (valGarraCostas in Prateleira2):
+            posicaoFinal = 23
+            IndoDeA_para_B(object,posicaoAtual,posicaoFinal)
+            object.cubo_garra_costas = 0
+        elif (valGarraCostas in Prateleira3):
+            posicaoFinal = 24
+            IndoDeA_para_B(object,posicaoAtual,posicaoFinal)
+            object.cubo_garra_costas = 0
+        elif (valGarraCostas in Prateleira4):
+            posicaoFinal = 25
+            IndoDeA_para_B(object,posicaoAtual,posicaoFinal)
+            object.cubo_garra_costas = 0
+        elif (valGarraCostas in Prateleira5):
+            posicaoFinal = 26
+            IndoDeA_para_B(object,posicaoAtual,posicaoFinal)
+            object.cubo_garra_costas = 0
+            
+    #print(valGarraFrente, valGarraCostas)
 
 # 31, 34, 37, 41, 44 e 47 --> o robô deverá fazer a subtração da sua posição atual pela sua posição final. 
 #Caso essa subtração seja < que 10, ele irá subir um quadrado e retomar para a função principal. Atualiza a posição inicial com a final após andar 1 quadrado para cima.
