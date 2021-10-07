@@ -59,8 +59,8 @@ def move_frente(object, v):
 
 def andar_livre(object, d, v):
 
-    # d = 1
-    # d =-1 , direita
+    # d = 1 direita
+    # d =-1 esquerda
     # v = velocidade
 
     sim.simxPauseCommunication(object.clientID, True)
