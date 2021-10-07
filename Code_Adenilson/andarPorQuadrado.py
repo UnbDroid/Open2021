@@ -184,44 +184,53 @@ def entregandoCubos(object, posicaoAtual, posicaoFinal, minhaDirecao, direcaoFin
         if (valGarraFrente in Prateleira1):
             posicaoFinal = 22
             direcaoFinal = NORTE
-            IndoDeA_para_B(object,posicaoAtual,posicaoFinal,minhaDirecao,direcaoFinal)
+            IndoDeA_para_B(object, posicaoAtual, posicaoFinal, minhaDirecao, direcaoFinal)
             object.cubo_garra_frente = 0
         elif (valGarraFrente in Prateleira2):
             posicaoFinal = 23
-            IndoDeA_para_B(object,posicaoAtual,posicaoFinal)
+            direcaoFinal = NORTE
+            IndoDeA_para_B(object, posicaoAtual, posicaoFinal, minhaDirecao, direcaoFinal)
             object.cubo_garra_frente = 0
         elif (valGarraFrente in Prateleira3):
             posicaoFinal = 24
-            IndoDeA_para_B(object,posicaoAtual,posicaoFinal)
+            direcaoFinal = NORTE
+            IndoDeA_para_B(object, posicaoAtual, posicaoFinal, minhaDirecao, direcaoFinal)
             object.cubo_garra_frente = 0
         elif (valGarraFrente in Prateleira4):
             posicaoFinal = 25
-            IndoDeA_para_B(object,posicaoAtual,posicaoFinal)
+            direcaoFinal = NORTE
+            IndoDeA_para_B(object, posicaoAtual, posicaoFinal, minhaDirecao, direcaoFinal)
             object.cubo_garra_frente = 0
         elif (valGarraFrente in Prateleira5):
             posicaoFinal = 26
-            IndoDeA_para_B(object,posicaoAtual,posicaoFinal)
+            direcaoFinal = NORTE
+            IndoDeA_para_B(object, posicaoAtual, posicaoFinal, minhaDirecao, direcaoFinal)
             object.cubo_garra_frente = 0
 
         if (valGarraCostas in Prateleira1):
             posicaoFinal = 22
-            IndoDeA_para_B(object,posicaoAtual,posicaoFinal)
+            direcaoFinal = NORTE
+            IndoDeA_para_B(object, posicaoAtual, posicaoFinal, minhaDirecao, direcaoFinal)
             object.cubo_garra_costas = 0
         elif (valGarraCostas in Prateleira2):
             posicaoFinal = 23
-            IndoDeA_para_B(object,posicaoAtual,posicaoFinal)
+            direcaoFinal = NORTE
+            IndoDeA_para_B(object, posicaoAtual, posicaoFinal, minhaDirecao, direcaoFinal)
             object.cubo_garra_costas = 0
         elif (valGarraCostas in Prateleira3):
             posicaoFinal = 24
-            IndoDeA_para_B(object,posicaoAtual,posicaoFinal)
+            direcaoFinal = NORTE
+            IndoDeA_para_B(object, posicaoAtual, posicaoFinal, minhaDirecao, direcaoFinal)
             object.cubo_garra_costas = 0
         elif (valGarraCostas in Prateleira4):
             posicaoFinal = 25
-            IndoDeA_para_B(object,posicaoAtual,posicaoFinal)
+            direcaoFinal = NORTE
+            IndoDeA_para_B(object, posicaoAtual, posicaoFinal, minhaDirecao, direcaoFinal)
             object.cubo_garra_costas = 0
         elif (valGarraCostas in Prateleira5):
             posicaoFinal = 26
-            IndoDeA_para_B(object,posicaoAtual,posicaoFinal)
+            direcaoFinal = NORTE
+            IndoDeA_para_B(object, posicaoAtual, posicaoFinal, minhaDirecao, direcaoFinal)
             object.cubo_garra_costas = 0
             
     #print(valGarraFrente, valGarraCostas)
