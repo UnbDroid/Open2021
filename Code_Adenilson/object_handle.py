@@ -61,5 +61,3 @@ class ObjectHandle:
       erro, self.ir_frente_esquerda = sim.simxGetObjectHandle(self.clientID, 'Sensor_IR_frente_esquerda', sim.simx_opmode_blocking)
       erro, self.ir_costas_direita = sim.simxGetObjectHandle(self.clientID, 'Sensor_IR_costas_direita', sim.simx_opmode_blocking)
       erro, self.ir_costas_esquerda = sim.simxGetObjectHandle(self.clientID, 'Sensor_IR_costas_esquerda', sim.simx_opmode_blocking)
-      
-      
