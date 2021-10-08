@@ -35,6 +35,8 @@ if clientID != -1:
     time.sleep(0.02)
     adeni = ObjectHandle(clientID, robotname) #instancia objeto
     #IndoDeA_para_B(adeni,31,34,SUL,SUL)
+
+
     def firstAreaCubes(currentPosition, myDirection, order):
         print('primeira')
         if(order == 1):
@@ -54,8 +56,8 @@ if clientID != -1:
         girar_90_graus(adeni,lastTurn)
         myDirection = SUL
         alinhar(adeni,'frente')
-        andar_em_metros(adeni,tras,2, 0.065)
-        matrix0 = visionAlgo.resolveVision(clientID,0)
+        andar_em_metros(adeni,'tras',2, 0.065)
+        matrix0 = visionAlgo.resolveVision(adeni,0)
         #time.sleep(3)
         return matrix0, currentPosition, myDirection
 
@@ -84,7 +86,7 @@ if clientID != -1:
         myDirection = SUL
         #align.Align()
         andar_em_metros(adeni,'tras' ,2, 0.065)
-        matrix1 = visionAlgo.resolveVision(clientID,1)
+        matrix1 = visionAlgo.resolveVision(adeni,1)
         return matrix1, currentPosition, myDirection
 
     def thirdAreaCubes(currentPosition, myDirection, order):
@@ -109,7 +111,7 @@ if clientID != -1:
         #align.Align()
         andar_em_metros(adeni,'tras',2, 0.065)
         print('ta aqui o erro')
-        matrix0 = visionAlgo.resolveVision(clientID,0) ####ALTERAR A MATRIZ
+        matrix0 = visionAlgo.resolveVision(adeni,0) ####ALTERAR A MATRIZ
         matrix0 = invertMatrix(matrix0)
         #time.sleep(3)
         print('nao sai')
@@ -137,7 +139,7 @@ if clientID != -1:
         myDirection = NORTE
         #align.Align()
         andar_em_metros(adeni,'tras',2, 0.065)
-        matrix1 = visionAlgo.resolveVision(clientID,1) #MODIFICAR MATRIZ
+        matrix1 = visionAlgo.resolveVision(adeni,1) #MODIFICAR MATRIZ
         matrix1 = invertMatrix(matrix1)
         return matrix1, currentPosition, myDirection
 
@@ -193,11 +195,11 @@ if clientID != -1:
         # print(matrix0)
         # print(matrix1)
         matrix = np.concatenate((matrix0, matrix1), axis=0)
-        
+
         #order = gb.get_path(gb.createGraphBlocks(matrix))  #AQUI FUNCIONA COM O CODIGO SIMPLES!!!!!
         #print(order, matrixFinal)
         return currentPosition, myDirection, matrix
-        
+
     def winOPEN():
         # move.inicio_virar_SUL()
         initialPosition = [4,1]
