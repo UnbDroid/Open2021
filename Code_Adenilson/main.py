@@ -36,7 +36,8 @@ if clientID != -1:
     time.sleep(0.02)
     adeni = ObjectHandle(clientID, robotname) #instancia objeto
     # IndoDeA_para_B(adeni,24,27,SUL,NORTE)
-    print(firstSq.identifyFirstPos(adeni))
+    # poze = firstSq.identifyFirstPos(adeni)
+    # print(melhorbloco(poze,))
 
 
 else:
