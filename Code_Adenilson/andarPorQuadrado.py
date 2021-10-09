@@ -184,6 +184,8 @@ def entregandoCubos(object, posicaoAtual, posicaoFinal, minhaDirecao, direcaoFin
         if (valGarraFrente in Prateleira1):
             posicaoFinal = 22
             direcaoFinal = NORTE
+            if minhaDirecao != SUL:
+                corrigindoADirecao(object,minhaDirecao,SUL)
             IndoDeA_para_B(object, posicaoAtual, posicaoFinal, minhaDirecao, direcaoFinal)
             object.cubo_garra_frente = 0
         elif (valGarraFrente in Prateleira2):

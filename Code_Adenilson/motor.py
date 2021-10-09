@@ -189,7 +189,7 @@ def alinhar(object, d): #alinha frente e costas.
         #     break
         if corE == 'PRETO' and corD == 'PRETO':
             break
-        if corE == 'PRETO' and corD == 'PRETO':
+        if corE == 'BRANCO' and corD == 'BRANCO':
             break
         while Ler_Cor(object, valSensorEsquerdo) == 'PRETO' and Ler_Cor(object, valSensorDireito) == 'BRANCO':
             # print('cor esquerda PRETO')
