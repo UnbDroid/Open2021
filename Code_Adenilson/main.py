@@ -34,6 +34,7 @@ if clientID != -1:
     sim.simxAddStatusbarMessage(clientID, 'Funcionando...', sim.simx_opmode_oneshot_wait)
     time.sleep(0.02)
     adeni = ObjectHandle(clientID, robotname) #instancia objeto
+<<<<<<< HEAD
     #IndoDeA_para_B(adeni,31,34,SUL,SUL)
 
 
@@ -211,6 +212,11 @@ if clientID != -1:
         initialPosition = (iniY+1)*10+(iniX+1)
         print(initialPosition, 'win OPEN')
         initialDirection = SUL
+=======
+    # IndoDeA_para_B(adeni,24,27,SUL,NORTE)
+    # poze = firstSq.identifyFirstPos(adeni)
+    # print(melhorbloco(poze,))
+>>>>>>> AdeniCode
 
         currentPosition, myDirection, matrix = getBlocksInformation(initialPosition, initialDirection)
         print(matrix, 'DEPOIS DO WIN OPEN')

@@ -1,3 +1,4 @@
+from algoritmo import melhorbloco
 import sim
 import numpy as np
 import time
@@ -11,6 +12,7 @@ axisX = 0
 axisY = 1
 
 ############### LÓGICA E FUNÇÕES PARA QUE O ROBÔ ANDE POR QUADRADO ############################
+
 
 
 def corrigindoADirecao(object, minhaDirecao, direcaoFinal): #corrige a direção do robô baseado na direção final.
@@ -66,7 +68,7 @@ def corrigindoADirecao(object, minhaDirecao, direcaoFinal): #corrige a direção
                 girar_90_graus(object, 1)  # horário
         return direcaoFinal
 
-def chegadaNolocal(posicaoAtual, posicaoFinal):  #define se chegou ao local
+def chegadaNolocal(posicaoAtual, posicaoFinal):  # define se chegou ao local
     locaisDeEstoque = [32, 33, 35, 36, 42, 43, 45, 46]
     locaisDeEntrega = [71, 72, 73, 74, 75, 76, 77]
     prateleira = [14]  # média entre as pratileiras
@@ -92,10 +94,10 @@ def chegadaNolocal(posicaoAtual, posicaoFinal):  #define se chegou ao local
 
     return False
 
-def IndoDeA_para_B(object, posicaoAtual,  posicaoFinal, minhaDirecao, direcaoFinal): #faz com que o robô ande de A para B, sendo baseado nas posições da arena.
+def IndoDeA_para_B(object, posicaoAtual,  posicaoFinal, minhaDirecao, direcaoFinal): # faz com que o robô ande de A para B, sendo baseado nas posições da arena.
 
     if minhaDirecao != SUL:
-        minhaDirecao = corrigindoADirecao(object,minhaDirecao,SUL)
+        minhaDirecao = corrigindoADirecao(object, minhaDirecao, SUL)
 
     while(not chegadaNolocal(posicaoAtual, posicaoFinal)):
         moverY = (int(posicaoFinal/10)) - (int(posicaoAtual/10))
@@ -103,7 +105,7 @@ def IndoDeA_para_B(object, posicaoAtual,  posicaoFinal, minhaDirecao, direcaoFin
 
         if(moverX != 0 and naoLocalDeCarga(object, posicaoAtual, moverX, axisX)):
             print('entrei no if')
-            #minhaDirecao = direcaoCorreta(object, minhaDirecao, moverX, axisX, True)
+            # minhaDirecao = direcaoCorreta(object, minhaDirecao, moverX, axisX, True)
 
             # O eixo x é a linha horizontal e verifica se ele vai para esquerda ou para direita.
             if(moverX > 0):
@@ -130,7 +132,8 @@ def IndoDeA_para_B(object, posicaoAtual,  posicaoFinal, minhaDirecao, direcaoFin
                 moverPorQuadrado(object, 'frente')
                 posicaoAtual += 10
         else:
-            posicaoAtual, minhaDirecao = desvioAreaDeCarga(object,posicaoAtual, posicaoFinal,minhaDirecao,direcaoFinal)
+            posicaoAtual, minhaDirecao = desvioAreaDeCarga(
+                object, posicaoAtual, posicaoFinal, minhaDirecao, direcaoFinal)
 
         print(posicaoAtual, moverX, moverY)
         # posicaoAtual, minhaDirecao
@@ -152,8 +155,9 @@ def desvioAreaDeCarga(object, posicaoAtual, posicaoFinal, minhaDirecao, direcaoF
     elif(posicaoAtual in [31, 34, 37]):
         destino = posicaoAtual-10
 
-    posicaoAtual, minhaDirecao = IndoDeA_para_B(object,posicaoAtual, destino,minhaDirecao,direcaoFinal)
-    return  posicaoAtual, minhaDirecao
+    posicaoAtual, minhaDirecao = IndoDeA_para_B(
+        object, posicaoAtual, destino, minhaDirecao, direcaoFinal)
+    return posicaoAtual, minhaDirecao
 
 def naoLocalDeCarga(object, posicaoAtual, movement, axis):
     if(axis == axisY):
@@ -170,8 +174,39 @@ def naoLocalDeCarga(object, posicaoAtual, movement, axis):
     if(posicaoAtual in locaisDeCarga):
         return False
     return True
-   
-def entregandoCubos(object, posicaoAtual, posicaoFinal, minhaDirecao, direcaoFinal): 
+
+def casosEspeciais(object, posicaoAtual, posicaoFinal, minhaDirecao, direcaoFinal):
+    casoH1 = [22, 23, 25, 26]
+    casoH2 = [52, 53, 55, 56]
+    casoV1 = [31, 41]
+    casoV2 = [37, 47]
+    casoVEspecial = [34, 44]
+    arg = [1, 3]  # OESTE - ESQUERDA
+    arg2 = [0, 2]  # LESTE - DIRETA
+
+    if (posicaoFinal in casoH1 and posicaoFinal != SUL):
+        corrigindoADirecao(object, minhaDirecao, SUL)
+    elif(posicaoFinal in casoH2 and posicaoFinal != NORTE):
+        corrigindoADirecao(object, minhaDirecao, NORTE)
+    elif(posicaoFinal in casoV1 and posicaoFinal != LESTE):
+        corrigindoADirecao(object, minhaDirecao, LESTE)
+    elif(posicaoFinal in casoV2 and posicaoFinal != OESTE):
+        corrigindoADirecao(object, minhaDirecao, OESTE)
+    elif(posicaoFinal in casoVEspecial):
+        
+        #currentPosition, myDirection, matrix = getBlocksInformation(posicaoAtual, minhaDirecao) #pegar essa função e descobrir os seus parâmetros usados. Checar a forma como vamos chamar as funções.
+        matrix = 'ALGUMA COISA QUE VAMOS RECEBER ;D'
+        bloco = melhorbloco(posicaoAtual, matrix)
+        if bloco[2] in arg:
+            corrigindoADirecao(object,minhaDirecao,OESTE)
+            # Girar Para Esquerda - OESTE
+            # pass
+        elif bloco[2] in arg2:
+            corrigindoADirecao(object,minhaDirecao,LESTE)
+            # Girar Para Direita - LESTE
+            # pass
+
+def entregandoCubos(object, posicaoAtual, posicaoFinal, minhaDirecao, direcaoFinal):
 
     Prateleira1 = [11, 6, 1]
     Prateleira2 = [12, 7, 2]
@@ -182,63 +217,78 @@ def entregandoCubos(object, posicaoAtual, posicaoFinal, minhaDirecao, direcaoFin
     valGarraFrente = object.cubo_garra_frente
     valGarraCostas = object.cubo_garra_costas
 
+    if posicaoAtual != SUL:
+        corrigindoADirecao(object,posicaoAtual,SUL)
+
     if valGarraFrente and valGarraCostas != 0:
         if (valGarraFrente in Prateleira1):
             posicaoFinal = 22
             direcaoFinal = NORTE
-            IndoDeA_para_B(object, posicaoAtual, posicaoFinal, minhaDirecao, direcaoFinal)
+            if minhaDirecao != SUL:
+                corrigindoADirecao(object, minhaDirecao, SUL)
+            IndoDeA_para_B(object, posicaoAtual, posicaoFinal,
+                           minhaDirecao, direcaoFinal)
             object.cubo_garra_frente = 0
         elif (valGarraFrente in Prateleira2):
             posicaoFinal = 23
             direcaoFinal = NORTE
-            IndoDeA_para_B(object, posicaoAtual, posicaoFinal, minhaDirecao, direcaoFinal)
+            IndoDeA_para_B(object, posicaoAtual, posicaoFinal,
+                           minhaDirecao, direcaoFinal)
             object.cubo_garra_frente = 0
         elif (valGarraFrente in Prateleira3):
             posicaoFinal = 24
             direcaoFinal = NORTE
-            IndoDeA_para_B(object, posicaoAtual, posicaoFinal, minhaDirecao, direcaoFinal)
+            IndoDeA_para_B(object, posicaoAtual, posicaoFinal,
+                           minhaDirecao, direcaoFinal)
             object.cubo_garra_frente = 0
         elif (valGarraFrente in Prateleira4):
             posicaoFinal = 25
             direcaoFinal = NORTE
-            IndoDeA_para_B(object, posicaoAtual, posicaoFinal, minhaDirecao, direcaoFinal)
+            IndoDeA_para_B(object, posicaoAtual, posicaoFinal,
+                           minhaDirecao, direcaoFinal)
             object.cubo_garra_frente = 0
         elif (valGarraFrente in Prateleira5):
             posicaoFinal = 26
             direcaoFinal = NORTE
-            IndoDeA_para_B(object, posicaoAtual, posicaoFinal, minhaDirecao, direcaoFinal)
+            IndoDeA_para_B(object, posicaoAtual, posicaoFinal,
+                           minhaDirecao, direcaoFinal)
             object.cubo_garra_frente = 0
 
         if (valGarraCostas in Prateleira1):
             posicaoFinal = 22
             direcaoFinal = NORTE
-            IndoDeA_para_B(object, posicaoAtual, posicaoFinal, minhaDirecao, direcaoFinal)
+            IndoDeA_para_B(object, posicaoAtual, posicaoFinal,
+                           minhaDirecao, direcaoFinal)
             object.cubo_garra_costas = 0
         elif (valGarraCostas in Prateleira2):
             posicaoFinal = 23
             direcaoFinal = NORTE
-            IndoDeA_para_B(object, posicaoAtual, posicaoFinal, minhaDirecao, direcaoFinal)
+            IndoDeA_para_B(object, posicaoAtual, posicaoFinal,
+                           minhaDirecao, direcaoFinal)
             object.cubo_garra_costas = 0
         elif (valGarraCostas in Prateleira3):
             posicaoFinal = 24
             direcaoFinal = NORTE
-            IndoDeA_para_B(object, posicaoAtual, posicaoFinal, minhaDirecao, direcaoFinal)
+            IndoDeA_para_B(object, posicaoAtual, posicaoFinal,
+                           minhaDirecao, direcaoFinal)
             object.cubo_garra_costas = 0
         elif (valGarraCostas in Prateleira4):
             posicaoFinal = 25
             direcaoFinal = NORTE
-            IndoDeA_para_B(object, posicaoAtual, posicaoFinal, minhaDirecao, direcaoFinal)
+            IndoDeA_para_B(object, posicaoAtual, posicaoFinal,
+                           minhaDirecao, direcaoFinal)
             object.cubo_garra_costas = 0
         elif (valGarraCostas in Prateleira5):
             posicaoFinal = 26
             direcaoFinal = NORTE
-            IndoDeA_para_B(object, posicaoAtual, posicaoFinal, minhaDirecao, direcaoFinal)
+            IndoDeA_para_B(object, posicaoAtual, posicaoFinal,
+                           minhaDirecao, direcaoFinal)
             object.cubo_garra_costas = 0
-            
-    #print(valGarraFrente, valGarraCostas)
 
-# 31, 34, 37, 41, 44 e 47 --> o robô deverá fazer a subtração da sua posição atual pela sua posição final. 
-#Caso essa subtração seja < que 10, ele irá subir um quadrado e retomar para a função principal. Atualiza a posição inicial com a final após andar 1 quadrado para cima.
-#Caso essa subtração seja > que 10, o robô irá duas casas para baixo e retomará para o código principal. Atualiza a posição inicial com a final após andar 2 quadrado para baixo.
+    # print(valGarraFrente, valGarraCostas)
+
+# 31, 34, 37, 41, 44 e 47 --> o robô deverá fazer a subtração da sua posição atual pela sua posição final.
+# Caso essa subtração seja < que 10, ele irá subir um quadrado e retomar para a função principal. Atualiza a posição inicial com a final após andar 1 quadrado para cima.
+# Caso essa subtração seja > que 10, o robô irá duas casas para baixo e retomará para o código principal. Atualiza a posição inicial com a final após andar 2 quadrado para baixo.
 
 # 22, 23, 25, 26, 52, 53, 55, e 56 --> o robô irá dar a volta pela diagonal

@@ -40,7 +40,9 @@ def basicFilter(_src):
 	img = cv2.medianBlur(img, 3)
 	cv2.imwrite('./imgs/4median.png', img)
 
-
+	# cv2.namedWindow('image')
+	# cv2.imshow('image',img)
+	# cv2.waitKey()
 
 	nimg = img.copy()
 
@@ -84,7 +86,7 @@ def findUseful(_src, _img):
 		cy = int(m['m01']/m['m00'])
 
 		if(compareCenters(cx, cy, foundCenters) == 1):
-			if(perimeter > 200 and perimeter < 1200):
+			if(perimeter > 160 and perimeter < 1200):
 				#print(perimeter)
 				k = np.array([[[cx,cy]]])
 
@@ -100,6 +102,11 @@ def findUseful(_src, _img):
 
 	cv2.imwrite('./imgs/8centers.png', _src)
 	cv2.imwrite('./imgs/0errors.png', errorim)
+	# cv2.namedWindow('image')
+	# cv2.imshow('image',_src)
+	# cv2.waitKey()
+	# cv2.imshow('image',errorim)
+	# cv2.waitKey()
 	#print(foundCenters)
 	#print(foundColors)
 	return foundColors, foundCenters
@@ -247,17 +254,19 @@ def getX(_colorSet, _edge):
 
 def getY(_center, _res):
 	percent = _center[0] / _res[0]
-
-	if(percent > 0.65):
+	print(percent)
+	if(percent > 0.7):#0.72
 		return 5
-	elif(percent > 0.45):
+	elif(percent > 0.6):#0.64
 		return 4
-	elif(percent > 0.20):
+	elif(percent > 0.35):#0.37
 		return 3
-	elif(percent > 0.09):
+	elif(percent > 0.2):#0.22
 		return 2
-	else:
+	elif(percent > 0.10):#0.11
 		return 1
+	else:#>0.16
+		return 0
 
 def identifyFirstPos(object):
 	global sigValue
