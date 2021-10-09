@@ -34,12 +34,10 @@ if clientID != -1:
     sim.simxAddStatusbarMessage(clientID, 'Funcionando...', sim.simx_opmode_oneshot_wait)
     time.sleep(0.02)
     adeni = ObjectHandle(clientID, robotname) #instancia objeto
-<<<<<<< HEAD
     #IndoDeA_para_B(adeni,31,34,SUL,SUL)
 
 
     def firstAreaCubes(currentPosition, myDirection, order):
-        print('primeira')
         if(order == 1):
             destine = 22
             direction = LESTE
@@ -49,14 +47,11 @@ if clientID != -1:
             direction = OESTE
             lastTurn = -1
         #Vai para a primeira área
-        currentPosition, myDirection = IndoDeA_para_B(adeni,currentPosition, destine, myDirection,myDirection)
+        currentPosition, myDirection = IndoDeA_para_B(adeni,currentPosition, destine, myDirection,direction)
+        print("parei")
         #Se posiciona da melhor forma para enxergar os blocos
-        myDirection = corrigindoADirecao(adeni, myDirection ,direction)
         #Align() #TurnTo ja alinha
         andar_em_metros(adeni,'frente', 2, 0.08)
-        girar_90_graus(adeni,lastTurn)
-        myDirection = SUL
-        alinhar(adeni,'frente')
         andar_em_metros(adeni,'tras',2, 0.065)
         matrix0 = visionAlgo.resolveVision(adeni,0)
         #time.sleep(3)
@@ -78,14 +73,10 @@ if clientID != -1:
             destine = 26
             direction = OESTE
             lastTurn = -1
-        currentPosition, myDirection = IndoDeA_para_B(adeni,currentPosition, destine, myDirection,myDirection)
+        currentPosition, myDirection = IndoDeA_para_B(adeni,currentPosition, destine, myDirection,direction)
         #Se posiciona da melhor forma para enxergar os blocos
-        myDirection = corrigindoADirecao(adeni ,myDirection,direction)
         #Align()
         andar_em_metros(adeni, 'frente', 2, 0.08)
-        girar_90_graus(adeni, lastTurn)
-        myDirection = SUL
-        #align.Align()
         andar_em_metros(adeni,'tras' ,2, 0.065)
         matrix1 = visionAlgo.resolveVision(adeni,1)
         return matrix1, currentPosition, myDirection
@@ -151,21 +142,31 @@ if clientID != -1:
         print('get block information')
         if (currentPosition < 40): #Ta na parte de cima
             if(currentPosition % 10 <= 2):
+                print("Primeira área1")
+                time.sleep(2)
                 matrix0, currentPosition, myDirection = firstAreaCubes(currentPosition, myDirection, 1)
                 #Vai para a segunda área
-                myDirection = corrigindoADirecao(adeni,myDirection ,LESTE)
+                print("Segunda área1")
+                time.sleep(2)
                 #MoveDirectionPosition(frente, 0.020)
                 currentPosition += 1
                 matrix1, currentPosition, myDirection = secondAreaCubes(currentPosition, myDirection, 2)
             elif(currentPosition % 10 <= 4):
+                print("Primeira área2")
+                time.sleep(2)
                 matrix0, currentPosition, myDirection = firstAreaCubes(currentPosition, myDirection, 2)
                 #Vai para a segunda área
-                myDirection = corrigindoADirecao(adeni,myDirection ,LESTE)
+                print("Segunda área2")
+                time.sleep(2)
                 #MoveDirectionPosition(frente, 0.020)
                 matrix1, currentPosition, myDirection = secondAreaCubes(currentPosition, myDirection, 2)
             else:
+                print("Primeira área3")
+                time.sleep(2)
                 matrix1, currentPosition, myDirection = secondAreaCubes(currentPosition, myDirection, 1)
-                myDirection = corrigindoADirecao(adeni,myDirection ,OESTE)
+
+                print("Segunda área3")
+                time.sleep(2)
                 currentPosition -= 1
                 matrix0, currentPosition, myDirection = firstAreaCubes(currentPosition, myDirection, 2)
         else: #Ta na parte de baixo
@@ -202,7 +203,7 @@ if clientID != -1:
         return currentPosition, myDirection, matrix
 
     def winOPEN():
-        # move.inicio_virar_SUL()
+
         initialPosition = [4,1]
         if(initialPosition[1] == -1):
             moverPorQuadrado(adeni,'frente')
@@ -211,13 +212,13 @@ if clientID != -1:
         iniY, iniX = 1,3  #TREM DE CV PARA CALCULAR O ALGORITM
         initialPosition = (iniY+1)*10+(iniX+1)
         print(initialPosition, 'win OPEN')
+        # VERIFICAR ISSO!!!!!!!!!!!!!! PRA PEGAR DIREÇÃO INICIAL
         initialDirection = SUL
-=======
-    # IndoDeA_para_B(adeni,24,27,SUL,NORTE)
-    # poze = firstSq.identifyFirstPos(adeni)
-    # print(melhorbloco(poze,))
->>>>>>> AdeniCode
-
+        ##### PARA TESTES ######
+        #FIRST AREA:
+        #initialPosition = 24
+        #SECOND AREA:
+        initialPosition = 27
         currentPosition, myDirection, matrix = getBlocksInformation(initialPosition, initialDirection)
         print(matrix, 'DEPOIS DO WIN OPEN')
         #time.sleep(1000)
