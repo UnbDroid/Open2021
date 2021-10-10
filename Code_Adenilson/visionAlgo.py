@@ -273,10 +273,10 @@ def findUseful(_src, _img, _factor):
 
 	cv2.imwrite('./imgs/8centers.png', _src)
 	cv2.imwrite('./imgs/0errors.png', errorim)
-	# cv2.imshow('find useful src', _src)
-	# cv2.waitKey(0)
-	# cv2.imshow('find useful errorim', errorim)
-	# cv2.waitKey(0)
+	cv2.imshow('find useful src', _src)
+	cv2.waitKey(0)
+	cv2.imshow('find useful errorim', errorim)
+	cv2.waitKey(0)
 	print(foundCenters)
 	print(foundColors)
 	return foundShapes, foundColors, foundCenters
