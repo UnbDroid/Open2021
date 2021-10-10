@@ -92,7 +92,7 @@ def alinhar_e_pegar_cubo(object, bloco_escolhido):
             posicao_cubo = 'direita'
 
     #Se alinha com o cubo
-    if posicao_cubo == 'direita' or posicao_cubo == 'esquerda':
+    if posicao_cubo == 'direita' or posicao_cubo == 'esquerda': #acho que pode tirar esse IF
         motor.alinharLateral(object, posicao_cubo) #alinha com o lado do quadrado onde está o cubo a ser pego
 
 
@@ -105,6 +105,9 @@ def alinhar_e_pegar_cubo(object, bloco_escolhido):
     #     numero_bloco = bloco_escolhido[0]
     #TIRAR OS COMENTÁRIOS DAS LINHAS ACIMA QUANDO FOR TESTAR A LEITURA DOS NÚMEROS!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     numero_bloco = bloco_escolhido[0] #teste, depois tem que tirar essa linha e tirar os comentários das linhas acima!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+    #Alinhar com a partes de trás do quadrado, para que a garra não bata no cubo quando descer
+    motor.alinhar(object, 'tras')
 
     if object.cubo_garra_frente == 0: #garra da frente está vazia
         garra.descer_garra_frente(object)
@@ -136,8 +139,8 @@ def alinhar_e_pegar_cubo(object, bloco_escolhido):
         distancia_cubo = min(dist_dir_inicial, dist_esq_inicial) #distância do robo até o cubo
 
         garra.abrir_garra_frente(object)
-        motor.andar_em_metros(object, 'frente', 1, distancia_cubo+0.02)
-        garra.fechar_garra_frente_cubo(object, cubo) #ARRUMAR O VALOR Da POSICAO DO CUBO PARA ELE NÃO TELEPORTAR
+        motor.andar_em_metros(object, 'frente', 1, distancia_cubo+0.025)
+        garra.fechar_garra_frente_cubo(object, cubo)
         garra.subir_garra_frente(object, 2)
         object.cubo_garra_frente = numero_bloco #define qual o número do cubo que esta garra está carregando
 
@@ -184,8 +187,8 @@ def alinhar_e_pegar_cubo(object, bloco_escolhido):
         distancia_cubo = min(dist_dir_inicial, dist_esq_inicial) #distância do robo até o cubo
 
         garra.abrir_garra_costas(object)
-        motor.andar_em_metros(object, 'tras', 1, distancia_cubo+0.02) #andar para tras(inverso da frente, pois está de costas)
-        garra.fechar_garra_costas_cubo(object, cubo) #ARRUMAR O VALOR Da POSICAO DO CUBO PARA ELE NÃO TELEPORTAR
+        motor.andar_em_metros(object, 'tras', 1, distancia_cubo+0.025) #andar para tras(inverso da frente, pois está de costas)
+        garra.fechar_garra_costas_cubo(object, cubo)
         garra.subir_garra_costas(object, 2)
         object.cubo_garra_costas = numero_bloco #define qual o número do cubo que esta garra está carregando
 
