@@ -96,9 +96,9 @@ def fechar_garra_frente_cubo(object, cube):
     erro = 1
     while erro != 0:
         erro, cubePosition = sim.simxGetObjectPosition(object.clientID, cube, object.robot, sim.simx_opmode_streaming)
-    cubePosition[0] = 0.06 #se aumentar, vai mais para baixo
-    cubePosition[1] = -0.01 #se aumentar, vai mais para dentro do robô
-    cubePosition[2] = -0.013 #se aumentar, vai mais para a esquerda
+    # cubePosition[0] = 0.2 #se aumentar, vai mais para baixo. Direita
+    # cubePosition[1] = -0.01 #se aumentar, vai mais para dentro do robô. Dentro
+    # cubePosition[2] = -0.013 #se aumentar, vai mais para a esquerda. Subir
 
     erro = 1
     while erro != 0:
@@ -106,7 +106,8 @@ def fechar_garra_frente_cubo(object, cube):
         sim.simxSetObjectIntParameter(object.clientID, cube, 3003, 1, sim.simx_opmode_oneshot) #torna o cubo estático
         sim.simxSetJointTargetPosition(object.clientID,object.pa_direita1,0.003,sim.simx_opmode_oneshot) #fechar a garra
         sim.simxSetJointTargetPosition(object.clientID,object.pa_esquerda1,0.003,sim.simx_opmode_oneshot) #fechar a garra
-        erro = sim.simxSetObjectPosition(object.clientID, cube, object.pa_esquerda1, cubePosition, sim.simx_opmode_oneshot) #centraliza o cubo na garra
+        # erro = sim.simxSetObjectPosition(object.clientID, cube, object.pa_esquerda1, cubePosition, sim.simx_opmode_oneshot) #centraliza o cubo na garra
+        erro = sim.simxSetObjectPosition(object.clientID, cube, object.s_base, cubePosition, sim.simx_opmode_oneshot) #centraliza o cubo na garra
         sim.simxSetObjectParent(object.clientID, cube, object.cubo_acoplador1, True, sim.simx_opmode_oneshot) #torna o cubo filho do acoplador
         sim.simxPauseCommunication(object.clientID, False)
     time.sleep(1)
@@ -125,9 +126,9 @@ def fechar_garra_costas_cubo(object, cube):
     erro = 1
     while erro != 0:
         erro, cubePosition = sim.simxGetObjectPosition(object.clientID, cube, object.robot, sim.simx_opmode_streaming)
-    cubePosition[0] = 0.04 #se aumentar, vai mais para baixo
-    cubePosition[1] = 0 #se aumentar, vai mais para dentro do robô
-    cubePosition[2] = 0 #se aumentar, vai mais para a esquerda
+    # cubePosition[0] = 0.04 #se aumentar, vai mais para baixo
+    # cubePosition[1] = 0 #se aumentar, vai mais para dentro do robô
+    # cubePosition[2] = 0 #se aumentar, vai mais para a esquerda
 
     erro = 1
     while erro != 0:
@@ -135,7 +136,8 @@ def fechar_garra_costas_cubo(object, cube):
         sim.simxSetObjectIntParameter(object.clientID, cube, 3003, 1, sim.simx_opmode_oneshot)# torna o cubo estático
         sim.simxSetJointTargetPosition(object.clientID,object.pa_direita2,0.003,sim.simx_opmode_oneshot) #se pa não precisa fechar a garra
         sim.simxSetJointTargetPosition(object.clientID,object.pa_esquerda2,0.003,sim.simx_opmode_oneshot)
-        erro = sim.simxSetObjectPosition(object.clientID, cube, object.pa_esquerda2, cubePosition, sim.simx_opmode_oneshot)
+        # erro = sim.simxSetObjectPosition(object.clientID, cube, object.pa_esquerda2, cubePosition, sim.simx_opmode_oneshot)
+        erro = sim.simxSetObjectPosition(object.clientID, cube, object.s_base, cubePosition, sim.simx_opmode_oneshot) #centraliza o cubo na garra
         sim.simxSetObjectParent(object.clientID, cube, object.cubo_acoplador2, True, sim.simx_opmode_oneshot)
         sim.simxPauseCommunication(object.clientID, False)
     time.sleep(1)
