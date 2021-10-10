@@ -26,14 +26,16 @@ def alinhar_e_pegar_cubo(object, bloco_escolhido):
             posicao_cubo = 'esquerda'
         elif bloco_escolhido[2] == 2:
             posicao_cubo = 'direita'
-        #para o caso de bloco_escolhido[2] == 3, bloco escondido
+        elif bloco_escolhido[2] == 3: #bloco escondido
+            posicao_cubo = 'esquerda'
         
     elif bloco_escolhido[1] == 1:
         if bloco_escolhido[2] == 0:
             posicao_cubo = 'direita'
         elif bloco_escolhido[2] == 1:
             posicao_cubo = 'esquerda'
-        #para o caso de bloco_escolhido[2] == 2, bloco escondido
+        elif bloco_escolhido[2] == 2: #bloco escondido
+            posicao_cubo = 'direita'
         elif bloco_escolhido[2] == 3:
             posicao_cubo = 'esquerda'
 
@@ -44,29 +46,33 @@ def alinhar_e_pegar_cubo(object, bloco_escolhido):
             posicao_cubo = 'esquerda'
         elif bloco_escolhido[2] == 2:
             posicao_cubo = 'direita'
-        #para o caso de bloco_escolhido[2] == 3, bloco escondido
+        elif bloco_escolhido[2] == 3: #bloco escondido
+            posicao_cubo = 'esquerda'
 
     elif bloco_escolhido[1] == 3:
         if bloco_escolhido[2] == 0:
             posicao_cubo = 'direita'
         elif bloco_escolhido[2] == 1:
             posicao_cubo = 'esquerda'
-        #para o caso de bloco_escolhido[2] == 2, bloco escondido
+        elif bloco_escolhido[2] == 2: #bloco escondido
+            posicao_cubo = 'direita'
         elif bloco_escolhido[2] == 3:
             posicao_cubo = 'esquerda'
 
     elif bloco_escolhido[1] == 4:
         if bloco_escolhido[2] == 0:
             posicao_cubo = 'esquerda'
-        #para o caso de bloco_escolhido[2] == 1, bloco escondido
+        elif bloco_escolhido[2] == 1: #bloco escondido
+            posicao_cubo = 'direita'
         elif bloco_escolhido[2] == 2:
             posicao_cubo = 'esquerda'
         elif bloco_escolhido[2] == 3:
             posicao_cubo = 'direita'
 
     elif bloco_escolhido[1] == 5:
-        #para o caso de bloco_escolhido[2] == 0, bloco escondido
-        if bloco_escolhido[2] == 1:
+        if bloco_escolhido[2] == 0: #bloco escondido
+            posicao_cubo = 'esquerda'
+        elif bloco_escolhido[2] == 1:
             posicao_cubo = 'direita'
         elif bloco_escolhido[2] == 2:
             posicao_cubo = 'esquerda'
@@ -76,15 +82,17 @@ def alinhar_e_pegar_cubo(object, bloco_escolhido):
     elif bloco_escolhido[1] == 6:
         if bloco_escolhido[2] == 0:
             posicao_cubo = 'esquerda'
-        #para o caso de bloco_escolhido[2] == 1, bloco escondido
+        elif bloco_escolhido[2] == 1: #bloco escondido
+            posicao_cubo = 'direita'
         elif bloco_escolhido[2] == 2:
             posicao_cubo = 'esquerda'
         elif bloco_escolhido[2] == 3:
             posicao_cubo = 'direita'
             
     elif bloco_escolhido[1] == 7:
-        #para o caso de bloco_escolhido[2] == 0, bloco escondido
-        if bloco_escolhido[2] == 1:
+        if bloco_escolhido[2] == 0: #bloco escondido
+            posicao_cubo = 'esquerda'
+        elif bloco_escolhido[2] == 1:
             posicao_cubo = 'direita'
         elif bloco_escolhido[2] == 2:
             posicao_cubo = 'esquerda'
