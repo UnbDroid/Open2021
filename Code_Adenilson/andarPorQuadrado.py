@@ -123,10 +123,12 @@ def IndoDeA_para_B(object, posicaoAtual,  posicaoFinal, minhaDirecao, direcaoFin
             #     object, minhaDirecao, moverX, axisX, True)
             # moverParaFrentePorQuadrado(object)
             if(moverY < 0):  # robô anda para cima
+                print('movey', moverY)
                 moverPorQuadrado(object, 'tras')
                 posicaoAtual -= 10
             # robô anda para baixo (necessário que ele gire 180 para não ter erro no alinhamento)
             else:
+                print('moveu por quadrado')
                 moverPorQuadrado(object, 'frente')
                 posicaoAtual += 10
         else:

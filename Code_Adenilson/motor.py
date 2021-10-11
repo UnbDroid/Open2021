@@ -24,9 +24,9 @@ def stop(object):
 def move_forward(object, v):
     sim.simxPauseCommunication(object.clientID, True)
     sim.simxSetJointTargetVelocity(
-        object.clientID, object.omniWheel_direita_frente, -v, sim.simx_opmode_oneshot)
+        object.clientID, object.omniWheel_direita_frente, v, sim.simx_opmode_oneshot)
     sim.simxSetJointTargetVelocity(
-        object.clientID, object.omniWheel_direita_atras, -v, sim.simx_opmode_oneshot)
+        object.clientID, object.omniWheel_direita_atras, v, sim.simx_opmode_oneshot)
     sim.simxSetJointTargetVelocity(
         object.clientID, object.omniWheel_esquerda_frente, -v, sim.simx_opmode_oneshot)
     sim.simxSetJointTargetVelocity(
@@ -128,6 +128,7 @@ def alinharLateral(object, d):#alinha lateral esquerda e direita
         if esquerda == 'PRETO' or direita == 'PRETO':
             print('quebrei')
             stop(object)
+            print('dei um break')
             break
 
         else:
@@ -172,6 +173,7 @@ def alinhar(object, d): #alinha frente e costas.
         direita = Ler_Cor(object, valSensorDireito)
         if esquerda == 'PRETO' or direita == 'PRETO':
             print('quebrei')
+            print('dei um break2')
             stop(object)
             break
 
@@ -236,17 +238,17 @@ def moverLadoPorQuadrado(object, d): #move direita ou esquerda dependendo da dir
 def TurnInSquare(object, angle):  #gira no centro do quadrado e vai para ponta
     print(angle)
 
-    alinhar(object)
-    MoveDirectionPosition(object, 2, 0.065)
+    alinhar(object, 'frente')
+    MoveDirectionPosition( 2, 0.065)
     if(angle > 0):
         direcaoEGiro(object, abs(angle))
     if(angle < 0):
         direcaoEGiro(object, abs(angle))
-    MoveDirectionPosition(object, 8, 0.025)
+    MoveDirectionPosition( 8, 0.025)
     alinhar(object)
 
-def MoveDirectionPosition(direcao, dist):  #andar reto para frente ou para trás
-    andar_em_metros(direcao, 5, dist)
+def MoveDirectionPosition(direcao, dist ):  #andar reto para frente ou para trás
+    andar_em_metros(object,direcao, 5, dist)
 
 # def inicio_virar_SUL(): #para a função COM VISÃO
 

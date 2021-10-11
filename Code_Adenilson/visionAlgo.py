@@ -440,8 +440,8 @@ def resolveVision(object, _sigValue):
 		j+=1
 
 	cv2.imwrite('./imgs/7Final.png', frame)
-	# cv2.imshow('image2', frame)
-	# cv2.waitKey(0)
+	cv2.imshow('image2', frame)
+	cv2.waitKey(0)
 
 	return foundCubes
 
