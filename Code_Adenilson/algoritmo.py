@@ -110,7 +110,7 @@ def trajeto(bloco):
         if blocofinal[1] == 2 or blocofinal[1] == 3:
             return blocofinal+10
     elif blocofinal in superiores:
-        if blocofinal[1] == 2 or blocofinal[1] == 3:
+        if blocofinal[1] == 0 or blocofinal[1] == 1:
             return blocofinal-10
     elif blocofinal in diminuir:
         if blocofinal[1] == 0 or blocofinal[1] == 2:
