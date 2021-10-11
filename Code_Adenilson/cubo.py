@@ -17,7 +17,7 @@ def alinhar_e_pegar_cubo(object, bloco_escolhido):
     bloco_escolhido vem no formato ['Tipo do bloco', area do bloco, sub area do bloco]
     'Tipo do bloco' é um caractere, onde W = branco(numeros), K = preto(codigo de barras), 0 = vazio, o resto é colorido
     '''
-    #TEM QUE RESOLVER PARA OS BLOCOS ESCONDIDOS!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    
     #Escolhe para qual lado do quadrado o robo tem que ir para se alinhar com o cubo
     if bloco_escolhido[1] == 0:
         if bloco_escolhido[2] == 0:
