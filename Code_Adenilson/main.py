@@ -60,12 +60,11 @@ if clientID != -1:
         currentPosition, myDirection = IndoDeA_para_B(adeni,currentPosition, destine, myDirection,direction)
 
         print("parei")
-        time.sleep(2)
         #Se posiciona da melhor forma para enxergar os blocos
         #Align() #TurnTo ja alinha
         alinharLateral(adeni, lado)
-
-        andar_em_metros(adeni,lado,2,0.085)
+        # alinhar(adeni, "tras")
+        andar_em_metros(adeni,lado,2,0.1)
         print(currentPosition)
 
 
@@ -81,10 +80,12 @@ if clientID != -1:
         # while Ler_Cor(adeni, 'esquerda') == 'BRANCO' and Ler_Cor(adeni, 'direita') =='BRANCO':
         #     move_forward(adeni, 2)
 
-        andar_em_metros(adeni,'tras',2, 0.07)
+        # andar_em_metros(adeni,'tras',2, 0.1)
+        alinhar(adeni, "tras")
         matrix0 = visionAlgo.resolveVision(adeni,0)
         #time.sleep(3)
-        andar_em_metros(adeni,'frente',2, 0.07)
+        andar_em_metros(adeni,'frente',2, 0.05)
+
         return matrix0, currentPosition, myDirection
 
     def secondAreaCubes(currentPosition, myDirection, order):
@@ -93,30 +94,29 @@ if clientID != -1:
     # #MoveDirectionPosition(frente, 0.020)
     # currentPosition += 1
         print('segunda')
-        if(order == 2):
+        if(order == 1):
             destine = 25
-            direction = LESTE
             lastTurn = 1
             lado ='esquerda'
-        if(order == 1):
+        if(order == 2):
             destine = 26
-            direction = OESTE
             lastTurn = -1
             lado = 'direita'
-        print('*********',currentPosition, destine, myDirection, direction)
-        time.sleep(2)
+        direction = SUL
+        print('*********2',currentPosition, destine, myDirection, direction)
         currentPosition, myDirection = IndoDeA_para_B(adeni,currentPosition, destine, myDirection,direction)
         #Se posiciona da melhor forma para enxergar os blocos
         #Align()
         alinharLateral(adeni, lado)
-        andar_em_metros(adeni,lado,2,0.06 )
+        # alinhar(adeni, "tras")
+        andar_em_metros(adeni,lado,2,0.1)
         while Ler_Cor(adeni, 'esquerda') == 'BRANCO ' and Ler_Cor(adeni, 'direita' == 'BRANCO'):
             move_forward(adeni, 2)
         print('sai do while')
-        andar_em_metros(adeni,'tras' ,2, 0.065)
+        # andar_em_metros(adeni,'tras' ,2, 0.1)
+        alinhar(adeni, "tras")
         matrix1 = visionAlgo.resolveVision(adeni,1)
-        print('*********2',currentPosition, destine, myDirection, direction)
-        andar_em_metros(adeni,'frente' ,2, 0.065)
+        andar_em_metros(adeni,'frente' ,2, 0.05)
 
         return matrix1, currentPosition, myDirection
 
@@ -191,13 +191,10 @@ if clientID != -1:
                 # currentPosition += 1
                 matrix1, currentPosition, myDirection = secondAreaCubes(currentPosition, myDirection, 2)
             elif(currentPosition % 10 <= 4):
-                print('filha da puta', currentPosition)
                 print("Primeira área2")
-                time.sleep(2)
-                matrix0, currentPosition, myDirection = firstAreaCubes(currentPosition, myDirection, 2)
+                matrix0, currentPosition, myDirection = firstAreaCubes(currentPosition, myDirection, 1)
                 #Vai para a segunda área
                 print("Segunda área2")
-                time.sleep(2)
                 #MoveDirectionPosition(frente, 0.020)
                 matrix1, currentPosition, myDirection = secondAreaCubes(currentPosition, myDirection, 2)
             else:
@@ -205,7 +202,7 @@ if clientID != -1:
                 print(myDirection)
                 matrix1, currentPosition, myDirection = secondAreaCubes(currentPosition, myDirection, 1)
                 print("Segunda área3")
-                # currentPosition -= 1
+                currentPosition += 1
                 matrix0, currentPosition, myDirection = firstAreaCubes(currentPosition, myDirection, 1)
         else: #Ta na parte de baixo
             if(currentPosition % 10 <= 2):
@@ -243,6 +240,7 @@ if clientID != -1:
     def winOPEN():
         iniY, iniX = firstSq.identifyFirstPos(adeni)
         initialPosition = [iniY,iniX]
+        print(initialPosition)
         if(initialPosition[1] == -1):
             moverPorQuadrado(adeni,'frente')
             alinhar(adeni, 'frente')
