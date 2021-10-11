@@ -137,6 +137,7 @@ def IndoDeA_para_B(object, posicaoAtual,  posicaoFinal, minhaDirecao, direcaoFin
 
         print(posicaoAtual, moverX, moverY)
         # posicaoAtual, minhaDirecao
+        corrigindoADirecao(object, minhaDirecao, direcaoFinal)
     return posicaoAtual, minhaDirecao
 
 def desvioAreaDeCarga(object, posicaoAtual, posicaoFinal, minhaDirecao, direcaoFinal):

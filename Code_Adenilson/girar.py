@@ -44,17 +44,14 @@ def get_angle_that_makes_sense(object):
     while (erro != 0):
         erro, euler_angles = sim.simxGetObjectOrientation(
             object.clientID, object.robot, -1, sim.simx_opmode_streaming)
-
-    # print(erro, euler_angles)
-    factor = 90
+    factor = 270
     # print(factor)
-    if (euler_angles[0] <= 0):
-        factor = 270
     # print(factor)
     # print((np.sign(euler_angles[1]) * 60*euler_angles[2]))
-    finalAngle = (np.sign(euler_angles[1]) * 60 * euler_angles[2]) + factor
+    finalAngle = (60 * euler_angles[2]) + factor
+    if(finalAngle > 360):
+        finalAngle -= 360
     return finalAngle
-
 
 def turn_around_angle(object, angle, sentido, velocidade):
     # sentido = 1 roda em sentido antihorario
@@ -82,7 +79,23 @@ def girar_180_graus(object):
     girar_90_graus(object, 1)
     girar_90_graus(object, 1)
 
-# gira no sentido horário sem nenhum problema, porém no anti horario apresenta problemas.
+
+def giroRSEA(object):
+    print(get_angle_that_makes_sense(object))
+    Iangulo = get_angle_that_makes_sense(object)
+    while 100<Iangulo<280:
+        giro_livre(object, 1, 4)
+        print(Iangulo, 'primeiro')
+        Iangulo = get_angle_that_makes_sense(object)
+    stop(object)
+    Iangulo = get_angle_that_makes_sense(object)
+    while Iangulo >=86:
+        print(Iangulo, 'segundo')
+        giro_livre(object, 1, 0.8)
+        Iangulo = get_angle_that_makes_sense(object)
+    stop(object)
+
+    # gira no sentido horário sem nenhum problema, porém no anti horario apresenta problemas.
 def girar_90_graus(object, sentido):
     # sentido = 1 , anti horario, esquerda
     # sentido =-1 , horario, direita
