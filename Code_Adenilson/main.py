@@ -9,6 +9,7 @@ from logLocomAlgo import *
 from object_handle import ObjectHandle
 from andarPorQuadrado import *
 from visionAlgo import *
+from cubo import *
 import firstSq
 
 try:
