@@ -7,12 +7,10 @@ from motor import *
 from sensor import *
 from object_handle import ObjectHandle
 from andarPorQuadrado import *
-<<<<<<< HEAD
 from visionAlgo import *
 from cubo import *
 from logLocomAlgo import *
 from algoritmo import *
->>>>>>> Arthur
 import firstSq
 
 try:
@@ -38,7 +36,6 @@ if clientID != -1:
     sim.simxAddStatusbarMessage(clientID, 'Funcionando...', sim.simx_opmode_oneshot_wait)
     time.sleep(0.02)
     adeni = ObjectHandle(clientID, robotname) #instancia objeto
-<<<<<<< HEAD
 
     print('Antes:', adeni.cubo_garra_frente)
     alinhar_e_pegar_cubo(adeni, ['K', 0, 1])
@@ -267,7 +264,7 @@ if clientID != -1:
         #myDirection = initialDirection
         #FIM DE TESTE
     winOPEN()
->>>>>>> Arthur
+
 
 else:
     print('Failed connecting to remote API server')
