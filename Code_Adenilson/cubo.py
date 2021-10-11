@@ -6,7 +6,7 @@ import garra
 import motor
 import sensor
 import girar
-# import visionAlgo
+import visionAlgo
 
 ## FUNÇÕES DO CUBO ######################################
 
@@ -105,14 +105,14 @@ def alinhar_e_pegar_cubo(object, bloco_escolhido):
 
 
     #Ve o valor númerico(ou cor) do bloco a ser pego
-    # if bloco_escolhido[0] == 'W': #bloco branco de numeros
-    #     numero_bloco = visionAlgo.getNumber(object)
-    # elif bloco_escolhido[0] == 'K': #bloco preto de codigo de barras
-    #     numero_bloco = visionAlgo.getCode(object)
-    # else: #bloco colorido
-    #     numero_bloco = bloco_escolhido[0]
+    if bloco_escolhido[0] == 'W': #bloco branco de numeros
+        numero_bloco = visionAlgo.getNumber(object)
+    elif bloco_escolhido[0] == 'K': #bloco preto de codigo de barras
+        numero_bloco = visionAlgo.getCode(object)
+    else: #bloco colorido
+        numero_bloco = bloco_escolhido[0]
     #TIRAR OS COMENTÁRIOS DAS LINHAS ACIMA QUANDO FOR TESTAR A LEITURA DOS NÚMEROS!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    numero_bloco = bloco_escolhido[0] #teste, depois tem que tirar essa linha e tirar os comentários das linhas acima!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    # numero_bloco = bloco_escolhido[0] #teste, depois tem que tirar essa linha e tirar os comentários das linhas acima!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
     #Alinhar com a partes de trás do quadrado, para que a garra não bata no cubo quando descer
     motor.alinhar(object, 'tras')
