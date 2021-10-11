@@ -173,7 +173,7 @@ def naoLocalDeCarga(object, posicaoAtual, movement, axis):
         return False
     return True
 
-def casosEspeciais(object, posicaoAtual, posicaoFinal, minhaDirecao, bloco):
+def casosEspeciais(object, posicaoFinal, minhaDirecao, bloco):
     casoH1 = [22, 23, 25, 26]
     casoH2 = [52, 53, 55, 56]
     casoV1 = [31, 41]
@@ -195,11 +195,11 @@ def casosEspeciais(object, posicaoAtual, posicaoFinal, minhaDirecao, bloco):
         # currentPosition, myDirection, matrix = getBlocksInformation(posicaoAtual, minhaDirecao) #pegar essa função e descobrir os seus parâmetros usados. Checar a forma como vamos chamar as funções.
         # matrix = 'ALGUMA COISA QUE VAMOS RECEBER ;D'
         # bloco = melhorbloco(posicaoAtual, matrix)
-        if bloco[2] in arg:
+        if bloco[2] in arg and posicaoFinal != OESTE:
             corrigindoADirecao(object,minhaDirecao,OESTE)
             # Girar Para Esquerda - OESTE
             # pass
-        elif bloco[2] in arg2:
+        elif bloco[2] in arg2 and posicaoFinal != LESTE:
             corrigindoADirecao(object,minhaDirecao,LESTE)
             # Girar Para Direita - LESTE
             # pass

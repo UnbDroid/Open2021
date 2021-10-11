@@ -65,11 +65,11 @@ def andar_livre(object, d, v):
 
     sim.simxPauseCommunication(object.clientID, True)
     sim.simxSetJointTargetVelocity(
-        object.clientID, object.omniWheel_direita_frente, -v*d, sim.simx_opmode_oneshot)
+        object.clientID, object.omniWheel_direita_frente, -v*(0.9)*d, sim.simx_opmode_oneshot)
     sim.simxSetJointTargetVelocity(
         object.clientID, object.omniWheel_esquerda_frente, -v*d, sim.simx_opmode_oneshot)
     sim.simxSetJointTargetVelocity(
-        object.clientID, object.omniWheel_direita_atras, +v*d, sim.simx_opmode_oneshot)
+        object.clientID, object.omniWheel_direita_atras, +v*(0.9)*d, sim.simx_opmode_oneshot)
     sim.simxSetJointTargetVelocity(
         object.clientID, object.omniWheel_esquerda_atras, +v*d, sim.simx_opmode_oneshot)
     sim.simxPauseCommunication(object.clientID, False)
