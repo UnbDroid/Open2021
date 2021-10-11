@@ -40,9 +40,9 @@ def basicFilter(_src):
 	img = cv2.medianBlur(img, 3)
 	cv2.imwrite('./imgs/4median.png', img)
 
-	cv2.namedWindow('image')
-	cv2.imshow('image',img)
-	cv2.waitKey()
+	# cv2.namedWindow('image')
+	# cv2.imshow('image',img)
+	# cv2.waitKey()
 
 	nimg = img.copy()
 
@@ -102,11 +102,11 @@ def findUseful(_src, _img):
 
 	cv2.imwrite('./imgs/8centers.png', _src)
 	cv2.imwrite('./imgs/0errors.png', errorim)
-	cv2.namedWindow('image')
-	cv2.imshow('image',_src)
-	cv2.waitKey()
-	cv2.imshow('image',errorim)
-	cv2.waitKey()
+	# cv2.namedWindow('image')
+	# cv2.imshow('image',_src)
+	# cv2.waitKey()
+	# cv2.imshow('image',errorim)
+	# cv2.waitKey()
 	#print(foundCenters)
 	#print(foundColors)
 	return foundColors, foundCenters
