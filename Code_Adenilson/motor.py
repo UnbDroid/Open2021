@@ -24,9 +24,9 @@ def stop(object):
 def move_forward(object, v):
     sim.simxPauseCommunication(object.clientID, True)
     sim.simxSetJointTargetVelocity(
-        object.clientID, object.omniWheel_direita_frente, -v, sim.simx_opmode_oneshot)
+        object.clientID, object.omniWheel_direita_frente, v, sim.simx_opmode_oneshot)
     sim.simxSetJointTargetVelocity(
-        object.clientID, object.omniWheel_direita_atras, -v, sim.simx_opmode_oneshot)
+        object.clientID, object.omniWheel_direita_atras, v, sim.simx_opmode_oneshot)
     sim.simxSetJointTargetVelocity(
         object.clientID, object.omniWheel_esquerda_frente, -v, sim.simx_opmode_oneshot)
     sim.simxSetJointTargetVelocity(

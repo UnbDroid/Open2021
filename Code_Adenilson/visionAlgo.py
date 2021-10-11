@@ -192,7 +192,7 @@ def basicFilter(_src, _op, _correction=0):
 		img2 = cv2.cvtColor(img2, cv2.COLOR_BGR2GRAY)
 		cv2.imwrite('./imgs/1gray2.png', img2)
 
-		# cv2.imshow('image b4', img2)
+		cv2.imshow('image b4', img2)
 		# cv2.waitKey(0)
 
 		img2 = cv2.medianBlur(img2, 3)
@@ -200,11 +200,11 @@ def basicFilter(_src, _op, _correction=0):
 		img2 = cv2.erode(img2,kernel,iterations = 2)
 		img2 = cv2.dilate(img2,kernel,iterations = 2)
 		cv2.imwrite('./imgs/4median2.png', img2)
-		# cv2.imshow('image b5', img2)
-		# cv2.waitKey(0)
+		cv2.imshow('image b5', img2)
+		cv2.waitKey(0)
 		nimg = cv2.bitwise_or(img, img2)
 		cv2.imwrite('./imgs/4median3.png', nimg)
-		# cv2.imshow('image b6', img2)
+		cv2.imshow('image b6', img2)
 		# cv2.waitKey(0)
 	else:
 		nimg = img.copy()
@@ -229,8 +229,8 @@ def findUseful(_src, _img, _factor):
 	thres, _img = cv2.threshold(_img, 10, 255, cv2.THRESH_BINARY)
 	edges = cv2.Canny(_img, 100, 200)
 	cv2.imwrite('./imgs/5edges.png', edges)
-	# cv2.imshow('find useful edges 1', edges)
-	# cv2.waitKey(0)
+	cv2.imshow('find useful edges 1', edges)
+	cv2.waitKey(0)
 	foundCenters = np.empty(shape=[0,2])
 	foundShapes = np.empty(shape=[0,5,2])
 	foundColors = np.empty(shape=[0,3])
@@ -273,8 +273,8 @@ def findUseful(_src, _img, _factor):
 
 	cv2.imwrite('./imgs/8centers.png', _src)
 	cv2.imwrite('./imgs/0errors.png', errorim)
-	# cv2.imshow('find useful src', _src)
-	# cv2.waitKey(0)
+	cv2.imshow('find useful src', _src)
+	cv2.waitKey(0)
 	# cv2.imshow('find useful errorim', errorim)
 	# cv2.waitKey(0)
 	print(foundCenters)
@@ -381,8 +381,8 @@ def isolateFace(_src, _img, _res, _op):
 	cnts, hier = cv2.findContours(edges, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
 
 	cv2.imwrite('./imgs/5face.png', img)
-	# cv2.imshow('isolateFace', img)
-	# cv2.waitKey(0)
+	cv2.imshow('isolateFace', img)
+	cv2.waitKey(0)
 
 	approx = [0]
 	while(len(approx) < 2 and factor < 5):
@@ -440,8 +440,8 @@ def resolveVision(object, _sigValue):
 		j+=1
 
 	cv2.imwrite('./imgs/7Final.png', frame)
-	# cv2.imshow('image2', frame)
-	# cv2.waitKey(0)
+	cv2.imshow('image2', frame)
+	cv2.waitKey(0)
 
 	return foundCubes
 
