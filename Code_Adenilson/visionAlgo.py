@@ -18,7 +18,7 @@ import numpy as np
 import cv2
 import compareFaces
 import pytesseract as pytes
-HSV_OP2 = [[37,42],[37,40],[25,30],[25,30]]
+HSV_OP2 = [[37,42],[37,40],[32,34],[25,30]]
 
 
 # LEMBRAR DE APAGAR OS CV2.SHOW
