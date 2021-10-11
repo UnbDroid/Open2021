@@ -61,15 +61,19 @@ def andar_livre(object, d, v):
 
     # d = 1 direita
     # d =-1 esquerda
+    if d == 1:
+        variacao = 0.915
+    elif d == -1:
+        variacao = 0.78
     # v = velocidade
 
     sim.simxPauseCommunication(object.clientID, True)
     sim.simxSetJointTargetVelocity(
-        object.clientID, object.omniWheel_direita_frente, -v*(0.9)*d, sim.simx_opmode_oneshot)
+        object.clientID, object.omniWheel_direita_frente, -v*variacao*d, sim.simx_opmode_oneshot)
     sim.simxSetJointTargetVelocity(
         object.clientID, object.omniWheel_esquerda_frente, -v*d, sim.simx_opmode_oneshot)
     sim.simxSetJointTargetVelocity(
-        object.clientID, object.omniWheel_direita_atras, +v*(0.9)*d, sim.simx_opmode_oneshot)
+        object.clientID, object.omniWheel_direita_atras, +v*variacao*d, sim.simx_opmode_oneshot)
     sim.simxSetJointTargetVelocity(
         object.clientID, object.omniWheel_esquerda_atras, +v*d, sim.simx_opmode_oneshot)
     sim.simxPauseCommunication(object.clientID, False)
@@ -128,7 +132,7 @@ def alinharLateral(object, d):#alinha lateral esquerda e direita
 
         else:
             # print('to andando')
-            andar_livre(object, d, 2)
+            andar_livre(object, d, 3)
     flag = 0
     while True:
 
@@ -142,7 +146,7 @@ def alinharLateral(object, d):#alinha lateral esquerda e direita
         if corE == 'PRETO' and corD == 'PRETO':
             break
         if corE == 'BRANCO' and corD == 'BRANCO':
-            andar_livre(object, d, 2)
+            andar_livre(object, d, 3)
         while Ler_Cor(object, valSensorEsquerdo) == 'PRETO' and Ler_Cor(object, valSensorDireito) == 'BRANCO':
             # print('cor esquerda PRETO')
             giro_livre(object, d, 1)
