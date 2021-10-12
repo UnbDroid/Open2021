@@ -1,10 +1,13 @@
-from Code_Adenilson.object_handle import LESTE, NORTE, OESTE, SUL
 import sim
 import time
 import numpy as np
 import cv2
 from girar import get_angle_that_makes_sense
 
+NORTE = 1
+SUL = -1
+LESTE = 2
+OESTE = -2
 
 def getImage(object, _camera):
 	errol = 1

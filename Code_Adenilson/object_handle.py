@@ -14,11 +14,10 @@ esquerda = -1
 
 
 class ObjectHandle:
+   
    def __init__(self, clientID, robotname):
       self.clientID = clientID
       self.robotname = robotname
-      self.cubo_garra_frente = 'HELLO' #0 se estiver vazio, se tiver cubo botar o número dele
-      self.cubo_garra_costas = 'HELLLOOOOK' #0 se estiver vazio, se tiver cubo botar o número dele
 
       ######## Robô:
       erro, self.robot = sim.simxGetObjectHandle(self.clientID, self.robotname, sim.simx_opmode_blocking)
