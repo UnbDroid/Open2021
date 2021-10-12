@@ -1,5 +1,6 @@
 import time
 import sys
+from Code_Adenilson.firstSq import getAngInicial
 #from graphb
 from garra import *
 from girar import *
@@ -250,7 +251,7 @@ if clientID != -1:
         print(initialPosition, 'win OPEN')
         # time.sleep(50)
         # VERIFICAR ISSO!!!!!!!!!!!!!! PRA PEGAR DIREÇÃO INICIAL
-        initialDirection = SUL
+        initialDirection = getAngInicial(adeni)
         ##### PARA TESTES ######
         #FIRST AREA:
         #initialPosition = 26
