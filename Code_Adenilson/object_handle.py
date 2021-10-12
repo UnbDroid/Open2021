@@ -62,5 +62,5 @@ class ObjectHandle:
       erro, self.ir_costas_esquerda = sim.simxGetObjectHandle(self.clientID, 'Sensor_IR_costas_esquerda', sim.simx_opmode_blocking)
       
       #Qual garra está com qual cubo:
-      self.cubo_garra_frente = 0 #0 se estiver vazio, se tiver cubo botar o número dele
-      self.cubo_garra_costas = 0 #0 se estiver vazio, se tiver cubo botar o número dele
+      self.cubo_garra_frente = [0, 'handle'] #0 se estiver vazio, se tiver cubo botar o número dele
+      self.cubo_garra_costas = [0, 'handle'] #0 se estiver vazio, se tiver cubo botar o número dele
