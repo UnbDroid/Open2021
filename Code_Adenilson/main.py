@@ -279,6 +279,7 @@ if clientID != -1:
         minhaDirecao = casosEspeciais(adeni,posicaoFinal,minhaDirecao,bloco)
         alinhar_e_pegar_cubo(adeni,bloco)
         entregandoCubos(adeni,posicaoFinal,minhaDirecao,SUL)
+        aproximar_prateleira(adeni,'frente')
 
         #time.sleep(1000)
         #order = [1, 2, 3]

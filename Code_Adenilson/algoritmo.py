@@ -119,7 +119,7 @@ def trajeto(bloco):
     #     l = str(l)
     #     blocofinal += l
     # blocofinal = int(blocofinal)
-    print('******',blocofinal)
+    # print('******',blocofinal)
     if blocofinal in inferiores:
         if bloco[2] == 2 or bloco[2] == 3:
             return blocofinal+10

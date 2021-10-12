@@ -101,7 +101,8 @@ def alinhar_e_pegar_cubo(object, bloco_escolhido):
 
     #Se alinha com o cubo
     if posicao_cubo == 'direita' or posicao_cubo == 'esquerda': #acho que pode tirar esse IF
-        motor.alinharLateral(object, posicao_cubo) #alinha com o lado do quadrado onde está o cubo a ser pego
+        pass
+        # motor.alinharLateral(object, posicao_cubo) #alinha com o lado do quadrado onde está o cubo a ser pego
 
     #Alinhar com a partes de trás do quadrado, para que a garra não bata no cubo quando descer
     motor.alinhar(object, 'tras')
@@ -109,7 +110,7 @@ def alinhar_e_pegar_cubo(object, bloco_escolhido):
     if posicao_cubo == 'direita':
         motor.andar_em_metros(object, 'esquerda', 1, 0.015)
     if posicao_cubo == 'esquerda':
-        motor.andar_em_metros(object, 'esquerda', 1, 0.04)
+        motor.andar_em_metros(object, 'esquerda', 1, 0.03)
 
     
 
