@@ -105,14 +105,18 @@ def alinhar_e_pegar_cubo(object, bloco_escolhido):
 
     #Alinhar com a partes de trás do quadrado, para que a garra não bata no cubo quando descer
     motor.alinhar(object, 'tras')
-    motor.andar_em_metros(object, 'frente', 1, 0.030)
-    motor.andar_em_metros(object, 'esquerda', 1, 0.025)
+    motor.andar_em_metros(object, 'frente', 1, 0.030) #andar para frente para identificar melhor o cubo
+    if posicao_cubo == 'direita':
+        motor.andar_em_metros(object, 'esquerda', 1, 0.015)
+    if posicao_cubo == 'esquerda':
+        motor.andar_em_metros(object, 'esquerda', 1, 0.04)
+
     
 
     #Ve o valor númerico(ou cor) do bloco a ser pego
     if bloco_escolhido[0] == 'W': #bloco branco de numeros
         numero_bloco = visionAlgo.getNumber(object)
-        numero_bloco = numero_bloco[1][0]
+        numero_bloco = numero_bloco[0]
     elif bloco_escolhido[0] == 'K': #bloco preto de codigo de barras
         numero_bloco = visionAlgo.getCode(object)
     else: #bloco colorido
@@ -120,8 +124,14 @@ def alinhar_e_pegar_cubo(object, bloco_escolhido):
     #TIRAR OS COMENTÁRIOS DAS LINHAS ACIMA QUANDO FOR TESTAR A LEITURA DOS NÚMEROS!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     # numero_bloco = bloco_escolhido[0] #teste, depois tem que tirar essa linha e tirar os comentários das linhas acima!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
+    if numero_bloco == 0: #caso seja o cubo 0, sinaliza só subindo e descendo a garra da frente
+        garra.subir_garra_frente(object, 1)
+        garra.subir_garra_frente(object, 3)
+        garra.subir_garra_frente(object, 2)
+        return
 
-    if object.cubo_garra_frente == 0: #garra da frente está vazia
+
+    if object.cubo_garra_frente[0] == 0: #garra da frente está vazia
         garra.descer_garra_frente(object)
 
         #Alinhar o robo com o cubo
@@ -144,7 +154,7 @@ def alinhar_e_pegar_cubo(object, bloco_escolhido):
                 if dist_dir > (dist_dir_inicial + 0.06):
                     motor.stop(object)
                     break
-        
+    
         #Andar para frente e pegar o cubo
         dist_esq_inicial = sensor.le_distancia_ir(object, object.ir_frente_esquerda)
         dist_dir_inicial = sensor.le_distancia_ir(object, object.ir_frente_direita)
@@ -159,7 +169,7 @@ def alinhar_e_pegar_cubo(object, bloco_escolhido):
 
 
                     
-    elif object.cubo_garra_costas == 0: #garra de trás está vazia
+    elif object.cubo_garra_costas[0] == 0: #garra de trás está vazia
         girar.girar_180_graus(object)
         #Realinhar após o giro para garantir que não está torto
         if posicao_cubo == 'esquerda':

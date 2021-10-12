@@ -371,8 +371,8 @@ def isolateFace(_src, _img, _res, _op):
 		img = cv2.dilate(img,kernel,iterations = 1)
 		img = cv2.erode(img,kernel,iterations = 1)
 		kernel = np.ones((5,5),dtype=np.uint8)
-		img = cv2.erode(img,kernel,iterations = 2)
-		img = cv2.dilate(img,kernel,iterations = 2)
+		img = cv2.erode(img,kernel,iterations = 1)
+		img = cv2.dilate(img,kernel,iterations = 1)
 
 	if(_op == 2):
 		img = img[int(nres[0]/4):nres[0], int(nres[1]/6):nres[1]-int(nres[1]/6)]
@@ -469,7 +469,7 @@ def getNumber(object):
 		cv2.imshow('isolImg number2', isolImg)
 		cv2.waitKey(0)
 
-	if(nres[0] < 90 or nres[1] < 90):
+	if(nres[0] < 70 or nres[1] < 70):
 		return ("empty", [-1, -1])
 
 
@@ -482,7 +482,7 @@ def getNumber(object):
 
 	op2 = compareFaces.compareNumber(isolImg, nres)
 
-	return (text, op2)
+	return (int(text), op2)
 
 def getCode(object):
 	correction = 0
