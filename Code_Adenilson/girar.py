@@ -80,21 +80,35 @@ def girar_180_graus(object):
     girar_90_graus(object, 1)
 
 
-def giroRSEA(object):
-    print(get_angle_that_makes_sense(object))
-    Iangulo = get_angle_that_makes_sense(object)
-    while 100<Iangulo<280:
-        giro_livre(object, 1, 4)
-       # print(Iangulo, 'primeiro')
-        Iangulo = get_angle_that_makes_sense(object)
-    stop(object)
-    Iangulo = get_angle_that_makes_sense(object)
-    while Iangulo >=86:
-        #print(Iangulo, 'segundo')
-        giro_livre(object, 1, 0.8)
-        Iangulo = get_angle_that_makes_sense(object)
-    stop(object)
+def giroRSEA(object, orientacao):
 
+    if orientacao == 1:
+        # print(get_angle_that_makes_sense(object))
+        Iangulo = get_angle_that_makes_sense(object)
+        while 100<Iangulo<280:
+            giro_livre(object, 1, 4)
+           # print(Iangulo, 'primeiro')
+            Iangulo = get_angle_that_makes_sense(object)
+        stop(object)
+        Iangulo = get_angle_that_makes_sense(object)
+        while Iangulo >=86:
+            #print(Iangulo, 'segundo')
+            giro_livre(object, 1, 0.8)
+            Iangulo = get_angle_that_makes_sense(object)
+        stop(object)
+    else:
+        Iangulo = get_angle_that_makes_sense(object)
+        while 80<Iangulo<260:
+            giro_livre(object, -1, 4)
+           # print(Iangulo, 'primeiro')
+            Iangulo = get_angle_that_makes_sense(object)
+        stop(object)
+        Iangulo = get_angle_that_makes_sense(object)
+        while Iangulo <=273:
+            #print(Iangulo, 'segundo')
+            giro_livre(object, -1, 0.8)
+            Iangulo = get_angle_that_makes_sense(object)
+        stop(object)
     # gira no sentido horário sem nenhum problema, porém no anti horario apresenta problemas.
 def girar_90_graus(object, sentido):
     # sentido = 1 , anti horario, esquerda
@@ -113,7 +127,7 @@ def girar_90_graus(object, sentido):
     giro_livre(object, sentido, velocidade)
     # print("ANTES DO WHILE", sentido)
     while True:
-        
+
         angulo_final = get_angle_that_makes_sense(object)
 
         angulo_percorrido = angulo_final - angulo_inicial

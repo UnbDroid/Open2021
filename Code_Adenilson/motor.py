@@ -160,7 +160,7 @@ def alinharLateral(object, d):#alinha lateral esquerda e direita
             # andar_livre(object, d, 2)
     stop(object)
 
-def alinharComLateralFT(object, d): #alinha frente e costas.
+def alinharComLateralFT(object, d, canto): #alinha frente e costas.
     if d == 'frente':
         valSensorEsquerdo = 'direitalateral2'
         valSensorDireito = 'direitalateral1'
@@ -199,16 +199,16 @@ def alinharComLateralFT(object, d): #alinha frente e costas.
             break
         while Ler_Cor(object, valSensorEsquerdo) == 'PRETO' and Ler_Cor(object, valSensorDireito) == 'BRANCO':
             # print('cor esquerda PRETO')
-            giro_livre(object, -1, 1.3)
+            giro_livre(object, canto, 1.3)
             flag = 1
         while Ler_Cor(object, valSensorEsquerdo) == 'BRANCO' and Ler_Cor(object, valSensorDireito) == 'PRETO':
             # print('cor direita PRETA')
-            giro_livre(object, 1, 1.3)
+            giro_livre(object, -canto, 1.3)
             flag = 1
         # else:
         # move_frente(object, 3)
-    return get_angle_that_makes_sense(object)
     stop(object)
+    return get_angle_that_makes_sense(object)
 
 
 

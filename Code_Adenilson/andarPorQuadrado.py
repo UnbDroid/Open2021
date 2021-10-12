@@ -27,7 +27,7 @@ def corrigindoADirecao(object, minhaDirecao, direcaoFinal): #corrige a direção
                 girar_90_graus(object, 1)  # sentido horário
 
             if(minhaDirecao == SUL):
-                girar_180_graus(object)
+                giroRSEA(object, 1)
         return direcaoFinal
 
     if(direcaoFinal == SUL):
@@ -41,7 +41,7 @@ def corrigindoADirecao(object, minhaDirecao, direcaoFinal): #corrige a direção
                 girar_90_graus(object, -1)  # anti horário
 
             if(minhaDirecao == NORTE):
-                girar_180_graus(object)
+                giroRSEA(object, -1)
         return direcaoFinal
 
     if(direcaoFinal == LESTE):
@@ -194,7 +194,7 @@ def casosEspeciais(object, posicaoFinal, minhaDirecao, bloco):
     elif(posicaoFinal in casoV2 and posicaoFinal != OESTE):
         direcaoFinal = corrigindoADirecao(object, minhaDirecao, OESTE)
     elif(posicaoFinal in casoVEspecial):
-        
+
         # currentPosition, myDirection, matrix = getBlocksInformation(posicaoAtual, minhaDirecao) #pegar essa função e descobrir os seus parâmetros usados. Checar a forma como vamos chamar as funções.
         # matrix = 'ALGUMA COISA QUE VAMOS RECEBER ;D'
         # bloco = melhorbloco(posicaoAtual, matrix)

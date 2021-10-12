@@ -320,19 +320,19 @@ def identifyFirstPos(object):
 def getAngInicial(object):
 	ang = get_angle_that_makes_sense(object)
 
-	if 279 > ang > 250:
+	if 282 > ang > 245:
 		direcao = SUL
 		# print("TA VIRADO PRO SUL")
-	elif 10 > ang > 1:
+	elif 15 > ang or ang > 350 :
 		direcao = LESTE
 		# print("TA VIRADO PRO LESTE")
-	elif 79 < ang < 82:
+	elif 70 < ang < 102:
 		direcao = NORTE
 		# print("TA VIRADO PRO NORTE")
-	elif 170 < ang < 180:
+	elif 170 < ang < 190:
 		direcao = OESTE
 		# print("TA VIRADO PRO OESTE")
 	# else:
-		
+
 		# print(ang)
 	return direcao
