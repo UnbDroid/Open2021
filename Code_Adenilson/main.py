@@ -90,10 +90,10 @@ if clientID != -1:
         return matrix0, currentPosition, myDirection
 
     def secondAreaCubes(currentPosition, myDirection, order):
-    #Vai para a segunda área
-    # myDirection = turnTo(myDirection ,EAST)
-    # #MoveDirectionPosition(frente, 0.020)
-    # currentPosition += 1
+        #Vai para a segunda área
+        # myDirection = turnTo(myDirection ,EAST)
+        # #MoveDirectionPosition(frente, 0.020)
+        # currentPosition += 1
         print('segunda')
         if(order == 1):
             destine = 25
