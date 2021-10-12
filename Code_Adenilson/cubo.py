@@ -216,3 +216,41 @@ def alinhar_e_pegar_cubo(object, bloco_escolhido):
         object.cubo_garra_costas[0] = numero_bloco #define qual o número do cubo que esta garra está carregando
         object.cubo_garra_costas[1] = cubo #define a handle do cubo que esta garra está carregando
 
+def aproximar_prateleira(object, frente_ou_costas):
+    if frente_ou_costas == 'frente':
+        dist_esq_inicial = sensor.le_distancia_ir(object, object.ir_frente_esquerda)
+        dist_dir_inicial = sensor.le_distancia_ir(object, object.ir_frente_direita)
+        if dist_esq_inicial > dist_dir_inicial:
+            motor.move_frente(object, 2)
+            while True:
+                dist_esq = sensor.le_distancia_ir(object, object.ir_frente_esquerda)
+                if dist_esq < 0.07:
+                    break
+            motor.stop(object)
+
+        elif dist_dir_inicial > dist_esq_inicial:
+            motor.move_frente(object, 2)
+            while True:
+                dist_dir = sensor.le_distancia_ir(object, object.ir_frente_direita)
+                if dist_dir < 0.07:
+                    break
+            motor.stop(object)
+
+    elif frente_ou_costas == 'costas':
+        dist_esq_inicial = sensor.le_distancia_ir(object, object.ir_costas_esquerda)
+        dist_dir_inicial = sensor.le_distancia_ir(object, object.ir_costas_direita)
+        if dist_esq_inicial > dist_dir_inicial:
+            motor.move_tras(object, 2)
+            while True:
+                dist_esq = sensor.le_distancia_ir(object, object.ir_costas_esquerda)
+                if dist_esq < 0.07:
+                    break
+            motor.stop(object)
+            
+        elif dist_dir_inicial > dist_esq_inicial:
+            motor.move_tras(object, 2)
+            while True:
+                dist_dir = sensor.le_distancia_ir(object, object.ir_costas_direita)
+                if dist_dir < 0.07:
+                    break
+            motor.stop(object)
