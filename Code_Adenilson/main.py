@@ -82,10 +82,11 @@ if clientID != -1:
 
         # andar_em_metros(adeni,'tras',2, 0.1)
         alinhar(adeni, "tras")
-        matrix0 = visionAlgo.resolveVision(adeni,0)
         #time.sleep(3)
-    
+        alinharComLateralFT(adeni, 'tras')
+        andar_em_metros(adeni, 'frente', 2,0.035)
         andar_em_metros(adeni,'frente',2, 0.05)
+        matrix0 = visionAlgo.resolveVision(adeni,0)
 
         return matrix0, currentPosition, myDirection
 
@@ -116,8 +117,9 @@ if clientID != -1:
         print('sai do while')
         # andar_em_metros(adeni,'tras' ,2, 0.1)
         alinhar(adeni, "tras")
+        alinharComLateralFT(adeni, 'tras')
+        andar_em_metros(adeni, 'frente', 2,0.035)
         matrix1 = visionAlgo.resolveVision(adeni,1)
-
         return matrix1, currentPosition, myDirection
 
     def thirdAreaCubes(currentPosition, myDirection, order):
