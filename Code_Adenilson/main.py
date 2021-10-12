@@ -199,6 +199,7 @@ if clientID != -1:
         #     alinharLateral(adeni, lado) 
         #     move_frente(adeni, 2)
         #alinhar(adeni, 'frente')
+        print(lado, 'lado')
         andar_em_metros(adeni, lado, 2,0.1)
         #alinhar(adeni, 'frente')
         # while Ler_Cor(adeni, 'esquerda')=='BRANCO' and Ler_Cor(adeni , 'direita')== 'BRANCO':
@@ -226,8 +227,6 @@ if clientID != -1:
         andar_em_metros(adeni,'frente', 2, 0.08)
         matrix1 = invertMatrix(matrix1)
         return matrix1, currentPosition, myDirection
-
-
 
     def getBlocksInformation(currentPosition, myDirection):
         print(currentPosition)
@@ -264,17 +263,17 @@ if clientID != -1:
                 #myDirection = corrigindoADirecao(adeni,myDirection ,LESTE)
                 #MoveDirectionPosition(frente, 0.020)
                 # currentPosition += 1
-                print('cu de paciencia')
                 matrix1, currentPosition, myDirection = fourthAreaCubes(currentPosition, myDirection, 2)
             elif(currentPosition % 10 <= 4):
                 matrix0, currentPosition, myDirection = thirdAreaCubes(currentPosition, myDirection, 2)
                 #Vai para a segunda área
-                myDirection = corrigindoADirecao(adeni,myDirection ,LESTE)
+                #myDirection = corrigindoADirecao(adeni,myDirection ,LESTE)
                 #MoveDirectionPosition(frente, 0.020)
+                currentPosition-=1
                 matrix1, currentPosition, myDirection = fourthAreaCubes(currentPosition, myDirection, 1)
             else:
                 matrix1, currentPosition, myDirection = fourthAreaCubes(currentPosition, myDirection, 1)
-                myDirection = corrigindoADirecao(adeni,myDirection ,OESTE)
+                #myDirection = corrigindoADirecao(adeni,myDirection ,OESTE)
                 # currentPosition -= 1
                 matrix0, currentPosition, myDirection = thirdAreaCubes(currentPosition, myDirection, 2)
 
@@ -301,7 +300,7 @@ if clientID != -1:
             andar_em_metros(adeni,'frente', 5, 0.065)
 
         initialPosition = (iniY+1)*10+(iniX+1)
-        initialPosition = 52
+        # initialPosition = 52
         print(initialPosition, 'win OPEN')
         # time.sleep(50)
         # VERIFICAR ISSO!!!!!!!!!!!!!! PRA PEGAR DIREÇÃO INICIAL
