@@ -84,6 +84,7 @@ if clientID != -1:
         alinhar(adeni, "tras")
         matrix0 = visionAlgo.resolveVision(adeni,0)
         #time.sleep(3)
+    
         andar_em_metros(adeni,'frente',2, 0.05)
 
         return matrix0, currentPosition, myDirection
@@ -116,7 +117,6 @@ if clientID != -1:
         # andar_em_metros(adeni,'tras' ,2, 0.1)
         alinhar(adeni, "tras")
         matrix1 = visionAlgo.resolveVision(adeni,1)
-        andar_em_metros(adeni,'frente' ,2, 0.05)
 
         return matrix1, currentPosition, myDirection
 
@@ -126,27 +126,57 @@ if clientID != -1:
             destine = 52
             direction = LESTE
             lastTurn = -1
+            lado ='esquerda'
         if(order == 2):
             destine = 53
             direction = OESTE
             lastTurn = 1
+            lado = 'direita'
         #Vai para a primeira área
         print(destine)
-        currentPosition, myDirection = IndoDeA_para_B(adeni,currentPosition, destine, myDirection,myDirection)
+        currentPosition, myDirection = IndoDeA_para_B(adeni,currentPosition, destine, myDirection,SUL)
         #Se posiciona da melhor forma para enxergar os blocos
-        myDirection = corrigindoADirecao(adeni ,myDirection,direction)
+        
+        alinharLateral(adeni, lado)
+        # while Ler_Cor(adeni, 'esquerda')=='BRANCO' and Ler_Cor(adeni , 'direita')== 'BRANCO':
+        #     alinharLateral(adeni, lado) 
+        #     move_frente(adeni, 2)
+        #alinhar(adeni, 'frente')
+        andar_em_metros(adeni, lado, 2,0.1)
+        giroRSEA(adeni)
+        #alinhar(adeni, 'frente')
+        #alinhar(adeni, 'frente')
+        # while Ler_Cor(adeni, 'esquerda')=='BRANCO' and Ler_Cor(adeni , 'direita')== 'BRANCO':
+        #     move_frente(adeni, 2)
+        #andar_em_metros(adeni, 'frente', 2,0.08)
+        #alinhar(adeni , 'frente')
+        alinharComLateralFT(adeni, 'frente')
+        andar_em_metros(adeni, 'tras', 2,0.08)
+        alinhar(adeni, 'tras')
+        angulo = alinharComLateralFT(adeni, 'tras')
+        print('mmmmmmmmmmmmmmmmmmmmmmmmmmmmmm', angulo)
+        andar_em_metros(adeni, 'frente', 2,0.035)
+        
         #Align() #TurnTo ja alinha
-        andar_em_metros(adeni,'frente', 2, 0.08)
-        girar_90_graus(adeni,lastTurn)
+        #andar_em_metros(adeni,'frente', 2, 0.1)
         myDirection = NORTE
         #align.Align()
-        andar_em_metros(adeni,'tras',2, 0.065)
+        # while Ler_Cor(adeni, 'esquerdalateral1')=='BRANCO' and Ler_Cor(adeni , 'direitalateral1')== 'BRANCO':
+        #      alinharLateral(adeni, lado)
+        #      move_tras(adeni, 2)
+        
+        #andar_em_metros(adeni,'tras',2, 0.085)
         print('ta aqui o erro')
+        #giroRSEA(adeni)
+        TurnInSquare(adeni, angulo )
         matrix0 = visionAlgo.resolveVision(adeni,0) ####ALTERAR A MATRIZ
         matrix0 = invertMatrix(matrix0)
+        #andar_em_metros(adeni, 'frente', 2, 0.04)   
         #time.sleep(3)
         print('nao sai')
+        andar_em_metros(adeni,'frente' , 2, 0.05)
         return matrix0, currentPosition, myDirection
+
     def fourthAreaCubes(currentPosition, myDirection, order):
         print('quarta')
         #Vai para a segunda área
@@ -157,20 +187,44 @@ if clientID != -1:
             destine = 55
             direction = LESTE
             lastTurn = -1
+            lado ='esquerda'
         if(order == 1):
             destine = 56
             direction = OESTE
             lastTurn = 1
-        currentPosition, myDirection = IndoDeA_para_B(adeni,currentPosition, destine, myDirection, myDirection)
+            lado ='direita'
+
+        currentPosition, myDirection = IndoDeA_para_B(adeni,currentPosition, destine, myDirection, SUL)
+        alinharLateral(adeni, lado)
+        # while Ler_Cor(adeni, 'esquerda')=='BRANCO' and Ler_Cor(adeni , 'direita')== 'BRANCO':
+        #     alinharLateral(adeni, lado) 
+        #     move_frente(adeni, 2)
+        #alinhar(adeni, 'frente')
+        andar_em_metros(adeni, lado, 2,0.1)
+        #alinhar(adeni, 'frente')
+        # while Ler_Cor(adeni, 'esquerda')=='BRANCO' and Ler_Cor(adeni , 'direita')== 'BRANCO':
+        #     move_frente(adeni, 2)
+        giroRSEA(adeni)
+        #andar_em_metros(adeni, 'frente', 2,0.08)
+        #alinhar(adeni , 'frente')
+        alinharComLateralFT(adeni, 'frente')
+        andar_em_metros(adeni, 'tras', 2,0.08)
+        alinhar(adeni, 'tras')
+        alinharComLateralFT(adeni, 'tras')
+        andar_em_metros(adeni, 'frente', 2,0.035)
+
+        #giroRSEA(adeni)
         #Se posiciona da melhor forma para enxergar os blocos
-        myDirection = corrigindoADirecao(adeni ,myDirection,direction)
+        #myDirection = corrigindoADirecao(adeni ,myDirection,direction)
         #Align()
-        andar_em_metros(adeni,'frente', 2, 0.08)
-        girar_90_graus(adeni,lastTurn)
+        #girar_90_graus(adeni,lastTurn)
         myDirection = NORTE
         #align.Align()
-        andar_em_metros(adeni,'tras',2, 0.065)
+        #alinhar(adeni, 'tras')
+        #giroRSEA(adeni)
         matrix1 = visionAlgo.resolveVision(adeni,1) #MODIFICAR MATRIZ
+        
+        andar_em_metros(adeni,'frente', 2, 0.08)
         matrix1 = invertMatrix(matrix1)
         return matrix1, currentPosition, myDirection
 
@@ -186,7 +240,7 @@ if clientID != -1:
                 matrix0, currentPosition, myDirection = firstAreaCubes(currentPosition, myDirection, 1)
                 #Vai para a segunda área
                 print("Segunda área1")
-                time.sleep(2)
+                
                 #MoveDirectionPosition(frente, 0.020)
                 # currentPosition += 1
                 matrix1, currentPosition, myDirection = secondAreaCubes(currentPosition, myDirection, 2)
@@ -208,9 +262,10 @@ if clientID != -1:
             if(currentPosition % 10 <= 2):
                 matrix0, currentPosition, myDirection = thirdAreaCubes(currentPosition, myDirection, 1)
                 #Vai para a segunda área
-                myDirection = corrigindoADirecao(adeni,myDirection ,LESTE)
+                #myDirection = corrigindoADirecao(adeni,myDirection ,LESTE)
                 #MoveDirectionPosition(frente, 0.020)
                 # currentPosition += 1
+                print('cu de paciencia')
                 matrix1, currentPosition, myDirection = fourthAreaCubes(currentPosition, myDirection, 2)
             elif(currentPosition % 10 <= 4):
                 matrix0, currentPosition, myDirection = thirdAreaCubes(currentPosition, myDirection, 2)
@@ -247,6 +302,7 @@ if clientID != -1:
             andar_em_metros(adeni,'frente', 5, 0.065)
 
         initialPosition = (iniY+1)*10+(iniX+1)
+        initialPosition = 61
         print(initialPosition, 'win OPEN')
         # time.sleep(50)
         # VERIFICAR ISSO!!!!!!!!!!!!!! PRA PEGAR DIREÇÃO INICIAL

@@ -25,8 +25,7 @@ def melhorbloco(posiçãorobo, arrayvisão):
         peso = bloquinho(l[0], l[1], l[2])
         quadrante = l[1]
         elementomatriz = matriz[quadrante]
-        dist = distancia(posiçãorobo, elementomatriz) + \
-            distancia(elementomatriz, pratileira)
+        dist = distancia(posiçãorobo, elementomatriz) + distancia(elementomatriz, pratileira)
         valor = peso//dist
         lista_valores_blocos.append(valor)
         lista_posiçoes_blocos.append([l[1], l[2]])

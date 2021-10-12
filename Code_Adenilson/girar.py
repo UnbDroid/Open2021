@@ -85,12 +85,12 @@ def giroRSEA(object):
     Iangulo = get_angle_that_makes_sense(object)
     while 100<Iangulo<280:
         giro_livre(object, 1, 4)
-        print(Iangulo, 'primeiro')
+       # print(Iangulo, 'primeiro')
         Iangulo = get_angle_that_makes_sense(object)
     stop(object)
     Iangulo = get_angle_that_makes_sense(object)
     while Iangulo >=86:
-        print(Iangulo, 'segundo')
+        #print(Iangulo, 'segundo')
         giro_livre(object, 1, 0.8)
         Iangulo = get_angle_that_makes_sense(object)
     stop(object)
@@ -117,8 +117,8 @@ def girar_90_graus(object, sentido):
         angulo_final = get_angle_that_makes_sense(object)
 
         angulo_percorrido = angulo_final - angulo_inicial
-        print('angulo final', angulo_final)
-        print('angulo percorrido', angulo_percorrido)
+        #print('angulo final', angulo_final)
+        #print('angulo percorrido', angulo_percorrido)
         if sentido != 1:  # anti horário
             # print("To aqui -> ", angulo_percorrido, " - ",
             #       angulo_final, " - ", angulo_inicial)
@@ -133,7 +133,7 @@ def girar_90_graus(object, sentido):
 
         # implementar aquilo que a gente falou do controle de velocidade baseado no quão próximo o robô está do ângulo final
 
-        if (88) < angulo_percorrido < (98):
+        if (83) < angulo_percorrido < (94):
             # print(50*'#')
             # print("Final angulo_percorrido: ", angulo_percorrido)  # teste
             # print(50*'#')
