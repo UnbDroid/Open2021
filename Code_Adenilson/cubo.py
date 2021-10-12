@@ -110,18 +110,23 @@ def alinhar_e_pegar_cubo(object, bloco_escolhido):
     if posicao_cubo == 'direita':
         motor.andar_em_metros(object, 'esquerda', 1, 0.015)
     if posicao_cubo == 'esquerda':
-        motor.andar_em_metros(object, 'esquerda', 1, 0.03)
+        motor.andar_em_metros(object, 'esquerda', 1, 0.02)
 
     
 
     #Ve o valor númerico(ou cor) do bloco a ser pego
     if bloco_escolhido[0] == 'W': #bloco branco de numeros
         numero_bloco = visionAlgo.getNumber(object)
+        if numero_bloco[0] == 'empty':
+            motor.andar_em_metros(object,'direita',1,0.02)
+            numero_bloco = visionAlgo.getNumber(object)
         numero_bloco = numero_bloco[0]
     elif bloco_escolhido[0] == 'K': #bloco preto de codigo de barras
         numero_bloco = visionAlgo.getCode(object)
     else: #bloco colorido
         numero_bloco = bloco_escolhido[0]
+
+    print(numero_bloco)
     #TIRAR OS COMENTÁRIOS DAS LINHAS ACIMA QUANDO FOR TESTAR A LEITURA DOS NÚMEROS!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     # numero_bloco = bloco_escolhido[0] #teste, depois tem que tirar essa linha e tirar os comentários das linhas acima!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 

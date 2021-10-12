@@ -381,8 +381,8 @@ def isolateFace(_src, _img, _res, _op):
 	cnts, hier = cv2.findContours(edges, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
 
 	cv2.imwrite('./imgs/5face.png', img)
-	# cv2.imshow('isolateFace', img)
-	# cv2.waitKey(0)
+	cv2.imshow('isolateFace', img)
+	cv2.waitKey(0)
 
 	approx = [0]
 	while(len(approx) < 2 and factor < 5):
@@ -473,14 +473,16 @@ def getNumber(object):
 		return ("empty", [-1, -1])
 
 
+	try:
+		text = pytes.image_to_string(isolImg, config='--oem 3 --psm 6 -c tessedit_char_whitelist=0123456789')
 
-	text = pytes.image_to_string(isolImg, config='--oem 3 --psm 6 -c tessedit_char_whitelist=0123456789')
+		if not(int(text) in range(0,16)):
+			# Não está no intervalo permitido de números [0, 15]
+			return ("empty", [-1, -1])
 
-	if not(int(text) in range(0,16)):
-    	# Não está no intervalo permitido de números [0, 15]
+		op2 = compareFaces.compareNumber(isolImg, nres)
+	except:
 		return ("empty", [-1, -1])
-
-	op2 = compareFaces.compareNumber(isolImg, nres)
 
 	return (int(text), op2)
 
