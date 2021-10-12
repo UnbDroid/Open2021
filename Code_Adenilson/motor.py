@@ -160,6 +160,58 @@ def alinharLateral(object, d):#alinha lateral esquerda e direita
             # andar_livre(object, d, 2)
     stop(object)
 
+def alinharComLateralFT(object, d): #alinha frente e costas.
+    if d == 'frente':
+        valSensorEsquerdo = 'direitalateral2'
+        valSensorDireito = 'direitalateral1'
+    elif d == 'tras':
+        valSensorEsquerdo = 'esquerdalateral2'
+        valSensorDireito = 'esquerdalateral1'
+
+    while True:
+        esquerda = Ler_Cor(object, valSensorEsquerdo)
+        direita = Ler_Cor(object, valSensorDireito)
+        if esquerda == 'PRETO' or direita == 'PRETO':
+            print('quebrei')
+            print('dei um break2')
+            stop(object)
+            break
+
+        else:
+            # print('to andando')
+            if d == 'tras':
+                move_tras(object, 2)
+            else:
+                move_frente(object, 2)
+    flag = 0
+    while True:
+
+        corE = Ler_Cor(object, valSensorEsquerdo)
+        # print("COR ESQUERDA == ", corE)
+        corD = Ler_Cor(object, valSensorDireito)
+        # print("COR DIREITA == ", corD)
+
+        # if flag:
+        #     break
+        if corE == 'PRETO' and corD == 'PRETO':
+            break
+        if corE == 'BRANCO' and corD == 'BRANCO':
+            break
+        while Ler_Cor(object, valSensorEsquerdo) == 'PRETO' and Ler_Cor(object, valSensorDireito) == 'BRANCO':
+            # print('cor esquerda PRETO')
+            giro_livre(object, -1, 1.3)
+            flag = 1
+        while Ler_Cor(object, valSensorEsquerdo) == 'BRANCO' and Ler_Cor(object, valSensorDireito) == 'PRETO':
+            # print('cor direita PRETA')
+            giro_livre(object, 1, 1.3)
+            flag = 1
+        # else:
+        # move_frente(object, 3)
+    return get_angle_that_makes_sense(object)
+    stop(object)
+
+
+
 def alinhar(object, d): #alinha frente e costas.
     if d == 'frente':
         valSensorEsquerdo = 'esquerda'
@@ -199,11 +251,11 @@ def alinhar(object, d): #alinha frente e costas.
             break
         while Ler_Cor(object, valSensorEsquerdo) == 'PRETO' and Ler_Cor(object, valSensorDireito) == 'BRANCO':
             # print('cor esquerda PRETO')
-            giro_livre(object, -1, 1)
+            giro_livre(object, -1, 1.3)
             flag = 1
         while Ler_Cor(object, valSensorEsquerdo) == 'BRANCO' and Ler_Cor(object, valSensorDireito) == 'PRETO':
             # print('cor direita PRETA')
-            giro_livre(object, 1, 1)
+            giro_livre(object, 1, 1.3)
             flag = 1
         # else:
         # move_frente(object, 3)

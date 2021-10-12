@@ -129,11 +129,11 @@ def test(object, camera): #pra que isso??
 			pvMax = vMax
 
 		# Display output image
-		cv2.imshow('image',output)
+		# cv2.imshow('image',output)
 
 		# Wait longer to prevent freeze for videos.
-		if cv2.waitKey(wait_time) & 0xFF == ord('q'):
-			break
+		# if cv2.waitKey(wait_time) & 0xFF == ord('q'):
+		# 	break
 
 	cv2.destroyAllWindows()
 
@@ -381,8 +381,8 @@ def isolateFace(_src, _img, _res, _op):
 	cnts, hier = cv2.findContours(edges, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
 
 	cv2.imwrite('./imgs/5face.png', img)
-	cv2.imshow('isolateFace', img)
-	cv2.waitKey(0)
+	# cv2.imshow('isolateFace', img)
+	# cv2.waitKey(0)
 
 	approx = [0]
 	while(len(approx) < 2 and factor < 5):

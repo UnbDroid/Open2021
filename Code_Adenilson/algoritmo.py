@@ -33,6 +33,7 @@ def melhorbloco(posicaoRobo, arrayVisao):
         quadrante = int(l[1])
         
         elementomatriz = matriz[quadrante]
+
         print('POSICAO=',posicaoRobo)
         print('ELEMENTO=', elementomatriz)
         print('PRATILEIRA=', pratileira)
