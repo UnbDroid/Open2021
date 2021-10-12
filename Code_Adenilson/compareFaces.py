@@ -4,10 +4,11 @@ import numpy as np
 def compareNumber(_compImg, _compRes):
 	num = 0
 	match = [0,10]
-
+	print(_compRes)
+	cv2.imshow('compass',_compImg)
 	while(num < 15):
 		ret = 0
-		imgt =   "Cubes/" + str(num) + ".png"
+		imgt =   "./Cubes/" + str(num) + ".png"
 		imgNum = cv2.imread(imgt,0)
 		imgNum = cv2.resize(imgNum, (_compRes[1],_compRes[0]))
 

@@ -225,7 +225,7 @@ def entregandoCubos(object, posicaoAtual, minhaDirecao, direcaoFinal):
     if posicaoAtual != SUL:
         corrigindoADirecao(object,posicaoAtual,SUL)
 
-    if valGarraFrente and valGarraCostas != 0:
+    if valGarraFrente or valGarraCostas != 0:
         if (valGarraFrente in Prateleira1):
             posicaoFinal = 22
             direcaoFinal = NORTE
