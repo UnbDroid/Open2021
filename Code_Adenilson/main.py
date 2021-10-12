@@ -119,6 +119,7 @@ if clientID != -1:
         alinhar(adeni, "tras")
         alinharComLateralFT(adeni, 'tras')
         andar_em_metros(adeni, 'frente', 2,0.035)
+        andar_em_metros(adeni,'frente',2, 0.05)
         matrix1 = visionAlgo.resolveVision(adeni,1)
         return matrix1, currentPosition, myDirection
 

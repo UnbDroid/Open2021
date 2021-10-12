@@ -134,7 +134,7 @@ def girar_90_graus(object, sentido):
 
         # implementar aquilo que a gente falou do controle de velocidade baseado no quão próximo o robô está do ângulo final
 
-        if (83) < angulo_percorrido < (94):
+        if (88) < angulo_percorrido < (94):
             # print(50*'#')
             # print("Final angulo_percorrido: ", angulo_percorrido)  # teste
             # print(50*'#')
