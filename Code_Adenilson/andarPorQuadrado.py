@@ -186,28 +186,28 @@ def casosEspeciais(object, posicaoFinal, minhaDirecao, bloco):
     arg2 = [0, 2]  # LESTE - DIRETA
 
     if (posicaoFinal in casoH1 and posicaoFinal != SUL):
-        corrigindoADirecao(object, minhaDirecao, SUL)
+        direcaoFinal = corrigindoADirecao(object, minhaDirecao, SUL)
     elif(posicaoFinal in casoH2 and posicaoFinal != NORTE):
-        corrigindoADirecao(object, minhaDirecao, NORTE)
+        direcaoFinal = corrigindoADirecao(object, minhaDirecao, NORTE)
     elif(posicaoFinal in casoV1 and posicaoFinal != LESTE):
-        corrigindoADirecao(object, minhaDirecao, LESTE)
+        direcaoFinal = corrigindoADirecao(object, minhaDirecao, LESTE)
     elif(posicaoFinal in casoV2 and posicaoFinal != OESTE):
-        corrigindoADirecao(object, minhaDirecao, OESTE)
+        direcaoFinal = corrigindoADirecao(object, minhaDirecao, OESTE)
     elif(posicaoFinal in casoVEspecial):
         
         # currentPosition, myDirection, matrix = getBlocksInformation(posicaoAtual, minhaDirecao) #pegar essa função e descobrir os seus parâmetros usados. Checar a forma como vamos chamar as funções.
         # matrix = 'ALGUMA COISA QUE VAMOS RECEBER ;D'
         # bloco = melhorbloco(posicaoAtual, matrix)
         if bloco[2] in arg and posicaoFinal != OESTE:
-            corrigindoADirecao(object,minhaDirecao,OESTE)
+            direcaoFinal = corrigindoADirecao(object,minhaDirecao,OESTE)
             # Girar Para Esquerda - OESTE
             # pass
         elif bloco[2] in arg2 and posicaoFinal != LESTE:
-            corrigindoADirecao(object,minhaDirecao,LESTE)
+            direcaoFinal = corrigindoADirecao(object,minhaDirecao,LESTE)
             # Girar Para Direita - LESTE
             # pass
-
-def entregandoCubos(object, posicaoAtual, posicaoFinal, minhaDirecao, direcaoFinal):
+    return direcaoFinal
+def entregandoCubos(object, posicaoAtual, minhaDirecao, direcaoFinal):
 
     Prateleira1 = [11, 6, 1]
     Prateleira2 = [12, 7, 2]
@@ -215,8 +215,8 @@ def entregandoCubos(object, posicaoAtual, posicaoFinal, minhaDirecao, direcaoFin
     Prateleira4 = [14, 9, 4]
     Prateleira5 = [15, 10, 5]
     locaisDeEntrega = [71, 72, 73, 74, 75, 76, 77]
-    valGarraFrente = object.cubo_garra_frente
-    valGarraCostas = object.cubo_garra_costas
+    valGarraFrente = object.cubo_garra_frente[0]
+    valGarraCostas = object.cubo_garra_costas[0]
 
     if posicaoAtual != SUL:
         corrigindoADirecao(object,posicaoAtual,SUL)
@@ -229,62 +229,62 @@ def entregandoCubos(object, posicaoAtual, posicaoFinal, minhaDirecao, direcaoFin
                 corrigindoADirecao(object, minhaDirecao, SUL)
             IndoDeA_para_B(object, posicaoAtual, posicaoFinal,
                            minhaDirecao, direcaoFinal)
-            object.cubo_garra_frente = 0
+            object.cubo_garra_frente[0] = 0
         elif (valGarraFrente in Prateleira2):
             posicaoFinal = 23
             direcaoFinal = NORTE
             IndoDeA_para_B(object, posicaoAtual, posicaoFinal,
                            minhaDirecao, direcaoFinal)
-            object.cubo_garra_frente = 0
+            object.cubo_garra_frente[0] = 0
         elif (valGarraFrente in Prateleira3):
             posicaoFinal = 24
             direcaoFinal = NORTE
             IndoDeA_para_B(object, posicaoAtual, posicaoFinal,
                            minhaDirecao, direcaoFinal)
-            object.cubo_garra_frente = 0
+            object.cubo_garra_frente[0] = 0
         elif (valGarraFrente in Prateleira4):
             posicaoFinal = 25
             direcaoFinal = NORTE
             IndoDeA_para_B(object, posicaoAtual, posicaoFinal,
                            minhaDirecao, direcaoFinal)
-            object.cubo_garra_frente = 0
+            object.cubo_garra_frente[0] = 0
         elif (valGarraFrente in Prateleira5):
             posicaoFinal = 26
             direcaoFinal = NORTE
             IndoDeA_para_B(object, posicaoAtual, posicaoFinal,
                            minhaDirecao, direcaoFinal)
-            object.cubo_garra_frente = 0
+            object.cubo_garra_frente[0] = 0
 
         if (valGarraCostas in Prateleira1):
             posicaoFinal = 22
             direcaoFinal = NORTE
             IndoDeA_para_B(object, posicaoAtual, posicaoFinal,
                            minhaDirecao, direcaoFinal)
-            object.cubo_garra_costas = 0
+            object.cubo_garra_costas[0] = 0
         elif (valGarraCostas in Prateleira2):
             posicaoFinal = 23
             direcaoFinal = NORTE
             IndoDeA_para_B(object, posicaoAtual, posicaoFinal,
                            minhaDirecao, direcaoFinal)
-            object.cubo_garra_costas = 0
+            object.cubo_garra_costas[0] = 0
         elif (valGarraCostas in Prateleira3):
             posicaoFinal = 24
             direcaoFinal = NORTE
             IndoDeA_para_B(object, posicaoAtual, posicaoFinal,
                            minhaDirecao, direcaoFinal)
-            object.cubo_garra_costas = 0
+            object.cubo_garra_costas[0] = 0
         elif (valGarraCostas in Prateleira4):
             posicaoFinal = 25
             direcaoFinal = NORTE
             IndoDeA_para_B(object, posicaoAtual, posicaoFinal,
                            minhaDirecao, direcaoFinal)
-            object.cubo_garra_costas = 0
+            object.cubo_garra_costas[0] = 0
         elif (valGarraCostas in Prateleira5):
             posicaoFinal = 26
             direcaoFinal = NORTE
             IndoDeA_para_B(object, posicaoAtual, posicaoFinal,
                            minhaDirecao, direcaoFinal)
-            object.cubo_garra_costas = 0
+            object.cubo_garra_costas[0] = 0
 
     # print(valGarraFrente, valGarraCostas)
 

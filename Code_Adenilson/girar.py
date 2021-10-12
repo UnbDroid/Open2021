@@ -117,8 +117,9 @@ def girar_90_graus(object, sentido):
         angulo_final = get_angle_that_makes_sense(object)
 
         angulo_percorrido = angulo_final - angulo_inicial
-        #print('angulo final', angulo_final)
-        #print('angulo percorrido', angulo_percorrido)
+
+        # print('angulo final', angulo_final)
+        # print('angulo percorrido', angulo_percorrido)
         if sentido != 1:  # anti horário
             # print("To aqui -> ", angulo_percorrido, " - ",
             #       angulo_final, " - ", angulo_inicial)

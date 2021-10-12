@@ -90,10 +90,10 @@ if clientID != -1:
         return matrix0, currentPosition, myDirection
 
     def secondAreaCubes(currentPosition, myDirection, order):
-    #Vai para a segunda área
-    # myDirection = turnTo(myDirection ,EAST)
-    # #MoveDirectionPosition(frente, 0.020)
-    # currentPosition += 1
+        #Vai para a segunda área
+        # myDirection = turnTo(myDirection ,EAST)
+        # #MoveDirectionPosition(frente, 0.020)
+        # currentPosition += 1
         print('segunda')
         if(order == 1):
             destine = 25
@@ -293,9 +293,14 @@ if clientID != -1:
         return currentPosition, myDirection, matrix
 
     def winOPEN():
+        direc = firstSq.getAngInicial(adeni)
+        print(direc, 'DIREÇÃO VIRADO')
+        initialDirection = corrigindoADirecao(adeni,direc,SUL)
+
         iniY, iniX = firstSq.identifyFirstPos(adeni)
         initialPosition = [iniY,iniX]
         print(initialPosition)
+        
         if(initialPosition[1] == -1):
             moverPorQuadrado(adeni,'frente')
             alinhar(adeni, 'frente')
@@ -306,14 +311,31 @@ if clientID != -1:
         print(initialPosition, 'win OPEN')
         # time.sleep(50)
         # VERIFICAR ISSO!!!!!!!!!!!!!! PRA PEGAR DIREÇÃO INICIAL
-        initialDirection = SUL
+        
         ##### PARA TESTES ######
         #FIRST AREA:
         #initialPosition = 26
         #SECOND AREA:
 
         currentPosition, myDirection, matrix = getBlocksInformation(initialPosition, initialDirection)
-        print(matrix, 'DEPOIS DO WIN OPEN')
+        # print('---', matrix, 'DEPOIS DO WIN OPEN')
+        # print('---', matrix[0], 'WIN OPEN')
+        # print('---', matrix[0][0], 'WIN OPEN')
+
+
+        # iniY, iniX = firstSq.identifyFirstPos(adeni)
+        # initialPosition = [iniY,iniX]
+        # initialPosition = (iniY+1)*10+(iniX+1)
+        posicao = [str(currentPosition)[0],str(currentPosition)[1]]
+        bloco = melhorbloco(posicao,matrix)
+        print(bloco,'MELHOR BLOCO É ESSE BRABO AQUI')
+        local = trajeto(bloco)
+        print(local,'MELHOR Trajeto É ESSE BRABO AQUI')
+        posicaoFinal,minhaDirecao = IndoDeA_para_B(adeni,currentPosition,local,firstSq.getAngInicial(adeni), SUL)
+        minhaDirecao = casosEspeciais(adeni,posicaoFinal,minhaDirecao,bloco)
+        alinhar_e_pegar_cubo(adeni,bloco)
+        entregandoCubos(adeni,posicaoFinal,minhaDirecao,SUL)
+
         #time.sleep(1000)
         #order = [1, 2, 3]
         pickLater = []
@@ -324,6 +346,7 @@ if clientID != -1:
         #myDirection = initialDirection
         #FIM DE TESTE
     # IndoDeA_para_B(adeni, 26, 22, SUL, SUL)
+    # print(firstSq.getAngInicial(adeni))
     winOPEN()
 
 
