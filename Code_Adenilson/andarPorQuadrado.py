@@ -104,7 +104,7 @@ def IndoDeA_para_B(object, posicaoAtual,  posicaoFinal, minhaDirecao, direcaoFin
         moverX = (posicaoFinal % 10) - (posicaoAtual % 10)
 
         if(moverX != 0 and naoLocalDeCarga(object, posicaoAtual, moverX, axisX)):
-            print('entrei no if')
+            # print('entrei no if')
             # minhaDirecao = direcaoCorreta(object, minhaDirecao, moverX, axisX, True)
 
             # O eixo x é a linha horizontal e verifica se ele vai para esquerda ou para direita.
@@ -118,17 +118,17 @@ def IndoDeA_para_B(object, posicaoAtual,  posicaoFinal, minhaDirecao, direcaoFin
                 moverLadoPorQuadrado(object, 'direita')  # anda para a direita
                 posicaoAtual -= 1
         elif(moverY != 0 and naoLocalDeCarga(object, posicaoAtual, moverY, axisY)):
-            print('Entrei 1 Elif')
+            # print('Entrei 1 Elif')
             # minhaDirecao = direcaoCorreta(
             #     object, minhaDirecao, moverX, axisX, True)
             # moverParaFrentePorQuadrado(object)
             if(moverY < 0):  # robô anda para cima
-                print('movey', moverY)
+                # print('movey', moverY)
                 moverPorQuadrado(object, 'tras')
                 posicaoAtual -= 10
             # robô anda para baixo (necessário que ele gire 180 para não ter erro no alinhamento)
             else:
-                print('moveu por quadrado')
+                # print('moveu por quadrado')
                 moverPorQuadrado(object, 'frente')
                 posicaoAtual += 10
         else:
@@ -155,6 +155,8 @@ def desvioAreaDeCarga(object, posicaoAtual, posicaoFinal, minhaDirecao, direcaoF
         destino = posicaoAtual+10
     elif(posicaoAtual in [31, 34, 37]):
         destino = posicaoAtual-10
+    elif(posicaoAtual in [11, 12, 13, 14, 15, 16,17]):
+        destino = posicaoAtual+10
 
     posicaoAtual, minhaDirecao = IndoDeA_para_B(
         object, posicaoAtual, destino, minhaDirecao, direcaoFinal)
@@ -172,6 +174,8 @@ def naoLocalDeCarga(object, posicaoAtual, movement, axis):
             locaisDeCarga = [31, 41, 34, 44]
         if(movement < 0):  # Quer ir pra direita (OESTE)
             locaisDeCarga = [34, 44, 37, 47]
+    if(axis == axisX):
+        locaisDeCarga = [11, 12, 13, 14, 15, 16, 17]
     if(posicaoAtual in locaisDeCarga):
         return False
     return True
