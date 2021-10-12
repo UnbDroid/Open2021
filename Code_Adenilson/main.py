@@ -90,10 +90,10 @@ if clientID != -1:
         return matrix0, currentPosition, myDirection
 
     def secondAreaCubes(currentPosition, myDirection, order):
-        #Vai para a segunda área
-        # myDirection = turnTo(myDirection ,EAST)
-        # #MoveDirectionPosition(frente, 0.020)
-        # currentPosition += 1
+    #Vai para a segunda área
+    # myDirection = turnTo(myDirection ,EAST)
+    # #MoveDirectionPosition(frente, 0.020)
+    # currentPosition += 1
         print('segunda')
         if(order == 1):
             destine = 25
@@ -153,8 +153,7 @@ if clientID != -1:
         alinharComLateralFT(adeni, 'frente')
         andar_em_metros(adeni, 'tras', 2,0.08)
         alinhar(adeni, 'tras')
-        angulo = alinharComLateralFT(adeni, 'tras')
-        print('mmmmmmmmmmmmmmmmmmmmmmmmmmmmmm', angulo)
+        alinharComLateralFT(adeni, 'tras')
         andar_em_metros(adeni, 'frente', 2,0.035)
         
         #Align() #TurnTo ja alinha
@@ -168,7 +167,7 @@ if clientID != -1:
         #andar_em_metros(adeni,'tras',2, 0.085)
         print('ta aqui o erro')
         #giroRSEA(adeni)
-        TurnInSquare(adeni, angulo )
+       
         matrix0 = visionAlgo.resolveVision(adeni,0) ####ALTERAR A MATRIZ
         matrix0 = invertMatrix(matrix0)
         #andar_em_metros(adeni, 'frente', 2, 0.04)   
@@ -272,7 +271,7 @@ if clientID != -1:
                 #Vai para a segunda área
                 myDirection = corrigindoADirecao(adeni,myDirection ,LESTE)
                 #MoveDirectionPosition(frente, 0.020)
-                matrix1, currentPosition, myDirection = fourthAreaCubes(currentPosition, myDirection, 2)
+                matrix1, currentPosition, myDirection = fourthAreaCubes(currentPosition, myDirection, 1)
             else:
                 matrix1, currentPosition, myDirection = fourthAreaCubes(currentPosition, myDirection, 1)
                 myDirection = corrigindoADirecao(adeni,myDirection ,OESTE)
@@ -293,49 +292,27 @@ if clientID != -1:
         return currentPosition, myDirection, matrix
 
     def winOPEN():
-        direc = firstSq.getAngInicial(adeni)
-        print(direc, 'DIREÇÃO VIRADO')
-        initialDirection = corrigindoADirecao(adeni,direc,SUL)
-
         iniY, iniX = firstSq.identifyFirstPos(adeni)
         initialPosition = [iniY,iniX]
         print(initialPosition)
-        
         if(initialPosition[1] == -1):
             moverPorQuadrado(adeni,'frente')
             alinhar(adeni, 'frente')
             andar_em_metros(adeni,'frente', 5, 0.065)
 
         initialPosition = (iniY+1)*10+(iniX+1)
-        initialPosition = 61
+        initialPosition = 52
         print(initialPosition, 'win OPEN')
         # time.sleep(50)
         # VERIFICAR ISSO!!!!!!!!!!!!!! PRA PEGAR DIREÇÃO INICIAL
-        
+        initialDirection = SUL
         ##### PARA TESTES ######
         #FIRST AREA:
         #initialPosition = 26
         #SECOND AREA:
 
         currentPosition, myDirection, matrix = getBlocksInformation(initialPosition, initialDirection)
-        # print('---', matrix, 'DEPOIS DO WIN OPEN')
-        # print('---', matrix[0], 'WIN OPEN')
-        # print('---', matrix[0][0], 'WIN OPEN')
-
-
-        # iniY, iniX = firstSq.identifyFirstPos(adeni)
-        # initialPosition = [iniY,iniX]
-        # initialPosition = (iniY+1)*10+(iniX+1)
-        posicao = [str(currentPosition)[0],str(currentPosition)[1]]
-        bloco = melhorbloco(posicao,matrix)
-        print(bloco,'MELHOR BLOCO É ESSE BRABO AQUI')
-        local = trajeto(bloco)
-        print(local,'MELHOR Trajeto É ESSE BRABO AQUI')
-        posicaoFinal,minhaDirecao = IndoDeA_para_B(adeni,currentPosition,local,firstSq.getAngInicial(adeni), SUL)
-        minhaDirecao = casosEspeciais(adeni,posicaoFinal,minhaDirecao,bloco)
-        alinhar_e_pegar_cubo(adeni,bloco)
-        entregandoCubos(adeni,posicaoFinal,minhaDirecao,SUL)
-
+        print(matrix, 'DEPOIS DO WIN OPEN')
         #time.sleep(1000)
         #order = [1, 2, 3]
         pickLater = []
@@ -346,7 +323,6 @@ if clientID != -1:
         #myDirection = initialDirection
         #FIM DE TESTE
     # IndoDeA_para_B(adeni, 26, 22, SUL, SUL)
-    # print(firstSq.getAngInicial(adeni))
     winOPEN()
 
 
