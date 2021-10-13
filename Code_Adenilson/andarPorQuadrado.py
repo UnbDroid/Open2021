@@ -7,6 +7,8 @@ from girar import *
 from sensor import *
 from motor import *
 from object_handle import *
+from garra import *
+from cubo import *
 
 axisX = 0
 axisY = 1
@@ -95,7 +97,6 @@ def chegadaNolocal(posicaoAtual, posicaoFinal):  # define se chegou ao local
     return False
 
 def IndoDeA_para_B(object, posicaoAtual,  posicaoFinal, minhaDirecao, direcaoFinal): # faz com que o robô ande de A para B, sendo baseado nas posições da arena.
-
     if minhaDirecao != SUL:
         minhaDirecao = corrigindoADirecao(object, minhaDirecao, SUL)
 
@@ -135,9 +136,9 @@ def IndoDeA_para_B(object, posicaoAtual,  posicaoFinal, minhaDirecao, direcaoFin
             posicaoAtual, minhaDirecao = desvioAreaDeCarga(
                 object, posicaoAtual, posicaoFinal, minhaDirecao, direcaoFinal)
 
-        print(posicaoAtual, moverX, moverY)
+        # print(posicaoAtual, moverX, moverY)
         # posicaoAtual, minhaDirecao
-        corrigindoADirecao(object, minhaDirecao, direcaoFinal)
+        minhaDirecao = corrigindoADirecao(object, minhaDirecao, direcaoFinal)
     return posicaoAtual, minhaDirecao
 
 def desvioAreaDeCarga(object, posicaoAtual, posicaoFinal, minhaDirecao, direcaoFinal):
@@ -211,7 +212,8 @@ def casosEspeciais(object, posicaoFinal, minhaDirecao, bloco):
             # Girar Para Direita - LESTE
             # pass
     return direcaoFinal
-def entregandoCubos(object, posicaoAtual, minhaDirecao, direcaoFinal):
+
+def entregandoCubos(object, posicaoAtual, minhaDirecao):
 
     Prateleira1 = [11, 6, 1]
     Prateleira2 = [12, 7, 2]
@@ -222,73 +224,65 @@ def entregandoCubos(object, posicaoAtual, minhaDirecao, direcaoFinal):
     valGarraFrente = object.cubo_garra_frente[0]
     valGarraCostas = object.cubo_garra_costas[0]
 
-    if posicaoAtual != SUL:
+    if minhaDirecao != SUL:
         corrigindoADirecao(object,posicaoAtual,SUL)
 
-    if valGarraFrente or valGarraCostas != 0:
-        if (valGarraFrente in Prateleira1):
+    if valGarraFrente != 0 or valGarraCostas != 0: #TROCAR PARA AND !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        if valGarraFrente in Prateleira1:
             posicaoFinal = 22
-            direcaoFinal = NORTE
-            if minhaDirecao != SUL:
-                corrigindoADirecao(object, minhaDirecao, SUL)
-            IndoDeA_para_B(object, posicaoAtual, posicaoFinal,
-                           minhaDirecao, direcaoFinal)
-            object.cubo_garra_frente[0] = 0
-        elif (valGarraFrente in Prateleira2):
+        elif valGarraFrente in Prateleira2:
             posicaoFinal = 23
-            direcaoFinal = NORTE
-            IndoDeA_para_B(object, posicaoAtual, posicaoFinal,
-                           minhaDirecao, direcaoFinal)
-            object.cubo_garra_frente[0] = 0
-        elif (valGarraFrente in Prateleira3):
+        elif valGarraFrente in Prateleira3:
             posicaoFinal = 24
-            direcaoFinal = NORTE
-            IndoDeA_para_B(object, posicaoAtual, posicaoFinal,
-                           minhaDirecao, direcaoFinal)
-            object.cubo_garra_frente[0] = 0
-        elif (valGarraFrente in Prateleira4):
+        elif valGarraFrente in Prateleira4:
             posicaoFinal = 25
-            direcaoFinal = NORTE
-            IndoDeA_para_B(object, posicaoAtual, posicaoFinal,
-                           minhaDirecao, direcaoFinal)
-            object.cubo_garra_frente[0] = 0
-        elif (valGarraFrente in Prateleira5):
+        elif valGarraFrente in Prateleira5:
             posicaoFinal = 26
-            direcaoFinal = NORTE
-            IndoDeA_para_B(object, posicaoAtual, posicaoFinal,
-                           minhaDirecao, direcaoFinal)
-            object.cubo_garra_frente[0] = 0
 
-        if (valGarraCostas in Prateleira1):
+        direcaoFinal = NORTE
+        posicaoAtual, minhaDirecao = IndoDeA_para_B(object, posicaoAtual, posicaoFinal, minhaDirecao, direcaoFinal)
+
+        if valGarraFrente in [1, 2, 3, 4, 5]:
+            andar = 1
+        elif valGarraFrente in [6, 7, 8, 9, 10]:
+            andar = 2
+        elif valGarraFrente in [11, 12, 13, 14, 15]:
+            andar = 3
+        subir_garra_frente(object, andar)
+        aproximar_prateleira(object, 'frente')
+        abrir_garra_frente_cubo(object, object.cubo_garra_frente[1])
+        andar_em_metros(object, 'tras', 2, 0.2)
+        alinhar(object, 'tras')
+        object.cubo_garra_frente[0] = 0
+
+        if valGarraCostas in Prateleira1:
             posicaoFinal = 22
-            direcaoFinal = NORTE
-            IndoDeA_para_B(object, posicaoAtual, posicaoFinal,
-                           minhaDirecao, direcaoFinal)
-            object.cubo_garra_costas[0] = 0
-        elif (valGarraCostas in Prateleira2):
+        elif valGarraCostas in Prateleira2:
             posicaoFinal = 23
-            direcaoFinal = NORTE
-            IndoDeA_para_B(object, posicaoAtual, posicaoFinal,
-                           minhaDirecao, direcaoFinal)
-            object.cubo_garra_costas[0] = 0
-        elif (valGarraCostas in Prateleira3):
+        elif valGarraCostas in Prateleira3:
             posicaoFinal = 24
-            direcaoFinal = NORTE
-            IndoDeA_para_B(object, posicaoAtual, posicaoFinal,
-                           minhaDirecao, direcaoFinal)
-            object.cubo_garra_costas[0] = 0
-        elif (valGarraCostas in Prateleira4):
+        elif valGarraCostas in Prateleira4:
             posicaoFinal = 25
-            direcaoFinal = NORTE
-            IndoDeA_para_B(object, posicaoAtual, posicaoFinal,
-                           minhaDirecao, direcaoFinal)
-            object.cubo_garra_costas[0] = 0
-        elif (valGarraCostas in Prateleira5):
+        elif valGarraCostas in Prateleira5:
             posicaoFinal = 26
-            direcaoFinal = NORTE
-            IndoDeA_para_B(object, posicaoAtual, posicaoFinal,
-                           minhaDirecao, direcaoFinal)
-            object.cubo_garra_costas[0] = 0
+
+        direcaoFinal = SUL
+        posicaoAtual, minhaDirecao = IndoDeA_para_B(object, posicaoAtual, posicaoFinal, minhaDirecao, direcaoFinal)
+
+        if valGarraCostas in [1, 2, 3, 4, 5]:
+            andar = 1
+        elif valGarraCostas in [6, 7, 8, 9, 10]:
+            andar = 2
+        elif valGarraCostas in [11, 12, 13, 14, 15]:
+            andar = 3
+        subir_garra_costas(object, andar)
+        aproximar_prateleira(object, 'costas')
+        abrir_garra_costas_cubo(object, object.cubo_garra_costas[1])
+        andar_em_metros(object, 'frente', 2, 0.2)
+        alinhar(object, 'frente')
+        object.cubo_garra_costas[0] = 0
+
+        return posicaoAtual, minhaDirecao
 
     # print(valGarraFrente, valGarraCostas)
 
