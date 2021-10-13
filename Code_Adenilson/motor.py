@@ -113,6 +113,7 @@ def andar_em_metros(object, d, v, m): #anda em todos os sentidos dependendo da d
     stop(object)
 
 def alinharLateral(object, d):#alinha lateral esquerda e direita
+    
     velocidade = 5
     if d == 'direita':
         valSensorEsquerdo = 'esquerdaLateral1'
@@ -139,6 +140,7 @@ def alinharLateral(object, d):#alinha lateral esquerda e direita
             andar_livre(object, d, velocidade)
     print(velocidade)
     flag = 0
+    iniTime = time()
     while True:
 
         corE = Ler_Cor(object, valSensorEsquerdo)
@@ -162,6 +164,9 @@ def alinharLateral(object, d):#alinha lateral esquerda e direita
             flag = 1
         # else:
             # andar_livre(object, d, 2)
+
+        if(time() - iniTime > 3):
+            break
     stop(object)
 
 def alinharComLateralFT(object, d, canto): #alinha frente e costas.
@@ -188,6 +193,7 @@ def alinharComLateralFT(object, d, canto): #alinha frente e costas.
             else:
                 move_frente(object, 2.5)
     flag = 0
+    iniTime = time()
     while True:
 
         corE = Ler_Cor(object, valSensorEsquerdo)
@@ -211,6 +217,8 @@ def alinharComLateralFT(object, d, canto): #alinha frente e costas.
             flag = 1
         # else:
         # move_frente(object, 3)
+        if(time() - iniTime > 3):
+            break
     stop(object)
     return get_angle_that_makes_sense(object)
 
@@ -244,7 +252,7 @@ def alinhar(object, d): #alinha frente e costas.
             else:
                 move_frente(object, velocidade)
     print(velocidade)
-    
+    iniTime = time()
     flag = 0
     while True:
 
@@ -267,6 +275,9 @@ def alinhar(object, d): #alinha frente e costas.
             # print('cor direita PRETA')
             giro_livre(object, 1, 1.3)
             flag = 1
+
+        if(time() - iniTime > 3):
+            break
         # else:
         # move_frente(object, 3)
     stop(object)
