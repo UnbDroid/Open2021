@@ -179,6 +179,7 @@ if clientID != -1:
         #time.sleep(3)
         # print('nao sai')
         andar_em_metros(adeni,'frente' , 2, 0.05)
+        andar_em_metros(adeni, lado, 2, 0.04) #LINHA NOVA
         return matrix0, currentPosition, myDirection
 
     def fourthAreaCubes(currentPosition, myDirection, order):
@@ -232,6 +233,7 @@ if clientID != -1:
         matrix1 = visionAlgo.resolveVision(adeni,1) #MODIFICAR MATRIZ
 
         andar_em_metros(adeni,'frente', 2, 0.08)
+        andar_em_metros(adeni, lado, 2, 0.04) #LINHA NOVA
         matrix1 = invertMatrix(matrix1)
         return matrix1, currentPosition, myDirection
 
@@ -342,6 +344,8 @@ if clientID != -1:
             bloco = melhorbloco(posicao,matrix)
             print('melhor bloco frente: ', bloco)
             local = trajeto(bloco)
+            print('local:', local)
+            print('posicao atual:', currentPosition)
             currentPosition,minhaDirecao = IndoDeA_para_B(adeni,currentPosition,local,firstSq.getAngInicial(adeni), SUL)
 
             minhaDirecao = casosEspeciais(adeni,currentPosition,minhaDirecao,bloco)
