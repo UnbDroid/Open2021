@@ -110,9 +110,7 @@ def girar_90_graus(object, sentido):
     # sentido = 1 , anti horario, esquerda
     # sentido =-1 , horario, direita
 
-    velocidade = 2  # se velocidade = 5, passo = 3.4
-    passo = 1.5
-
+    velocidade = 5  # se velocidade = 5, passo = 3.4
     angulo_inicial = get_angle_that_makes_sense(object)
     """if angulo_inicial >0:
         angulo_inicial-=4

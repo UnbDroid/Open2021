@@ -113,6 +113,7 @@ def andar_em_metros(object, d, v, m): #anda em todos os sentidos dependendo da d
     stop(object)
 
 def alinharLateral(object, d):#alinha lateral esquerda e direita
+    velocidade = 5
     if d == 'direita':
         valSensorEsquerdo = 'esquerdaLateral1'
         valSensorDireito = 'direitaLateral1'
@@ -123,6 +124,9 @@ def alinharLateral(object, d):#alinha lateral esquerda e direita
         d = -1
 
     while True:
+        if velocidade>=2:
+            velocidade-=0.0005
+        
         esquerda = Ler_Cor(object, valSensorEsquerdo)
         direita = Ler_Cor(object, valSensorDireito)
         if esquerda == 'PRETO' or direita == 'PRETO':
@@ -130,10 +134,10 @@ def alinharLateral(object, d):#alinha lateral esquerda e direita
             stop(object)
             # print('dei um break')
             break
-
         else:
             # print('to andando')
-            andar_livre(object, d, 3)
+            andar_livre(object, d, velocidade)
+    print(velocidade)
     flag = 0
     while True:
 
@@ -213,6 +217,7 @@ def alinharComLateralFT(object, d, canto): #alinha frente e costas.
 
 
 def alinhar(object, d): #alinha frente e costas.
+    velocidade = 5
     if d == 'frente':
         valSensorEsquerdo = 'esquerda'
         valSensorDireito = 'direita'
@@ -221,8 +226,11 @@ def alinhar(object, d): #alinha frente e costas.
         valSensorDireito = 'direitacosta'
 
     while True:
+        if velocidade>=2:
+            velocidade-=0.0005
         esquerda = Ler_Cor(object, valSensorEsquerdo)
         direita = Ler_Cor(object, valSensorDireito)
+    
         if esquerda == 'PRETO' or direita == 'PRETO':
             # print('quebrei')
             # print('dei um break2')
@@ -232,9 +240,11 @@ def alinhar(object, d): #alinha frente e costas.
         else:
             # print('to andando')
             if d == 'tras':
-                move_tras(object, 2)
+                move_tras(object, velocidade)
             else:
-                move_frente(object, 2)
+                move_frente(object, velocidade)
+    print(velocidade)
+    
     flag = 0
     while True:
 
@@ -283,17 +293,17 @@ def moverPorQuadrado(object, d): #move frente ou trás dependendo da direção
     andar_em_metros(object, d, 6, 0.16)
     alinhar(object, d)
     if d == 'tras':
-        andar_em_metros(object, 'frente', 2, 0.04)
+        andar_em_metros(object, 'frente', 2, 0.02)
     elif d == 'frente':
-        andar_em_metros(object, 'tras', 2, 0.04)
+        andar_em_metros(object, 'tras', 2, 0.02)
 
 def moverLadoPorQuadrado(object, d): #move direita ou esquerda dependendo da direção
-    andar_em_metros(object, d, 3, 0.16)
+    andar_em_metros(object, d, 5, 0.16)
     alinharLateral(object, d)
     if d == 'direita':
-        andar_em_metros(object, 'esquerda', 2, 0.04)
+        andar_em_metros(object, 'esquerda', 2, 0.02)
     elif d == 'esquerda':
-        andar_em_metros(object, 'direita', 2, 0.04)
+        andar_em_metros(object, 'direita', 2, 0.02)
 
 def TurnInSquare(object, angle):  #gira no centro do quadrado e vai para ponta
     # print(angle)
