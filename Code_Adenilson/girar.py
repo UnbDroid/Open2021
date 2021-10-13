@@ -10,14 +10,10 @@ import sim
 
 def stop(object):
     sim.simxPauseCommunication(object.clientID, True)
-    print(sim.simxSetJointTargetVelocity(
-        object.clientID, object.omniWheel_direita_frente, 0, sim.simx_opmode_oneshot))
-    sim.simxSetJointTargetVelocity(
-        object.clientID, object.omniWheel_direita_atras, 0, sim.simx_opmode_oneshot)
-    sim.simxSetJointTargetVelocity(
-        object.clientID, object.omniWheel_esquerda_frente, 0, sim.simx_opmode_oneshot)
-    sim.simxSetJointTargetVelocity(
-        object.clientID, object.omniWheel_esquerda_atras, 0, sim.simx_opmode_oneshot)
+    sim.simxSetJointTargetVelocity(object.clientID, object.omniWheel_direita_frente, 0, sim.simx_opmode_oneshot)
+    sim.simxSetJointTargetVelocity(object.clientID, object.omniWheel_direita_atras, 0, sim.simx_opmode_oneshot)
+    sim.simxSetJointTargetVelocity(object.clientID, object.omniWheel_esquerda_frente, 0, sim.simx_opmode_oneshot)
+    sim.simxSetJointTargetVelocity(object.clientID, object.omniWheel_esquerda_atras, 0, sim.simx_opmode_oneshot)
     sim.simxPauseCommunication(object.clientID, False)
     time.sleep(0.5)
 
