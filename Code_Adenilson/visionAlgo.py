@@ -367,10 +367,10 @@ def isolateFace(_src, _img, _res, _op):
 		img = cv2.erode(img,kernel,iterations = 3)
 		img = cv2.dilate(img,kernel,iterations = 2)
 	else:
-		kernel = np.ones((7,7),dtype=np.uint8)
+		kernel = np.ones((6,6),dtype=np.uint8)
 		img = cv2.dilate(img,kernel,iterations = 1)
 		img = cv2.erode(img,kernel,iterations = 1)
-		kernel = np.ones((5,5),dtype=np.uint8)
+		kernel = np.ones((4,4),dtype=np.uint8)
 		img = cv2.erode(img,kernel,iterations = 1)
 		img = cv2.dilate(img,kernel,iterations = 1)
 
@@ -459,9 +459,9 @@ def getNumber(object):
 	img = basicFilter(src, 1)
 	isolImg, nres = isolateFace(frame.copy(), img, resol, 0)
 	# print("nres", nres)
-	cv2.imwrite('./imgs/7new.png', isolImg)
 	# cv2.imshow('isolImg number', isolImg)
 	# cv2.waitKey(0)
+	cv2.imwrite('./imgs/7new.png', isolImg)
 
 	if(nres[0] < 90 or nres[1] < 90):
 		isolImg, nres = isolateFace(frame.copy(), img, resol, 2)

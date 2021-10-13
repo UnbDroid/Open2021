@@ -179,7 +179,7 @@ if clientID != -1:
         #time.sleep(3)
         # print('nao sai')
         andar_em_metros(adeni,'frente' , 2, 0.05)
-        andar_em_metros(adeni, lado, 2, 0.04) #LINHA NOVA
+        andar_em_metros(adeni, lado, 2, 0.03) #LINHA NOVA
         return matrix0, currentPosition, myDirection
 
     def fourthAreaCubes(currentPosition, myDirection, order):
@@ -233,7 +233,7 @@ if clientID != -1:
         matrix1 = visionAlgo.resolveVision(adeni,1) #MODIFICAR MATRIZ
 
         andar_em_metros(adeni,'frente', 2, 0.08)
-        andar_em_metros(adeni, lado, 2, 0.04) #LINHA NOVA
+        andar_em_metros(adeni, lado, 2, 0.03) #LINHA NOVA
         matrix1 = invertMatrix(matrix1)
         return matrix1, currentPosition, myDirection
 
@@ -304,7 +304,7 @@ if clientID != -1:
         #print(direc, 'DIREÇÃO VIRADO')
         initialDirection = corrigindoADirecao(adeni,direc,SUL)
         alinhar(adeni, 'frente')
-        andar_em_metros(adeni, 'tras', 2, 0.06)
+        andar_em_metros(adeni, 'tras', 2, 0.08)
         iniY, iniX = firstSq.identifyFirstPos(adeni)
         initialPosition = [iniY,iniX]
         initialDirection

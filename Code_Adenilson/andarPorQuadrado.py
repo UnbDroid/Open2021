@@ -160,7 +160,7 @@ def desvioAreaDeCarga(object, posicaoAtual, posicaoFinal, minhaDirecao, direcaoF
         destino = posicaoAtual+10
 
     posicaoAtual, minhaDirecao = IndoDeA_para_B(
-        object, posicaoAtual, destino, minhaDirecao, direcaoFinal)
+        object, posicaoAtual, destino, minhaDirecao, minhaDirecao)
     return posicaoAtual, minhaDirecao
 
 def naoLocalDeCarga(object, posicaoAtual, movement, axis):
@@ -252,6 +252,7 @@ def entregandoCubos(object, posicaoAtual, minhaDirecao):
         aproximar_prateleira(object, 'frente')
         abrir_garra_frente_cubo(object, object.cubo_garra_frente[1])
         andar_em_metros(object, 'tras', 2, 0.2)
+        subir_garra_frente(object,2)
 
         sim.simxPauseCommunication(object.clientID, True)
         sim.simxSetJointTargetPosition(object.clientID, object.pa_direita1, 0.002, sim.simx_opmode_oneshot)
@@ -286,6 +287,7 @@ def entregandoCubos(object, posicaoAtual, minhaDirecao):
         aproximar_prateleira(object, 'costas')
         abrir_garra_costas_cubo(object, object.cubo_garra_costas[1])
         andar_em_metros(object, 'frente', 2, 0.2)
+        subir_garra_costas(object,2)
 
         sim.simxPauseCommunication(object.clientID, True)
         sim.simxSetJointTargetPosition(object.clientID, object.pa_direita2, 0.002, sim.simx_opmode_oneshot)
