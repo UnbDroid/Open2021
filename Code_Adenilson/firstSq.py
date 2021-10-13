@@ -106,7 +106,7 @@ def findUseful(_src, _img):
 				foundColors = np.append(foundColors, [_src[cy][cx]], axis=0)
 				cv2.drawContours(_src, k, -1, (255, 0, 255), 3)
 			else:
-				print(perimeter)
+				# print(perimeter)
 				# print("A")
 				cv2.drawContours(errorim, cnt, -1, (255, 255, 0), 3)
 		else:
@@ -273,7 +273,7 @@ def getX(_colorSet, _edge):
 
 def getY(_center, _res):
 	percent = _center[0] / _res[0]
-	print(percent)
+	# print(percent)
 	if(percent > 0.7):  # 0.72
 		return 5
 	elif(percent > 0.6):  # 0.64

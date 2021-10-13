@@ -138,7 +138,7 @@ def IndoDeA_para_B(object, posicaoAtual,  posicaoFinal, minhaDirecao, direcaoFin
 
         # print(posicaoAtual, moverX, moverY)
         # posicaoAtual, minhaDirecao
-        minhaDirecao = corrigindoADirecao(object, minhaDirecao, direcaoFinal)
+    minhaDirecao = corrigindoADirecao(object, minhaDirecao, direcaoFinal)
     return posicaoAtual, minhaDirecao
 
 def desvioAreaDeCarga(object, posicaoAtual, posicaoFinal, minhaDirecao, direcaoFinal):
@@ -175,9 +175,9 @@ def naoLocalDeCarga(object, posicaoAtual, movement, axis):
             locaisDeCarga = [31, 41, 34, 44]
         if(movement < 0):  # Quer ir pra direita (OESTE)
             locaisDeCarga = [34, 44, 37, 47]
-    if(axis == axisX):
-        locaisDeCarga = [11, 12, 13, 14, 15, 16, 17]
     if(posicaoAtual in locaisDeCarga):
+        return False
+    if(posicaoAtual in [11, 12, 13, 14, 15, 16, 17] and axis == axisX):
         return False
     return True
 
@@ -252,6 +252,13 @@ def entregandoCubos(object, posicaoAtual, minhaDirecao):
         aproximar_prateleira(object, 'frente')
         abrir_garra_frente_cubo(object, object.cubo_garra_frente[1])
         andar_em_metros(object, 'tras', 2, 0.2)
+
+        sim.simxPauseCommunication(object.clientID, True)
+        sim.simxSetJointTargetPosition(object.clientID, object.pa_direita1, 0.002, sim.simx_opmode_oneshot)
+        sim.simxSetJointTargetPosition(object.clientID, object.pa_esquerda1, 0.002, sim.simx_opmode_oneshot)
+        sim.simxPauseCommunication(object.clientID, False)
+        time.sleep(1)
+
         alinhar(object, 'tras')
         object.cubo_garra_frente[0] = 0
 
@@ -279,6 +286,13 @@ def entregandoCubos(object, posicaoAtual, minhaDirecao):
         aproximar_prateleira(object, 'costas')
         abrir_garra_costas_cubo(object, object.cubo_garra_costas[1])
         andar_em_metros(object, 'frente', 2, 0.2)
+
+        sim.simxPauseCommunication(object.clientID, True)
+        sim.simxSetJointTargetPosition(object.clientID, object.pa_direita2, 0.002, sim.simx_opmode_oneshot)
+        sim.simxSetJointTargetPosition(object.clientID, object.pa_esquerda2, 0.002, sim.simx_opmode_oneshot)
+        sim.simxPauseCommunication(object.clientID, False)
+        time.sleep(1)
+
         alinhar(object, 'frente')
         object.cubo_garra_costas[0] = 0
 

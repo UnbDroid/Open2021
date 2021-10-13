@@ -280,11 +280,15 @@ def MoveForwardPosition(object, dist):
     MoveDirectionPosition(object, 8, dist)
 
 def moverPorQuadrado(object, d): #move frente ou trás dependendo da direção
-    andar_em_metros(object, d, 6, 0.20)
+    andar_em_metros(object, d, 6, 0.16)
     alinhar(object, d)
+    if d == 'tras':
+        andar_em_metros(object, 'frente', 2, 0.04)
+    elif d == 'frente':
+        andar_em_metros(object, 'tras', 2, 0.04)
 
 def moverLadoPorQuadrado(object, d): #move direita ou esquerda dependendo da direção
-    andar_em_metros(object, d, 3, 0.18)
+    andar_em_metros(object, d, 3, 0.16)
     alinharLateral(object, d)
 
 def TurnInSquare(object, angle):  #gira no centro do quadrado e vai para ponta
