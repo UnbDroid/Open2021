@@ -126,9 +126,9 @@ def alinharLateral(object, d):#alinha lateral esquerda e direita
         esquerda = Ler_Cor(object, valSensorEsquerdo)
         direita = Ler_Cor(object, valSensorDireito)
         if esquerda == 'PRETO' or direita == 'PRETO':
-            print('quebrei')
+            # print('quebrei')
             stop(object)
-            print('dei um break')
+            # print('dei um break')
             break
 
         else:
@@ -172,8 +172,8 @@ def alinharComLateralFT(object, d, canto): #alinha frente e costas.
         esquerda = Ler_Cor(object, valSensorEsquerdo)
         direita = Ler_Cor(object, valSensorDireito)
         if esquerda == 'PRETO' or direita == 'PRETO':
-            print('quebrei')
-            print('dei um break2')
+            # print('quebrei')
+            # print('dei um break2')
             stop(object)
             break
 
@@ -224,8 +224,8 @@ def alinhar(object, d): #alinha frente e costas.
         esquerda = Ler_Cor(object, valSensorEsquerdo)
         direita = Ler_Cor(object, valSensorDireito)
         if esquerda == 'PRETO' or direita == 'PRETO':
-            print('quebrei')
-            print('dei um break2')
+            # print('quebrei')
+            # print('dei um break2')
             stop(object)
             break
 
@@ -284,11 +284,11 @@ def moverPorQuadrado(object, d): #move frente ou trás dependendo da direção
     alinhar(object, d)
 
 def moverLadoPorQuadrado(object, d): #move direita ou esquerda dependendo da direção
-    andar_em_metros(object, d, 3, 0.20)
+    andar_em_metros(object, d, 3, 0.18)
     alinharLateral(object, d)
 
 def TurnInSquare(object, angle):  #gira no centro do quadrado e vai para ponta
-    print(angle)
+    # print(angle)
 
     alinhar(object, 'frente')
     MoveDirectionPosition( 2, 0.065)

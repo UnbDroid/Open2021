@@ -34,9 +34,9 @@ def melhorbloco(posicaoRobo, arrayVisao):
         
         elementomatriz = matriz[quadrante]
 
-        print('POSICAO=',posicaoRobo)
-        print('ELEMENTO=', elementomatriz)
-        print('PRATILEIRA=', pratileira)
+        # print('POSICAO=',posicaoRobo)
+        # print('ELEMENTO=', elementomatriz)
+        # print('PRATILEIRA=', pratileira)
 
         dist = distancia(posicaoRobo, elementomatriz) + distancia(elementomatriz, pratileira)
         valor = peso//dist

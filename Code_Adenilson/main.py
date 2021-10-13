@@ -55,17 +55,17 @@ if clientID != -1:
             lastTurn = -1
             lado = 'direita'
         direction = SUL
-        print('*********1',currentPosition, destine, myDirection, direction)
+        # print('*********1',currentPosition, destine, myDirection, direction)
         #Vai para a primeira área
         currentPosition, myDirection = IndoDeA_para_B(adeni,currentPosition, destine, myDirection,direction)
 
-        print("parei")
+        # print("parei")
         #Se posiciona da melhor forma para enxergar os blocos
         #Align() #TurnTo ja alinha
         alinharLateral(adeni, lado)
         # alinhar(adeni, "tras")
         andar_em_metros(adeni,lado,2,0.14)
-        print(currentPosition)
+        # print(currentPosition)
 
 
         #while Ler_Cor(adeni, 'esquerda') == 'BRANCO' and Ler_Cor(adeni, 'direita') =='BRANCO':
@@ -95,7 +95,7 @@ if clientID != -1:
         # myDirection = turnTo(myDirection ,EAST)
         # #MoveDirectionPosition(frente, 0.020)
         # currentPosition += 1
-        print('segunda')
+        # print('segunda')
         if(order == 1):
             destine = 25
             lastTurn = 1
@@ -105,7 +105,7 @@ if clientID != -1:
             lastTurn = -1
             lado = 'direita'
         direction = SUL
-        print('*********2',currentPosition, destine, myDirection, direction)
+        # print('*********2',currentPosition, destine, myDirection, direction)
         currentPosition, myDirection = IndoDeA_para_B(adeni,currentPosition, destine, myDirection,direction)
         #Se posiciona da melhor forma para enxergar os blocos
         #Align()
@@ -114,7 +114,7 @@ if clientID != -1:
         andar_em_metros(adeni,lado,2,0.12)
         while Ler_Cor(adeni, 'esquerda') == 'BRANCO ' and Ler_Cor(adeni, 'direita' == 'BRANCO'):
             move_forward(adeni, 2)
-        print('sai do while')
+        # print('sai do while')
         # andar_em_metros(adeni,'tras' ,2, 0.1)
         alinhar(adeni, "tras")
         alinharComLateralFT(adeni, 'tras', 1)
@@ -124,7 +124,7 @@ if clientID != -1:
         return matrix1, currentPosition, myDirection
 
     def thirdAreaCubes(currentPosition, myDirection, order):
-        print('terceira')
+        # print('terceira')
         if(order == 1):
             destine = 52
             direction = LESTE
@@ -136,7 +136,7 @@ if clientID != -1:
             lastTurn = 1
             lado = 'direita'
         #Vai para a primeira área
-        print(destine)
+        # print(destine)
         currentPosition, myDirection = IndoDeA_para_B(adeni,currentPosition, destine, myDirection,SUL)
         #Se posiciona da melhor forma para enxergar os blocos
 
@@ -168,19 +168,19 @@ if clientID != -1:
         #      move_tras(adeni, 2)
 
         #andar_em_metros(adeni,'tras',2, 0.085)
-        print('ta aqui o erro')
+        # print('ta aqui o erro')
         #giroRSEA(adeni)
 
         matrix0 = visionAlgo.resolveVision(adeni,0) ####ALTERAR A MATRIZ
         matrix0 = invertMatrix(matrix0)
         #andar_em_metros(adeni, 'frente', 2, 0.04)
         #time.sleep(3)
-        print('nao sai')
+        # print('nao sai')
         andar_em_metros(adeni,'frente' , 2, 0.05)
         return matrix0, currentPosition, myDirection
 
     def fourthAreaCubes(currentPosition, myDirection, order):
-        print('quarta')
+        # print('quarta')
         #Vai para a segunda área
         # myDirection = turnTo(myDirection ,EAST)
         # #MoveDirectionPosition(frente, 0.020)
@@ -202,7 +202,7 @@ if clientID != -1:
         #     alinharLateral(adeni, lado)
         #     move_frente(adeni, 2)
         #alinhar(adeni, 'frente')
-        print(lado, 'lado')
+        # print(lado, 'lado')
         andar_em_metros(adeni, lado, 2,0.1)
         #alinhar(adeni, 'frente')
         # while Ler_Cor(adeni, 'esquerda')=='BRANCO' and Ler_Cor(adeni , 'direita')== 'BRANCO':
@@ -232,31 +232,31 @@ if clientID != -1:
         return matrix1, currentPosition, myDirection
 
     def getBlocksInformation(currentPosition, myDirection):
-        print(currentPosition)
-        print('get block information')
+        # print(currentPosition)
+        # print('get block information')
         if (currentPosition < 40): #Ta na parte de cima
             if(currentPosition % 10 <= 2):
-                print("Primeira área1")
+                # print("Primeira área1")
                 time.sleep(2)
                 matrix0, currentPosition, myDirection = firstAreaCubes(currentPosition, myDirection, 1)
                 #Vai para a segunda área
-                print("Segunda área1")
+                # print("Segunda área1")
 
                 #MoveDirectionPosition(frente, 0.020)
                 # currentPosition += 1
                 matrix1, currentPosition, myDirection = secondAreaCubes(currentPosition, myDirection, 2)
             elif(currentPosition % 10 <= 4):
-                print("Primeira área2")
+                # print("Primeira área2")
                 matrix0, currentPosition, myDirection = firstAreaCubes(currentPosition, myDirection, 1)
                 #Vai para a segunda área
-                print("Segunda área2")
+                # print("Segunda área2")
                 #MoveDirectionPosition(frente, 0.020)
                 matrix1, currentPosition, myDirection = secondAreaCubes(currentPosition, myDirection, 2)
             else:
-                print("Primeira área3")
-                print(myDirection)
+                # print("Primeira área3")
+                # print(myDirection)
                 matrix1, currentPosition, myDirection = secondAreaCubes(currentPosition, myDirection, 1)
-                print("Segunda área3")
+                # print("Segunda área3")
                 currentPosition += 1
                 matrix0, currentPosition, myDirection = firstAreaCubes(currentPosition, myDirection, 1)
         else: #Ta na parte de baixo
@@ -290,17 +290,19 @@ if clientID != -1:
         matrix = np.concatenate((matrix0, matrix1), axis=0)
         print(matrix)
         #order = gb.get_path(gb.createGraphBlocks(matrix))  #AQUI FUNCIONA COM O CODIGO SIMPLES!!!!!
-        #print(order, matrixFinal)
+        # print(order, matrixFinal)
         return currentPosition, myDirection, matrix
 
     def winOPEN():
         direc = firstSq.getAngInicial(adeni)
-        print(direc, 'DIREÇÃO VIRADO')
+        # print(direc, 'DIREÇÃO VIRADO')
         initialDirection = corrigindoADirecao(adeni,direc,SUL)
+        alinhar(adeni, 'frente')
+        andar_em_metros(adeni, 'tras', 2, 0.08)
 
         iniY, iniX = firstSq.identifyFirstPos(adeni)
         initialPosition = [iniY,iniX]
-        print(initialPosition)
+        # print(initialPosition)
 
         if(initialPosition[1] == -1):
             moverPorQuadrado(adeni,'frente')
@@ -308,7 +310,7 @@ if clientID != -1:
             andar_em_metros(adeni,'frente', 5, 0.065)
 
         initialPosition = (iniY+1)*10+(iniX+1)
-        print(initialPosition, 'win OPEN')
+        # print(initialPosition, 'win OPEN')
         # time.sleep(50)
         # VERIFICAR ISSO!!!!!!!!!!!!!! PRA PEGAR DIREÇÃO INICIAL
 
@@ -330,12 +332,11 @@ if clientID != -1:
         bloco = melhorbloco(posicao,matrix)
         print(bloco,'MELHOR BLOCO É ESSE BRABO AQUI')
         local = trajeto(bloco)
-        print(local,'MELHOR Trajeto É ESSE BRABO AQUI')
+        # print(local,'MELHOR Trajeto É ESSE BRABO AQUI')
         posicaoFinal,minhaDirecao = IndoDeA_para_B(adeni,currentPosition,local,firstSq.getAngInicial(adeni), SUL)
         minhaDirecao = casosEspeciais(adeni,posicaoFinal,minhaDirecao,bloco)
         alinhar_e_pegar_cubo(adeni,bloco)
-        entregandoCubos(adeni,posicaoFinal,minhaDirecao,SUL)
-        aproximar_prateleira(adeni,'frente')
+        entregandoCubos(adeni,posicaoFinal,minhaDirecao)
 
 
         #time.sleep(1000)

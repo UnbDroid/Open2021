@@ -213,7 +213,7 @@ def basicFilter(_src, _op, _correction=0):
 
 def compareCenters(_cx, _cy, _centers):
 	"Compara os valores [cy,cx] com o vetor 2d conhecido"
-	print("Entrei compare Centers")
+	# print("Entrei compare Centers")
 	if(len(_centers) == 0):
 		return 1
 	for coord in _centers:
@@ -252,7 +252,7 @@ def findUseful(_src, _img, _factor):
 		cy = int(m['m01']/m['m00'])
 
 		if(compareCenters(cx, cy, foundCenters) == 1):
-			print("Compare centers = 1")
+			# print("Compare centers = 1")
 			if(len(approx) == 4 and (cv2.contourArea(cnt) > 200) and (cv2.contourArea(cnt) < 2900)):
 				k = np.array([[[cx,cy]]])
 				for padd in range(5-(len(approx))):
@@ -263,12 +263,12 @@ def findUseful(_src, _img, _factor):
 				foundColors = np.append(foundColors, [_src[cy][cx]], axis=0)
 				cv2.drawContours(_src, k, -1, (255,0,255), 3)
 			elif(len(approx) == 4):
-				print(cv2.contourArea(cnt))
+				# print(cv2.contourArea(cnt))
 				cv2.drawContours(errorim, cnt, -1, (0,255,255), 3)
 			else:
 				cv2.drawContours(errorim, cnt, -1, (255,255,0), 3)
 		else:
-			print("Compare centers = 0")
+			# print("Compare centers = 0")
 			cv2.drawContours(errorim, cnt, -1, (255,0,255), 3)
 
 	cv2.imwrite('./imgs/8centers.png', _src)
@@ -277,8 +277,8 @@ def findUseful(_src, _img, _factor):
 	# cv2.waitKey(0)
 	# cv2.imshow('find useful errorim', errorim)
 	# cv2.waitKey(0)
-	print(foundCenters)
-	print(foundColors)
+	# print(foundCenters)
+	# print(foundColors)
 	return foundShapes, foundColors, foundCenters
 
 def rgbToLetter(_colors):
@@ -432,7 +432,7 @@ def resolveVision(object, _sigValue):
 	img = basicFilter(src, 0)
 	foundShape, foundColors, foundCenters = findUseful(src, img, 0.09)
 	foundColors = rgbToLetter(foundColors)
-	print(foundColors)
+	# print(foundColors)
 	foundCubes = createArray(foundCenters, foundColors, resol[0], resol[1])
 
 	j=0
@@ -458,15 +458,15 @@ def getNumber(object):
 	src = frame.copy()
 	img = basicFilter(src, 1)
 	isolImg, nres = isolateFace(frame.copy(), img, resol, 0)
-	print("nres", nres)
+	# print("nres", nres)
 	cv2.imwrite('./imgs/7new.png', isolImg)
 	# cv2.imshow('isolImg number', isolImg)
 	# cv2.waitKey(0)
 
 	if(nres[0] < 90 or nres[1] < 90):
 		isolImg, nres = isolateFace(frame.copy(), img, resol, 2)
-		print("nres2", nres)
-		print(isolImg)
+		# print("nres2", nres)
+		# print(isolImg)
 		cv2.imwrite('./imgs/7new.png', isolImg)
 		# cv2.imshow('isolImg number2', isolImg)
 		# cv2.waitKey(0)
@@ -480,7 +480,7 @@ def getNumber(object):
 
 		if not(int(text) in range(0,16)):
 			# Não está no intervalo permitido de números [0, 15]
-			print("TO NO IF ERRADO")
+			# print("TO NO IF ERRADO")
 			return ("empty", [-1, -1])
 			
 

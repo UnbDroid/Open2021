@@ -127,8 +127,6 @@ def alinhar_e_pegar_cubo(object, bloco_escolhido):
         numero_bloco = bloco_escolhido[0]
 
     print(numero_bloco)
-    #TIRAR OS COMENTÁRIOS DAS LINHAS ACIMA QUANDO FOR TESTAR A LEITURA DOS NÚMEROS!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    # numero_bloco = bloco_escolhido[0] #teste, depois tem que tirar essa linha e tirar os comentários das linhas acima!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
     if numero_bloco == 0: #caso seja o cubo 0, sinaliza só subindo e descendo a garra da frente
         garra.subir_garra_frente(object, 1)
