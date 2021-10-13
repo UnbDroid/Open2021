@@ -180,9 +180,9 @@ def alinharComLateralFT(object, d, canto): #alinha frente e costas.
         else:
             # print('to andando')
             if d == 'tras':
-                move_tras(object, 2)
+                move_tras(object, 2.5)
             else:
-                move_frente(object, 2)
+                move_frente(object, 2.5)
     flag = 0
     while True:
 
@@ -290,6 +290,10 @@ def moverPorQuadrado(object, d): #move frente ou trás dependendo da direção
 def moverLadoPorQuadrado(object, d): #move direita ou esquerda dependendo da direção
     andar_em_metros(object, d, 3, 0.16)
     alinharLateral(object, d)
+    if d == 'direita':
+        andar_em_metros(object, 'esquerda', 2, 0.04)
+    elif d == 'esquerda':
+        andar_em_metros(object, 'direita', 2, 0.04)
 
 def TurnInSquare(object, angle):  #gira no centro do quadrado e vai para ponta
     # print(angle)

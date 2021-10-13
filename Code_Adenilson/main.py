@@ -152,11 +152,13 @@ if clientID != -1:
         # while Ler_Cor(adeni, 'esquerda')=='BRANCO' and Ler_Cor(adeni , 'direita')== 'BRANCO':
         #     move_frente(adeni, 2)
         #andar_em_metros(adeni, 'frente', 2,0.08)
-        #alinhar(adeni , 'frente')
-        alinharComLateralFT(adeni, 'frente', -1)
+        alinhar(adeni , 'frente')
+        #alinharComLateralFT(adeni, 'frente', -1)
         andar_em_metros(adeni, 'tras', 2,0.08)
         alinhar(adeni, 'tras')
-        alinharComLateralFT(adeni, 'tras', -1)
+        alinharComLateralFT(adeni, 'tras', 1)
+        #alinharComLateralFT(adeni, 'tras', -1)
+
         andar_em_metros(adeni, 'frente', 2,0.035)
 
         #Align() #TurnTo ja alinha
@@ -209,11 +211,13 @@ if clientID != -1:
         #     move_frente(adeni, 2)
         giroRSEA(adeni, 1)
         #andar_em_metros(adeni, 'frente', 2,0.08)
-        #alinhar(adeni , 'frente')
-        alinharComLateralFT(adeni, 'frente', -1)
+        alinhar(adeni , 'frente')
+        #alinharComLateralFT(adeni, 'frente', -1)
         andar_em_metros(adeni, 'tras', 2,0.08)
         alinhar(adeni, 'tras')
-        alinharComLateralFT(adeni, 'tras', -1)
+        alinharComLateralFT(adeni, 'tras', 1)
+        #alinharComLateralFT(adeni, 'tras', -1)
+
         andar_em_metros(adeni, 'frente', 2,0.035)
 
         #giroRSEA(adeni)
@@ -301,6 +305,7 @@ if clientID != -1:
         andar_em_metros(adeni, 'tras', 2, 0.06)
         iniY, iniX = firstSq.identifyFirstPos(adeni)
         initialPosition = [iniY,iniX]
+        initialDirection
         # print(initialPosition)
         if(initialPosition[1] == -1):
             moverPorQuadrado(adeni,'frente')
