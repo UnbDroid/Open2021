@@ -228,46 +228,6 @@ def entregandoCubos(object, posicaoAtual, minhaDirecao):
         corrigindoADirecao(object,posicaoAtual,SUL)
 
     if valGarraFrente != 0 and valGarraCostas != 0: #TROCAR PARA AND !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        posicaoFinal = posicaoAtual #precaução para caso falhe na visão
-        if valGarraFrente in Prateleira1:
-            posicaoFinal = 22
-        elif valGarraFrente in Prateleira2:
-            posicaoFinal = 23
-        elif valGarraFrente in Prateleira3:
-            posicaoFinal = 24
-        elif valGarraFrente in Prateleira4:
-            posicaoFinal = 25
-        elif valGarraFrente in Prateleira5:
-            posicaoFinal = 26
-
-        direcaoFinal = NORTE
-        posicaoAtual, minhaDirecao = IndoDeA_para_B(object, posicaoAtual, posicaoFinal, minhaDirecao, direcaoFinal)
-
-        andar = 2 #precaução para caso falhe na visão
-        if valGarraFrente in [1, 2, 3, 4, 5]:
-            andar = 1
-        elif valGarraFrente in [6, 7, 8, 9, 10]:
-            andar = 2
-        elif valGarraFrente in [11, 12, 13, 14, 15]:
-            andar = 3
-        subir_garra_frente(object, andar)
-        aproximar_prateleira(object, 'frente')
-        abrir_garra_frente_cubo(object, object.cubo_garra_frente[1])
-        object.cubo_garra_frente = [0, 'handle']
-        andar_em_metros(object, 'tras', 2, 0.2)
-        subir_garra_frente(object,2)
-
-        sim.simxPauseCommunication(object.clientID, True)
-        sim.simxSetJointTargetPosition(object.clientID, object.pa_direita1, 0.002, sim.simx_opmode_oneshot)
-        sim.simxSetJointTargetPosition(object.clientID, object.pa_esquerda1, 0.002, sim.simx_opmode_oneshot)
-        sim.simxPauseCommunication(object.clientID, False)
-        time.sleep(1)
-
-        alinhar(object, 'tras')
-        object.cubo_garra_frente[0] = 0
-
-        if valGarraCostas == -1:
-            return posicaoAtual, minhaDirecao
 
         posicaoFinal = posicaoAtual #precaução para caso falhe na visão
         if valGarraCostas in Prateleira1:
@@ -299,13 +259,58 @@ def entregandoCubos(object, posicaoAtual, minhaDirecao):
         subir_garra_costas(object,2)
 
         sim.simxPauseCommunication(object.clientID, True)
-        sim.simxSetJointTargetPosition(object.clientID, object.pa_direita2, 0.002, sim.simx_opmode_oneshot)
-        sim.simxSetJointTargetPosition(object.clientID, object.pa_esquerda2, 0.002, sim.simx_opmode_oneshot)
+        sim.simxSetJointTargetPosition(object.clientID, object.pa_direita2, 0.001, sim.simx_opmode_oneshot)
+        sim.simxSetJointTargetPosition(object.clientID, object.pa_esquerda2, 0.001, sim.simx_opmode_oneshot)
         sim.simxPauseCommunication(object.clientID, False)
         time.sleep(1)
 
         alinhar(object, 'frente')
+        andar_em_metros(object,'tras', 2, 0.1)
         object.cubo_garra_costas[0] = 0
+
+        posicaoFinal = posicaoAtual #precaução para caso falhe na visão
+
+        if valGarraFrente == -1:
+            return posicaoAtual, minhaDirecao
+
+        if valGarraFrente in Prateleira1:
+            posicaoFinal = 22
+        elif valGarraFrente in Prateleira2:
+            posicaoFinal = 23
+        elif valGarraFrente in Prateleira3:
+            posicaoFinal = 24
+        elif valGarraFrente in Prateleira4:
+            posicaoFinal = 25
+        elif valGarraFrente in Prateleira5:
+            posicaoFinal = 26
+
+        direcaoFinal = NORTE
+        posicaoAtual, minhaDirecao = IndoDeA_para_B(object, posicaoAtual, posicaoFinal, minhaDirecao, direcaoFinal)
+
+        andar = 2 #precaução para caso falhe na visão
+        if valGarraFrente in [1, 2, 3, 4, 5]:
+            andar = 1
+        elif valGarraFrente in [6, 7, 8, 9, 10]:
+            andar = 2
+        elif valGarraFrente in [11, 12, 13, 14, 15]:
+            andar = 3
+        subir_garra_frente(object, andar)
+        aproximar_prateleira(object, 'frente')
+        abrir_garra_frente_cubo(object, object.cubo_garra_frente[1])
+        object.cubo_garra_frente = [0, 'handle']
+        andar_em_metros(object, 'tras', 2, 0.2)
+        subir_garra_frente(object,2)
+
+        sim.simxPauseCommunication(object.clientID, True)
+        sim.simxSetJointTargetPosition(object.clientID, object.pa_direita1, 0.001, sim.simx_opmode_oneshot)
+        sim.simxSetJointTargetPosition(object.clientID, object.pa_esquerda1, 0.001, sim.simx_opmode_oneshot)
+        sim.simxPauseCommunication(object.clientID, False)
+        time.sleep(1)
+
+        alinhar(object, 'tras')
+        andar_em_metros(object,'frente', 2, 0.1)
+        object.cubo_garra_frente[0] = 0
+
 
         return posicaoAtual, minhaDirecao
     return posicaoAtual, minhaDirecao

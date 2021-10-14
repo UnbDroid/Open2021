@@ -18,7 +18,7 @@ def alinhar_e_pegar_cubo(object, bloco_escolhido):
     bloco_escolhido vem no formato ['Tipo do bloco', area do bloco, sub area do bloco]
     'Tipo do bloco' é um caractere, onde W = branco(numeros), K = preto(codigo de barras), 0 = vazio, o resto é colorido
     '''
-    
+
     #Escolhe para qual lado do quadrado o robo tem que ir para se alinhar com o cubo
     if bloco_escolhido[1] == 0:
         if bloco_escolhido[2] == 0:
@@ -29,7 +29,7 @@ def alinhar_e_pegar_cubo(object, bloco_escolhido):
             posicao_cubo = 'direita'
         elif bloco_escolhido[2] == 3: #bloco escondido
             posicao_cubo = 'esquerda'
-        
+
     elif bloco_escolhido[1] == 1:
         if bloco_escolhido[2] == 0:
             posicao_cubo = 'direita'
@@ -89,7 +89,7 @@ def alinhar_e_pegar_cubo(object, bloco_escolhido):
             posicao_cubo = 'esquerda'
         elif bloco_escolhido[2] == 3:
             posicao_cubo = 'direita'
-            
+
     elif bloco_escolhido[1] == 7:
         if bloco_escolhido[2] == 0: #bloco escondido
             posicao_cubo = 'esquerda'
@@ -113,7 +113,7 @@ def alinhar_e_pegar_cubo(object, bloco_escolhido):
     if posicao_cubo == 'esquerda':
         motor.andar_em_metros(object, 'esquerda', 1, 0.02)
 
-    
+
 
     #Ve o valor númerico(ou cor) do bloco a ser pego
     if bloco_escolhido[0] == 'W': #bloco branco de numeros
@@ -160,7 +160,7 @@ def alinhar_e_pegar_cubo(object, bloco_escolhido):
                 if dist_dir > (dist_dir_inicial + 0.06):
                     motor.stop(object)
                     break
-    
+
         #Andar para frente e pegar o cubo
         dist_esq_inicial = sensor.le_distancia_ir(object, object.ir_frente_esquerda)
         dist_dir_inicial = sensor.le_distancia_ir(object, object.ir_frente_direita)
@@ -174,11 +174,11 @@ def alinhar_e_pegar_cubo(object, bloco_escolhido):
         object.cubo_garra_frente[1] = cubo #define a handle do cubo que esta garra está carregando
 
         if posicao_cubo == 'direita':
-            motor.andar_em_metros(object, 'esquerda', velocidade, 0.01)
+            motor.andar_em_metros(object, 'esquerda', velocidade, 0.03)
         if posicao_cubo == 'esquerda':
-            motor.andar_em_metros(object, 'direita', velocidade, 0.01)
+            motor.andar_em_metros(object, 'direita', velocidade, 0.03)
 
-                    
+
     elif object.cubo_garra_costas[0] == 0: #garra de trás está vazia
         girar.girar_180_graus(object)
         #Realinhar após o giro para garantir que não está torto
@@ -189,7 +189,7 @@ def alinhar_e_pegar_cubo(object, bloco_escolhido):
             posicao_cubo = 'esquerda'#como o robo girou, direita troca com a esquerda
             motor.andar_em_metros(object, 'direita', 2, 0.05) #garantir que o robo vai estar dentro do quadrado certo para alinhar depois
         motor.alinharLateral(object, posicao_cubo) #alinhou
-    
+
         garra.descer_garra_costas(object)
 
         #Como o robo está de costas, quando for andar vai inverter direita e esquerda no argumento da função andar_livre
@@ -213,7 +213,7 @@ def alinhar_e_pegar_cubo(object, bloco_escolhido):
                 if dist_dir > (dist_dir_inicial + 0.06):
                     motor.stop(object)
                     break
-        
+
         #Andar para frente e pegar o cubo
         dist_esq_inicial = sensor.le_distancia_ir(object, object.ir_costas_esquerda)
         dist_dir_inicial = sensor.le_distancia_ir(object, object.ir_costas_direita)
@@ -226,6 +226,11 @@ def alinhar_e_pegar_cubo(object, bloco_escolhido):
         object.cubo_garra_costas[0] = numero_bloco #define qual o número do cubo que esta garra está carregando
         object.cubo_garra_costas[1] = cubo #define a handle do cubo que esta garra está carregando
 
+        if posicao_cubo == 'direita':
+            motor.andar_em_metros(object, 'esquerda', velocidade, 0.05)
+        if posicao_cubo == 'esquerda':
+            motor.andar_em_metros(object, 'direita', velocidade, 0.05)
+
     return 1
 
 def aproximar_prateleira(object, frente_ou_costas):
@@ -233,7 +238,7 @@ def aproximar_prateleira(object, frente_ou_costas):
         dist_esq_inicial = sensor.le_distancia_ir(object, object.ir_frente_esquerda)
         dist_dir_inicial = sensor.le_distancia_ir(object, object.ir_frente_direita)
         if dist_esq_inicial > dist_dir_inicial:
-            motor.move_frente(object, 2)
+            motor.move_frente(object, 3)
             while True:
                 dist_esq = sensor.le_distancia_ir(object, object.ir_frente_esquerda)
                 if dist_esq < 0.07:
@@ -241,7 +246,7 @@ def aproximar_prateleira(object, frente_ou_costas):
             motor.stop(object)
 
         elif dist_dir_inicial > dist_esq_inicial:
-            motor.move_frente(object, 2)
+            motor.move_frente(object, 3)
             while True:
                 dist_dir = sensor.le_distancia_ir(object, object.ir_frente_direita)
                 if dist_dir < 0.07:
@@ -252,15 +257,15 @@ def aproximar_prateleira(object, frente_ou_costas):
         dist_esq_inicial = sensor.le_distancia_ir(object, object.ir_costas_esquerda)
         dist_dir_inicial = sensor.le_distancia_ir(object, object.ir_costas_direita)
         if dist_esq_inicial > dist_dir_inicial:
-            motor.move_tras(object, 2)
+            motor.move_tras(object, 3)
             while True:
                 dist_esq = sensor.le_distancia_ir(object, object.ir_costas_esquerda)
                 if dist_esq < 0.07:
                     break
             motor.stop(object)
-            
+
         elif dist_dir_inicial > dist_esq_inicial:
-            motor.move_tras(object, 2)
+            motor.move_tras(object, 3)
             while True:
                 dist_dir = sensor.le_distancia_ir(object, object.ir_costas_direita)
                 if dist_dir < 0.07:

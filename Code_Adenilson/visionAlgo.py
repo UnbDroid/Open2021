@@ -371,8 +371,8 @@ def isolateFace(_src, _img, _res, _op):
 		img = cv2.dilate(img,kernel,iterations = 1)
 		img = cv2.erode(img,kernel,iterations = 1)
 		kernel = np.ones((5,5),dtype=np.uint8)
-		img = cv2.erode(img,kernel,iterations = 1)
-		img = cv2.dilate(img,kernel,iterations = 1)
+		img = cv2.erode(img,kernel,iterations = 2)
+		img = cv2.dilate(img,kernel,iterations = 2)
 
 	if(_op == 2):
 		img = img[int(nres[0]/4):nres[0], int(nres[1]/6):nres[1]-int(nres[1]/6)]
@@ -381,8 +381,8 @@ def isolateFace(_src, _img, _res, _op):
 	cnts, hier = cv2.findContours(edges, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
 
 	cv2.imwrite('./imgs/5face.png', img)
-	# cv2.imshow('isolateFace', img)
-	# cv2.waitKey(0)
+	cv2.imshow('isolateFace', img)
+	cv2.waitKey(0)
 
 	approx = [0]
 	while(len(approx) < 2 and factor < 5):
@@ -414,8 +414,8 @@ def isolateFace(_src, _img, _res, _op):
 		thres, img = cv2.threshold(img, 127, 255, cv2.THRESH_BINARY)
 
 	# print("isolate",[maxHei-height,maxWid-width])
-	# cv2.imshow('isolateFace', img)
-	# cv2.waitKey(0)
+	cv2.imshow('isolateFace', img)
+	cv2.waitKey(0)
 	return img, [maxHei-height,maxWid-width]
 
 def resolveVision(object, _sigValue):
@@ -482,7 +482,7 @@ def getNumber(object):
 			# Não está no intervalo permitido de números [0, 15]
 			# print("TO NO IF ERRADO")
 			return ("empty", [-1, -1])
-			
+
 
 		# op2 = compareFaces.compareNumber(isolImg, nres)
 		op2 = [-1, -1]
