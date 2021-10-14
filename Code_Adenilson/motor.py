@@ -165,8 +165,6 @@ def alinharLateral(object, d):#alinha lateral esquerda e direita
         # else:
             # andar_livre(object, d, 2)
 
-        if(time.time() - iniTime > 3):
-            break
     stop(object)
 
 def alinharComLateralFT(object, d, canto): #alinha frente e costas.
@@ -276,8 +274,6 @@ def alinhar(object, d): #alinha frente e costas.
             giro_livre(object, 1, 1.3)
             flag = 1
 
-        if(time.time() - iniTime > 3):
-            break
         # else:
         # move_frente(object, 3)
     stop(object)
