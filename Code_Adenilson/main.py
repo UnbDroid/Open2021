@@ -188,12 +188,12 @@ if clientID != -1:
         # myDirection = turnTo(myDirection ,EAST)
         # #MoveDirectionPosition(frente, 0.020)
         # currentPosition += 1
-        if(order == 2):
+        if(order == 1):
             destine = 55
             direction = LESTE
             lastTurn = -1
             lado ='esquerda'
-        if(order == 1):
+        if(order == 2):
             destine = 56
             direction = OESTE
             lastTurn = 1
@@ -279,7 +279,7 @@ if clientID != -1:
                 #myDirection = corrigindoADirecao(adeni,myDirection ,LESTE)
                 #MoveDirectionPosition(frente, 0.020)
                 currentPosition-=1
-                matrix1, currentPosition, myDirection = fourthAreaCubes(currentPosition, myDirection, 1)
+                matrix1, currentPosition, myDirection = fourthAreaCubes(currentPosition, myDirection, 2)
             else:
                 matrix1, currentPosition, myDirection = fourthAreaCubes(currentPosition, myDirection, 1)
                 #myDirection = corrigindoADirecao(adeni,myDirection ,OESTE)
