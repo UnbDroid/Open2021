@@ -113,6 +113,8 @@ def trajeto(bloco):
     inferiores = [42, 43, 45, 46]
     diminuir = [32, 42, 35, 45]
     aumentar = [33, 43, 36, 46]
+    ladosubtrair =[45, 42]
+    ladoaumentar = [43, 46]
     teste = bloco
     # aumentar = [3, 1, 5, 7]
     blocofinal = matriz[bloco[1]]
@@ -122,8 +124,13 @@ def trajeto(bloco):
     # blocofinal = int(blocofinal)
     # print('******',blocofinal)
     if blocofinal in inferiores:
-        if bloco[2] == 2 or bloco[2] == 3:
-            return blocofinal+10
+        if blocofinal in ladosubtrair and bloco[2] ==2:
+            return blocofinal-1
+        elif blocofinal in ladoaumentar and bloco[2] == 3:
+            return blocofinal+1
+        else:
+            if bloco[2] == 2 or bloco[2] == 3:
+                return blocofinal+10
     if blocofinal in superiores:
         if bloco[2] == 0 or bloco[2] == 1:
             return blocofinal-10

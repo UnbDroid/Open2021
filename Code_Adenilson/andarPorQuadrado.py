@@ -225,9 +225,10 @@ def entregandoCubos(object, posicaoAtual, minhaDirecao):
     valGarraCostas = object.cubo_garra_costas[0]
 
     if minhaDirecao != SUL:
-        corrigindoADirecao(object,posicaoAtual,SUL)
+        minhaDirecao = corrigindoADirecao(object,posicaoAtual,SUL)
 
-    if valGarraFrente != 0 or valGarraCostas != 0: #TROCAR PARA AND !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    if valGarraFrente != 0 and valGarraCostas != 0: #TROCAR PARA AND !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        posicaoFinal = posicaoAtual #precaução para caso falhe na visão
         if valGarraFrente in Prateleira1:
             posicaoFinal = 22
         elif valGarraFrente in Prateleira2:
@@ -242,6 +243,7 @@ def entregandoCubos(object, posicaoAtual, minhaDirecao):
         direcaoFinal = NORTE
         posicaoAtual, minhaDirecao = IndoDeA_para_B(object, posicaoAtual, posicaoFinal, minhaDirecao, direcaoFinal)
 
+        andar = 2 #precaução para caso falhe na visão
         if valGarraFrente in [1, 2, 3, 4, 5]:
             andar = 1
         elif valGarraFrente in [6, 7, 8, 9, 10]:
@@ -251,6 +253,7 @@ def entregandoCubos(object, posicaoAtual, minhaDirecao):
         subir_garra_frente(object, andar)
         aproximar_prateleira(object, 'frente')
         abrir_garra_frente_cubo(object, object.cubo_garra_frente[1])
+        object.cubo_garra_frente = [0, 'handle']
         andar_em_metros(object, 'tras', 2, 0.2)
         subir_garra_frente(object,2)
 
@@ -263,6 +266,10 @@ def entregandoCubos(object, posicaoAtual, minhaDirecao):
         alinhar(object, 'tras')
         object.cubo_garra_frente[0] = 0
 
+        if valGarraCostas == -1:
+            return posicaoAtual, minhaDirecao
+
+        posicaoFinal = posicaoAtual #precaução para caso falhe na visão
         if valGarraCostas in Prateleira1:
             posicaoFinal = 22
         elif valGarraCostas in Prateleira2:
@@ -277,6 +284,7 @@ def entregandoCubos(object, posicaoAtual, minhaDirecao):
         direcaoFinal = SUL
         posicaoAtual, minhaDirecao = IndoDeA_para_B(object, posicaoAtual, posicaoFinal, minhaDirecao, direcaoFinal)
 
+        andar = 2 #precaução para caso falhe na visão
         if valGarraCostas in [1, 2, 3, 4, 5]:
             andar = 1
         elif valGarraCostas in [6, 7, 8, 9, 10]:
@@ -286,6 +294,7 @@ def entregandoCubos(object, posicaoAtual, minhaDirecao):
         subir_garra_costas(object, andar)
         aproximar_prateleira(object, 'costas')
         abrir_garra_costas_cubo(object, object.cubo_garra_costas[1])
+        object.cubo_garra_costas = [0, 'handle']
         andar_em_metros(object, 'frente', 2, 0.2)
         subir_garra_costas(object,2)
 
@@ -299,6 +308,7 @@ def entregandoCubos(object, posicaoAtual, minhaDirecao):
         object.cubo_garra_costas[0] = 0
 
         return posicaoAtual, minhaDirecao
+    return posicaoAtual, minhaDirecao
 
     # print(valGarraFrente, valGarraCostas)
 
