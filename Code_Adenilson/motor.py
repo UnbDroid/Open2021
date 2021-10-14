@@ -138,7 +138,7 @@ def alinharLateral(object, d):#alinha lateral esquerda e direita
         else:
             # print('to andando')
             andar_livre(object, d, velocidade)
-    print(velocidade)
+    # print(velocidade)
     flag = 0
     iniTime = time.time()
     while True:
@@ -251,7 +251,7 @@ def alinhar(object, d): #alinha frente e costas.
                 move_tras(object, velocidade)
             else:
                 move_frente(object, velocidade)
-    print(velocidade)
+    # print(velocidade)
     iniTime = time.time()
     flag = 0
     while True:

@@ -461,7 +461,7 @@ def getNumber(object):
 	# print("nres", nres)
 	# cv2.imshow('isolImg number', isolImg)
 	# cv2.waitKey(0)
-	cv2.imwrite('./imgs/7new.png', isolImg)
+	# cv2.imwrite('./imgs/7new.png', isolImg)
 
 	if(nres[0] < 90 or nres[1] < 90):
 		isolImg, nres = isolateFace(frame.copy(), img, resol, 2)

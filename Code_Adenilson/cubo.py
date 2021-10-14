@@ -11,6 +11,7 @@ import visionAlgo
 ## FUNÇÕES DO CUBO ######################################
 
 def alinhar_e_pegar_cubo(object, bloco_escolhido):
+    velocidade = 2
     '''
     status_garra indica se é para usar a garra da frente ou das costas
     posicao_cubo indica se o cubo a ser pego está na esquerda ou na direita do quadrado da arena
@@ -129,10 +130,11 @@ def alinhar_e_pegar_cubo(object, bloco_escolhido):
     print(numero_bloco)
 
     if numero_bloco == 0: #caso seja o cubo 0, sinaliza só subindo e descendo a garra da frente
-        garra.subir_garra_frente(object, 1)
         garra.subir_garra_frente(object, 3)
         garra.subir_garra_frente(object, 2)
-        return
+        garra.subir_garra_frente(object, 3)
+        garra.subir_garra_frente(object, 2)
+        return 0
 
 
     if object.cubo_garra_frente[0] == 0: #garra da frente está vazia
@@ -171,6 +173,10 @@ def alinhar_e_pegar_cubo(object, bloco_escolhido):
         object.cubo_garra_frente[0] = numero_bloco #define qual o número do cubo que esta garra está carregando
         object.cubo_garra_frente[1] = cubo #define a handle do cubo que esta garra está carregando
 
+        if posicao_cubo == 'direita':
+            motor.andar_em_metros(object, 'esquerda', velocidade, 0.01)
+        if posicao_cubo == 'esquerda':
+            motor.andar_em_metros(object, 'direita', velocidade, 0.01)
 
                     
     elif object.cubo_garra_costas[0] == 0: #garra de trás está vazia
@@ -219,6 +225,8 @@ def alinhar_e_pegar_cubo(object, bloco_escolhido):
         garra.subir_garra_costas(object, 2)
         object.cubo_garra_costas[0] = numero_bloco #define qual o número do cubo que esta garra está carregando
         object.cubo_garra_costas[1] = cubo #define a handle do cubo que esta garra está carregando
+
+    return 1
 
 def aproximar_prateleira(object, frente_ou_costas):
     if frente_ou_costas == 'frente':

@@ -338,6 +338,7 @@ if clientID != -1:
         # IndoDeA_para_B(adeni, 26, 22, SUL, SUL)
 
         currentPosition, myDirection, matrix = getBlocksInformation(initialPosition, initialDirection)
+        quantidade_cubos = 0
         while True:
             posicao = [str(currentPosition)[0],str(currentPosition)[1]]
 
@@ -349,7 +350,14 @@ if clientID != -1:
             currentPosition,minhaDirecao = IndoDeA_para_B(adeni,currentPosition,local,firstSq.getAngInicial(adeni), SUL)
 
             minhaDirecao = casosEspeciais(adeni,currentPosition,minhaDirecao,bloco)
-            alinhar_e_pegar_cubo(adeni,bloco)
+            quantidade_cubos += alinhar_e_pegar_cubo(adeni,bloco)
+            minhaDirecao = firstSq.getAngInicial(adeni)
+            minhaDirecao = corrigindoADirecao(adeni, minhaDirecao, SUL)
+
+            if quantidade_cubos == 5:
+                adeni.cubo_garra_costas[0] = -1
+            print('direção antes de entregar cubo: ', minhaDirecao)
+            currentPosition, direcaoFinal = entregandoCubos(adeni,currentPosition,minhaDirecao)
 
             ###########################################################################
 
@@ -361,7 +369,7 @@ if clientID != -1:
             currentPosition,minhaDirecao = IndoDeA_para_B(adeni,currentPosition,local,firstSq.getAngInicial(adeni), SUL)
 
             minhaDirecao = casosEspeciais(adeni,currentPosition,minhaDirecao,bloco)
-            alinhar_e_pegar_cubo(adeni,bloco)
+            quantidade_cubos += alinhar_e_pegar_cubo(adeni,bloco)
             minhaDirecao = firstSq.getAngInicial(adeni)
             minhaDirecao = corrigindoADirecao(adeni, minhaDirecao, SUL)
 
