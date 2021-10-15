@@ -299,7 +299,7 @@ if clientID != -1:
         # print(order, matrixFinal)
         return currentPosition, myDirection, matrix
 
-    def winOPEN():   
+    def winOPEN():
         direc = firstSq.getAngInicial(adeni)
         #print(direc, 'DIREÇÃO VIRADO')
         initialDirection = corrigindoADirecao(adeni,direc,SUL)
@@ -354,7 +354,7 @@ if clientID != -1:
             minhaDirecao = firstSq.getAngInicial(adeni)
             minhaDirecao = corrigindoADirecao(adeni, minhaDirecao, SUL)
 
-            if quantidade_cubos == 5:
+            if quantidade_cubos >= 5:
                 adeni.cubo_garra_costas[0] = -1
             print('direção antes de entregar cubo: ', minhaDirecao)
             currentPosition, direcaoFinal = entregandoCubos(adeni,currentPosition,minhaDirecao)

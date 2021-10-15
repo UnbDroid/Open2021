@@ -228,51 +228,51 @@ def entregandoCubos(object, posicaoAtual, minhaDirecao):
         corrigindoADirecao(object,posicaoAtual,SUL)
 
     if valGarraFrente != 0 and valGarraCostas != 0: #TROCAR PARA AND !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        if valGarraCostas != -1:
+            posicaoFinal = posicaoAtual #precaução para caso falhe na visão
+            if valGarraCostas in Prateleira1:
+                posicaoFinal = 22
+            elif valGarraCostas in Prateleira2:
+                posicaoFinal = 23
+            elif valGarraCostas in Prateleira3:
+                posicaoFinal = 24
+            elif valGarraCostas in Prateleira4:
+                posicaoFinal = 25
+            elif valGarraCostas in Prateleira5:
+                posicaoFinal = 26
 
-        posicaoFinal = posicaoAtual #precaução para caso falhe na visão
-        if valGarraCostas in Prateleira1:
-            posicaoFinal = 22
-        elif valGarraCostas in Prateleira2:
-            posicaoFinal = 23
-        elif valGarraCostas in Prateleira3:
-            posicaoFinal = 24
-        elif valGarraCostas in Prateleira4:
-            posicaoFinal = 25
-        elif valGarraCostas in Prateleira5:
-            posicaoFinal = 26
+            direcaoFinal = SUL
+            posicaoAtual, minhaDirecao = IndoDeA_para_B(object, posicaoAtual, posicaoFinal, minhaDirecao, direcaoFinal)
 
-        direcaoFinal = SUL
-        posicaoAtual, minhaDirecao = IndoDeA_para_B(object, posicaoAtual, posicaoFinal, minhaDirecao, direcaoFinal)
+            andar = 2 #precaução para caso falhe na visão
+            if valGarraCostas in [1, 2, 3, 4, 5]:
+                andar = 1
+            elif valGarraCostas in [6, 7, 8, 9, 10]:
+                andar = 2
+            elif valGarraCostas in [11, 12, 13, 14, 15]:
+                andar = 3
+            subir_garra_costas(object, andar)
+            aproximar_prateleira(object, 'costas')
+            abrir_garra_costas_cubo(object, object.cubo_garra_costas[1])
+            object.cubo_garra_costas = [0, 'handle']
+            andar_em_metros(object, 'frente', 2, 0.2)
+            subir_garra_costas(object,2)
 
-        andar = 2 #precaução para caso falhe na visão
-        if valGarraCostas in [1, 2, 3, 4, 5]:
-            andar = 1
-        elif valGarraCostas in [6, 7, 8, 9, 10]:
-            andar = 2
-        elif valGarraCostas in [11, 12, 13, 14, 15]:
-            andar = 3
-        subir_garra_costas(object, andar)
-        aproximar_prateleira(object, 'costas')
-        abrir_garra_costas_cubo(object, object.cubo_garra_costas[1])
-        object.cubo_garra_costas = [0, 'handle']
-        andar_em_metros(object, 'frente', 2, 0.2)
-        subir_garra_costas(object,2)
+            sim.simxPauseCommunication(object.clientID, True)
+            sim.simxSetJointTargetPosition(object.clientID, object.pa_direita2, 0.001, sim.simx_opmode_oneshot)
+            sim.simxSetJointTargetPosition(object.clientID, object.pa_esquerda2, 0.001, sim.simx_opmode_oneshot)
+            sim.simxPauseCommunication(object.clientID, False)
+            time.sleep(1)
 
-        sim.simxPauseCommunication(object.clientID, True)
-        sim.simxSetJointTargetPosition(object.clientID, object.pa_direita2, 0.001, sim.simx_opmode_oneshot)
-        sim.simxSetJointTargetPosition(object.clientID, object.pa_esquerda2, 0.001, sim.simx_opmode_oneshot)
-        sim.simxPauseCommunication(object.clientID, False)
-        time.sleep(1)
-
-        alinhar(object, 'frente')
-        andar_em_metros(object,'tras', 2, 0.1)
-        object.cubo_garra_costas[0] = 0
+            alinhar(object, 'frente')
+            andar_em_metros(object,'tras', 2, 0.1)
+            object.cubo_garra_costas[0] = 0
 
         posicaoFinal = posicaoAtual #precaução para caso falhe na visão
 
         if valGarraFrente == -1:
             return posicaoAtual, minhaDirecao
-
+            
         if valGarraFrente in Prateleira1:
             posicaoFinal = 22
         elif valGarraFrente in Prateleira2:
