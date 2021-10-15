@@ -382,7 +382,7 @@ def isolateFace(_src, _img, _res, _op):
 
 	cv2.imwrite('./imgs/5face.png', img)
 	# cv2.imshow('isolateFace', img)
-	cv2.waitKey(0)
+	# cv2.waitKey(0)
 
 	approx = [0]
 	while(len(approx) < 2 and factor < 5):
@@ -415,7 +415,7 @@ def isolateFace(_src, _img, _res, _op):
 
 	# print("isolate",[maxHei-height,maxWid-width])
 	# cv2.imshow('isolateFace', img)
-	cv2.waitKey(0)
+	# cv2.waitKey(0)
 	return img, [maxHei-height,maxWid-width]
 
 def resolveVision(object, _sigValue):
@@ -458,12 +458,13 @@ def getNumber(object):
 	src = frame.copy()
 	img = basicFilter(src, 1)
 	isolImg, nres = isolateFace(frame.copy(), img, resol, 0)
-	# print("nres", nres)
+	# nres = 80, 0
+	print("nres", nres)
 	# cv2.imshow('isolImg number', isolImg)
 	# cv2.waitKey(0)
 	# cv2.imwrite('./imgs/7new.png', isolImg)
 
-	if(nres[0] < 90 or nres[1] < 90):
+	if(nres[0] < 100 or nres[1] < 90):
 		isolImg, nres = isolateFace(frame.copy(), img, resol, 2)
 		# print("nres2", nres)
 		# print(isolImg)
