@@ -284,7 +284,7 @@ if clientID != -1:
                 matrix1, currentPosition, myDirection = fourthAreaCubes(currentPosition, myDirection, 1)
                 #myDirection = corrigindoADirecao(adeni,myDirection ,OESTE)
                 # currentPosition -= 1
-                matrix0, currentPosition, myDirection = thirdAreaCubes(currentPosition, myDirection, 2)
+                matrix0, currentPosition, myDirection = thirdAreaCubes(currentPosition, myDirection, 1)
 
         #time.sleep(3)
 
