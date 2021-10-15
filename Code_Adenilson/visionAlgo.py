@@ -381,7 +381,7 @@ def isolateFace(_src, _img, _res, _op):
 	cnts, hier = cv2.findContours(edges, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
 
 	cv2.imwrite('./imgs/5face.png', img)
-	cv2.imshow('isolateFace', img)
+	# cv2.imshow('isolateFace', img)
 	cv2.waitKey(0)
 
 	approx = [0]
@@ -414,7 +414,7 @@ def isolateFace(_src, _img, _res, _op):
 		thres, img = cv2.threshold(img, 127, 255, cv2.THRESH_BINARY)
 
 	# print("isolate",[maxHei-height,maxWid-width])
-	cv2.imshow('isolateFace', img)
+	# cv2.imshow('isolateFace', img)
 	cv2.waitKey(0)
 	return img, [maxHei-height,maxWid-width]
 
