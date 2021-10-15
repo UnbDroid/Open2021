@@ -276,7 +276,7 @@ def getY(_center, _res):
 	# print(percent)
 	if(percent > 0.7):  # 0.72
 		return 5
-	elif(percent > 0.6):  # 0.64
+	elif(percent > 0.58):  # 0.64
 		return 4
 	elif(percent > 0.35):  # 0.37
 		return 3
