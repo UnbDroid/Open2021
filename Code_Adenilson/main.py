@@ -233,7 +233,7 @@ if clientID != -1:
         matrix1 = visionAlgo.resolveVision(adeni,1) #MODIFICAR MATRIZ
 
         andar_em_metros(adeni,'frente', 2, 0.08)
-        andar_em_metros(adeni, lado, 2, 0.03) #LINHA NOVA
+        andar_em_metros(adeni, lado, 2, 0.1) #LINHA NOVA
         matrix1 = invertMatrix(matrix1)
         return matrix1, currentPosition, myDirection
 
